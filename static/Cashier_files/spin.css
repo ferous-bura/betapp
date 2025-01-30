@@ -1,0 +1,67 @@
+.spin_doz1{
+    background-color:#ccc; 
+    position: absolute; 
+    bottom: 30%; left: -7px;
+}
+.spin_doz{
+    border-radius: 50%; 
+    height:18px; 
+    width:18px; 
+    background-color:#ccc; 
+    position: absolute;
+    display: none;
+}
+.spin_doz2{
+    top: 30%; 
+    left: -7px;
+    
+}
+.spin_doz3{
+    top: -7px; 
+    left: 30%;
+}
+.spin_doz4{
+    top: -7px; 
+    left: -7px;
+}
+.spin_doz5{
+    left: -7px; 
+    top: -7px;
+}
+.spin_doz6{
+    bottom: -7px; 
+    left: -7px;
+}
+.spin_doz7{
+    bottom: -7px !important; 
+    left: 30% !important;
+}
+.spin_doz:hover{
+    border-radius: 50%; 
+    background-color:rgb(0, 175, 206); 
+    border: 1px solid black;
+    position: absolute;
+}
+
+.selected_spin{
+    background: rgb(230, 135, 20) !important;
+    background-color: rgb(230, 135, 20) !important;
+}
+.RouletteTable{
+    top: 30px;
+    
+}
+
+.close_spin_selection:hover{
+    color: rgb(235, 34, 34);
+}
+
+#AddToSlipDivLoader_spin{
+    display: none; 
+    width: 41% ; 
+    height:245px; 
+    opacity: 0.7; 
+    background-color: rgb(63, 63, 63); 
+    position: absolute; 
+    z-index: 6;
+  }

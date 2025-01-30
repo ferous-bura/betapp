@@ -1,0 +1,222 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <div class="container mt-4">
+    <!-- Form Section -->
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="selectAgents">Select Agent</label>
+          <select class="form-control select2" id="selectAgents" name="selectAgents" multiple>
+            {% for statistics in ticket_statistics %}
+            <option value="{{ statistics.agent_id }}">{{ statistics.agent }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="form-group col-md-2">
+          <label for="dateDropdown">Select Date</label>
+          <select class="form-control" id="dateDropdown" name="dateDropdown">
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="this_week">This Week</option>
+              <option value="last_week">Last Week</option>
+              <option value="this_month">This Month</option>
+              <option value="last_month">Last Month</option>
+              <option value="this_year">This Year</option>
+          </select>
+      </div>
+
+        <div class="form-group col-md-2">
+          <label for="fromDate">From Date</label>
+          <input type="date" class="form-control" id="fromDate" name="fromDate">
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="toDate">To Date</label>
+          <input type="date" class="form-control" id="toDate" name="toDate">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="submit">When you Finish</label>
+          <button class="form-control text-lg btn btn-primary" type="submit">Load Report</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Statistics</h6>
+    </div>
+    <div class="card-body">
+<!-- start of card view -->
+
+<div class="row">
+  <div class="col-md-3 mb-2">
+      <div class="card text-center bg-gradient-success text-gray-100">
+      <div class="card-body">
+          <h5 class="card-title card-net">0ETB</h5>
+          <p class="card-text">Net</p>
+      </div>
+      </div>
+  </div>
+  <div class="col-md-3 mb-2">
+      <div class="card text-center bg-gradient-dark text-gray-100">
+      <div class="card-body">
+          <h5 class="card-title card-ticket">0</h5>
+          <p class="card-text">Tickets</p>
+      </div>
+      </div>
+  </div>
+  <div class="col-md-3 mb-2">
+      <div class="card text-center bg-gradient-dark text-gray-100">
+      <div class="card-body">
+          <h5 class="card-title card-claimed">0ETB</h5>
+          <p class="card-text">Claimed Winning</p>
+      </div>
+      </div>
+  </div>
+  <div class="col-md-3 mb-2">
+      <div class="card text-center bg-gradient-dark text-gray-100">
+          <div class="card-body">
+          <h5 class="card-title card-stake">0ETB</h5>
+          <p class="card-text">Gross Stake</p>
+      </div>
+      </div>
+  </div>
+</div>
+
+<!-- end of card view -->
+    </div>
+  </div>
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Statistics</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" id="dataTableContainer" style="display: none;">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead class="bg-gradient-dark text-gray-100">
+                    <tr>
+                        <th>Agent</th>
+                        <th>Net</th>
+                        <th>Tickets</th>
+                        <th>Claimed Winning</th>
+                        <th>Claimed Count</th>
+                        <th>Unclaimed Amount</th>
+                        <th>Unclaimed Count</th>
+                        <th>Cancelled Stake</th>
+                        <th>Cancelled Count</th>
+                        <th>GGR</th>
+                        <th>Gross Stake</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for statistics in ticket_statistics %}
+                    <tr>
+                        <td>{{ statistics.agent }}</td>
+                        <td>{{ statistics.net_value }}</td>
+                        <td>{{ statistics.tickets }}</td>
+                        <td>{{ statistics.claimed_winning }}</td>
+                        <td>{{ statistics.claimed_count }}</td>
+                        <td>{{ statistics.unclaimed_winning }}</td>
+                        <td>{{ statistics.unclaimed_count }}</td>
+                        <td>{{ statistics.cancelled_stake }}</td>
+                        <td>{{ statistics.cancelled_count }}</td>
+                        <td>{{ statistics.ggr }}</td>
+                        <td>{{ statistics.gross_stake }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+        placeholder: 'Select Agents',
+        tags: true
+    });
+
+    $('form').submit(function(event) {
+      event.preventDefault(); // Prevent default form submission
+      var selectedAgents = $('#selectAgents').val(); // Get selected agents
+      var fromDate = $('#fromDate').val(); // Get from date
+      var toDate = $('#toDate').val(); // Get to date
+      var selectedDate = $('#dateDropdown').val();
+      console.log(selectedAgents);
+      console.log(fromDate);
+      console.log(toDate);
+      $.ajax({
+        type: 'GET',
+        url: '{% url "dashboard:api_statistics" %}',
+        data: {
+            'agents': selectedAgents,
+            'from_date': fromDate,
+            'to_date': toDate,
+            selectedDate: selectedDate  // Send the selected date value
+        },
+        success: function(response) {
+            console.log(response);
+            
+            $('.card-net').text('');
+            $('.card-ticket').text('');
+            $('.card-claimed').text('');
+            $('.card-stake').text('');
+            // Update card values
+            $('.card-net').text(response.statistics_card.total_net + ' ETB');
+            $('.card-ticket').text(response.statistics_card.total_tickets + ' ETB');
+            $('.card-claimed').text(response.statistics_card.total_claimed_winning + ' ETB');
+            $('.card-stake').text(response.statistics_card.total_gross_stake + ' ETB');
+
+            // Show the table
+            $('#dataTableContainer').show();
+
+            // Clear the existing DataTable
+            $('#dataTable').DataTable().clear().draw();
+
+            // Append new data to the DataTable
+            $.each(response.ticket_statistics, function(index, statistics) {
+                var row = [
+                    statistics.agent,
+                    statistics.net,
+                    statistics.tickets,
+                    statistics.claimed_winning,
+                    statistics.claimed_count,
+                    statistics.unclaimed_winning,
+                    statistics.unclaimed_count,
+                    statistics.cancelled_stake,
+                    statistics.cancelled_count,
+                    statistics.ggr,
+                    statistics.gross_stake
+                ];
+
+                // Append the row to the DataTable
+                $('#dataTable').DataTable().row.add(row);
+            });
+
+            // Draw the DataTable after adding all rows
+            $('#dataTable').DataTable().draw();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });     
+    });
+    
+  });
+</script>
+
+{% endblock %}

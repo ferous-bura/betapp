@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Chrome App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="{% static 'css/gamer.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div id="balls" class="container">
+            <!-- Balls content goes here -->
+            <h1>Balls Section</h1>
+            <div id="balls-grid" class="row"></div>
+        </div>
+        <div id="time" class="container">
+            <!-- Time content goes here -->
+            <h1>Time Section</h1>
+            <div id="timer">04:00</div>
+        </div>
+    </div>
+
+	<script src="{% static 'js/gamer.js' %}"></script>
+</body>
+</html>

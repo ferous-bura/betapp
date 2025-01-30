@@ -1,0 +1,33 @@
+{% extends "account/_base.html" %}
+{% load static %}
+{% block content %}
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+    </div>
+    <form method="post" action="{% url 'zuser:signup' %}" class="user">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+    </form>
+  
+    <hr>
+    <div class="text-center">
+        <a class="small" href="{% url 'zuser:forgot_password' %}">Forgot Password?</a>
+    </div>
+    <div class="text-center">
+        <a class="small" href="{% url 'zuser:login' %}">Login!</a>
+    </div>
+</div>
+{% endblock content %}

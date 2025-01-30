@@ -1,0 +1,51 @@
+{% extends "account/_base.html" %}
+{% load i18n %}
+{% load allauth account %}
+{% block head_title %}
+    {% trans "Sign Up" %}
+{% endblock head_title %}
+{% block content %}
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+    </div>
+    <form method="post" action="{% url 'account_signup' %}" class="user">
+            {% csrf_token %}
+
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text and 1 > 7 %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% if redirect_field_value %}
+<!-- <input type="hidden" name="next" value="/" /> -->
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+    
+    {% if SOCIALACCOUNT_ENABLED and 1 > 6 %}
+        <hr>
+        <a title="Google" href="/accounts/google/login/?process=login&amp;next=%2F" class="btn btn-google btn-user btn-block">
+            <i class="fab fa-google fa-fw"></i> Register with Google
+        </a>
+        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+            <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+        </a>
+    {% endif %}  
+</form>
+  
+    <hr>
+    <div class="text-center">
+        <a class="small" href="/accounts/password/reset/">Forgot Password?</a>
+    </div>
+    <div class="text-center">
+        <a class="small" href="{{ login_url }}">Login!</a>
+    </div>
+</div>
+{% endblock content %}

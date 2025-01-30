@@ -1,0 +1,149 @@
+{% extends "dashboard/_base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    a {
+        text-decoration-line: none !important;
+        text-decoration: none !important;
+    }
+    .text-big {
+        font-size: 16px !important; /* Adjust the font size as needed */
+    }
+    .text-big:hover {
+        background-color: #1bad1685 !important; /* Change color on hover */
+        color: cornsilk !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manage Cashiers</h1>
+        <a href="#" data-toggle="modal" data-target="#registrationModal">
+            <button type="submit" class="btn btn-primary mt-4">
+                <i class="fas fa-plus fa-sm text-white-50"></i> 
+                Add Cashiers 
+            </button>
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3"> 
+            <h6 class="m-0 font-weight-bold text-primary">Cashiers List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Cashier Username</th>
+                            <th>Agent</th>
+                            <th>Bets</th>
+                            <th>Total Slip</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for cashier, info in cashier_info.items %}
+                        <tr class="text-big">
+                            <td><a class="{% if cashier.has_access %}text-danger{% else %}text-black{% endif %}" style="width: 50%;" href="{{ cashier.get_absolute_url }}">{{ cashier.cashier }}</a></td>
+                            <td>{{ cashier.agent }}</td>
+                            <td>{{ info.count_bets }}</td>
+                            <td>{{ info.total_choice_count }}</td>
+                        </tr>
+                    {% endfor %}                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.container-fluid -->
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agent Registration</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1>Create Cashiers</h1>
+                <form action="." method="post">
+                    <label for="agents_list">select agent:</label>
+                    <div class="input-group">
+                        <select id="agents_list" name="agents_list">
+                            {% for agent in agents %}
+                                <option value="{{ agent.id }}">{{ agent }}</option>
+                            {% endfor %}
+                        </select>
+                    <label for="cashiers_quantity">cashiers quantity:</label>
+                    <div class="input-group">
+                        <input class="form-control" min="1" required type="number" id="cashiers_quantity" name="quantity">
+                    </div>
+
+                    <div class="input-group">
+                        <input value="qwerty123456" type="pw" id="pw" name="pw" class="form-control" aria-describedby="pw-toggle">
+                        <button class="btn btn-outline-secondary" type="button" id="pw-toggle" onclick="togglePasswordVisibility()">Show</button>
+                    </div>
+                    <input type="hidden" name="action" value="agent">
+                    <button type="submit" class="btn btn-primary mt-4">
+                        Create Cashiers
+                    </button>
+                    {% csrf_token %}
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <!-- Navigation buttons for steps -->
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitForm(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the form data
+        const formData = new FormData(document.querySelector('form'));
+
+        // Make a fetch request to submit the form data
+        fetch('/dashboard/cashier-create/', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle success, e.g., update UI or show a success message
+                alert('Form submitted successfully');
+                $('#registrationModal').modal('hide');
+            } else {
+                // Handle errors, e.g., show an error message
+                alert('Form submission failed');
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            console.error('Error:', error);
+        });
+    }
+
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("pw");
+        var passwordToggleBtn = document.getElementById("pw-toggle");
+
+        if (passwordInput.type === "pw") {
+            passwordInput.type = "text";
+            passwordToggleBtn.textContent = "Hide";
+        } else {
+            passwordInput.type = "pw";
+            passwordToggleBtn.textContent = "Show";
+        }
+    }
+</script>
+
+{% endblock %}

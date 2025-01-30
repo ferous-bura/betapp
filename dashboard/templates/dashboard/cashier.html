@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Add any custom styles here if needed */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Styling for tabs */
+        .nav-tabs {
+            background-color: #141518; /* Blue background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for tabs */
+        }
+        .mt-3 {
+          margin-top: 0rem !important;
+
+        }
+        .nav-tabs .nav-link {
+            color: #fff; /* White text color */
+            margin: 0 10px; /* Spacing between tabs */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #0056b3; /* Active tab color */
+        }
+
+        /* Styling for menu in mobile mode */
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+
+            .navbar-collapse {
+                background-color: #f8f9fa; /* Background color for menu */
+                padding-top: 56px; /* Adjusted for fixed top navigation bar */
+                display: none; /* Initially hide the links in mobile view */
+            }
+
+            .navbar-nav {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar-nav .nav-item {
+                display: block;
+                width: 100%;
+            }
+
+            .navbar-nav .nav-link {
+                border-radius: 0;
+                margin: 0;
+                padding: 10px;
+            }
+
+            .navbar-nav .dropdown-menu {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- First Row using Bootstrap classes -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span>&#8285;</span> <!-- Three dots icon -->
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+            <form class="form-inline mb-2 mb-lg-0 mx-auto">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="#">Register</a>
+                        <a class="dropdown-item" href="#">Profile</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Second Row using Bootstrap classes -->
+    <ul class="nav nav-tabs justify-content-center mt-3">
+        <li class="nav-item">
+            <a class="nav-link active btn btn-primary" href="#">Tab 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-success" href="#">Tab 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-danger" href="#">Tab 3</a>
+        </li>
+    </ul>
+
+    <!-- Link Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // Add JavaScript to toggle the visibility of the links when the menu icon is clicked
+        document.querySelector('.navbar-toggler').addEventListener('click', function () {
+            document.querySelector('.navbar-collapse').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

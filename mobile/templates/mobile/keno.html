@@ -1,0 +1,820 @@
+{% extends 'mobile/_base.html' %}
+{% load static %}
+{% block style %}
+
+<style>
+  .balls_span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    /* Set fixed width for the circles */
+    height: 35px;
+    /* Set fixed height for the circles */
+    font-size: 20px;
+    border-radius: 50%;
+    /* background-color: rgb(0, 63, 39); */
+    box-shadow: 0px 3px 10px rgba(22, 19, 19, 0.705);
+    color: rgba(173, 239, 209, 0.795);
+  }
+
+  .resultNum {
+    background-color: yellow;
+    color: black;
+    padding: 2px;
+    font-weight: bold;
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .2);
+  }
+
+  .selectedKeno {
+    background-color: #00A4CCFF !important;
+    color: #fff !important;
+    font-weight: bold;
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .2);
+  }
+
+  td {
+    padding: 0;
+    /* Remove padding from table cells */
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .matrix-scrollable {
+    overflow-x: auto;
+    max-width: 100%;
+    width: auto;
+    align-content: center;
+  }
+
+  .table td,
+  .table th {
+    border-top: none !important;
+  }
+
+  .table td,
+  .table th {
+    padding: .12rem !important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+
+  /* Style for even rows */
+  tr.even {
+    background-color: #f2f2f2 !important;
+    /* Light gray background color */
+  }
+
+  /* Style for odd rows */
+  tr.odd {
+    background-color: #ffffff !important;
+    /* White background color */
+  }
+
+      .disabled {
+      pointer-events: none;
+      /* Disable click events */
+      opacity: 0.9;
+      /* Optionally, reduce opacity to visually indicate disabled state */
+    }
+
+    .sel-live-zoom-out {
+      animation: zoomOut 0.9s ease forwards;
+    }
+
+    @keyframes zoomOut {
+      from {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .video-container {
+      width: 100%;
+      /* Make the container full width */
+  position: fixed;
+  bottom: 0;
+      z-index: 1111;
+    }
+
+    .video-container video {
+      width: 100%;
+      /* Make the video full width */
+      height: auto;
+      /* Maintain aspect ratio */  
+    }
+
+  .pipet-container {
+    position: relative;
+  }
+/* Animation Container */
+.animation-container {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 1;
+}
+
+/* Animated Image */
+.animation-container img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) scale(0.65);
+  animation: shake 0.9s cubic-bezier(.36,.07,.19,.97) both; /* Apply shake animation */
+}
+
+/* Shake Animation Keyframes */
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-50%) scale(0.65) rotate(-3deg);
+  }
+  20%, 80% {
+    transform: translateX(-50%) scale(0.65) rotate(3deg);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-50%) scale(0.65) rotate(-3deg);
+  }
+  40%, 60% {
+    transform: translateX(-50%) scale(0.65) rotate(3deg);
+  }
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="keno">
+  <!-- Notification -->
+
+  <div id="notification-container">
+    <div id="notification" class="alert alert-success">
+      <p id="messageNotify"></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-0 p-1">
+      <div class="matrix-scrollable">
+        <table id="result-table" class="table">
+          <tbody id="num-row-table">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 m-0 p-1">
+      <div class="selection-and-live row m-0">
+        <div class="col-12">
+
+          <div id="selected-balls-display-container" class="row">
+            <div class="col-12">
+              <div class="bet_info">
+                <span class="small"><span id="ExtraDescriptionOdd" class="badge badge-primary"></span>, </span>
+                <span class="small"><span id="ExtractDescriptionWonAmount" class="badge badge-danger"></span>
+                </span>
+              </div>
+            </div>
+            <div class="col-10">
+              <ul class="list-inline">
+                <li class="list-inline-item" id="selections-container">
+                  <input type="text" id="selected-balls-input" class="form-control selected-balls"
+                    style="width: 130%; background-color: rgb(1, 16, 39); color: azure;"
+                    placeholder="No balls selected" readonly>
+                </li>
+              </ul>
+            </div>
+            <div class="col-2">
+              <span class="clear">
+                <button type="button" class="btn btn-sm btn-secondary" onclick=resetSelections()>Clear</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        {% include 'mobile/chat.html' %}
+      </div>
+    </div>
+  </div>
+  
+  {% endblock %}
+
+  {% block footer %}
+  <footer class="sticky-footer">
+    <button  onclick="fetchKenoResult()"> onclick="fetchKenoResult()"</button>
+    <div class="container p-1 selection-and-live">
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button type="button" class="quantity-left-minus btn btn-sm btn-warning btn-number" data-type="minus"
+                  data-field="">
+                  <i class="fas fa-minus" style="color: white;"></i>
+                </button>
+              </span>
+              <input style="background-color: rgb(1, 16, 39); color: azure;" type="number" id="quantity" name="quantity"
+                class="form-control form-control-sm input-number" value="10" min="1" required disabled>
+              <span class="input-group-btn">
+                <button type="button" class="quantity-right-plus btn btn-sm btn-success btn-number" data-type="plus"
+                  data-field="">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </span>
+              <ul class="list-inline" style="margin-left: 20px;">
+                <li class="list-inline-item">
+                  <button type="button" class="btn btn-light btn-sm static-value" data-value="10">10</button>
+                </li>
+                <li class="list-inline-item">
+                  <button type="button" class="btn btn-light btn-sm static-value" data-value="50">50</button>
+                </li>
+                <li class="list-inline-item">
+                  <button type="button" class="btn btn-light btn-sm static-value" data-value="100">100</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-9">
+          <form id="stake-form" method="post">
+            <input type="hidden" id="stake-value" name="stake-value">
+            <button type="submit" class="btn btn-block btn-light" disabled>Submit</button>
+          </form>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-light btn-block" data-toggle="modal"
+            data-target="#exampleModalCenter">Menu</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="animation-container" style="display: none;">
+    <!-- Animated images will be added here -->
+  </div>
+
+  <div class="video-container" style="display: none;">
+    <video id="shuffleVideo">
+      <source src="{% static 'img/shuffle.webm' %}" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+
+  {% endblock %}
+  
+  {% block script %}
+  {% csrf_token %}
+  <script>
+    $(document).ready(function () {
+      var quantitiy = 0;
+      $('.quantity-right-plus').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        // If is not undefined
+        if (quantity < 10) {
+          $('#quantity').val(quantity + 1);
+        } else
+          if (quantity >= 500) {
+            $('#quantity').val(quantity + 100);
+          } else
+            if (quantity >= 100) {
+              $('#quantity').val(quantity + 50);
+            } else
+              if (quantity >= 50) {
+                $('#quantity').val(quantity + 10);
+              } else {
+                $('#quantity').val(quantity + 5);
+              }
+        kenoOdds();
+      });
+
+      $('.quantity-left-minus').click(function (e) {
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        // If is not undefined
+        if (quantity <= 1) {
+          $('#quantity').val(1);
+        } else
+          if (quantity < 10) {
+            $('#quantity').val(quantity - 1);
+          } else
+            if (quantity >= 500) {
+              $('#quantity').val(quantity - 100);
+            } else
+              if (quantity >= 100) {
+                $('#quantity').val(quantity - 50);
+              } else
+                if (quantity >= 50) {
+                  $('#quantity').val(quantity - 10);
+                } else {
+                  $('#quantity').val(quantity - 5);
+                }
+        kenoOdds();
+      });
+
+      // Static values click event
+      $('.static-value').click(function (e) {
+        e.preventDefault();
+        var value = $(this).data('value');
+        $('#quantity').val(value);
+        kenoOdds();
+      });
+
+
+    });
+
+    // Form submission
+    $('#stake-form').submit(function (e) {
+      e.preventDefault();
+      var submitBtn = $(this).find('button[type="submit"]');
+      var originalBtnText = submitBtn.text();
+      submitBtn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> submitting...');
+
+      var stakeValue = $('#quantity').val();
+      $('#stake-value').val(stakeValue);
+      var selectedNumbersArray = Object.keys(selectedNumbers).map(Number); // Convert keys to numbers
+
+      var csrftoken = getCookie('csrftoken');
+      var requestData = {
+        selection: selectedNumbersArray,
+        stake: stakeValue,
+        action: 'place_bet',
+        input_type: 'single',
+        time: new Date().getTime()
+      };
+      console.log(requestData);
+      $.ajax({
+        url: "{% url 'mobile:keno_req' %}",
+        method: 'POST',
+        data: JSON.stringify(requestData),
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function (response) {
+          console.log(response);
+          // Check if the response contains 'response' key
+          if (response.status == 'success') {
+            // Show success notification
+            showNotification(response.message, 'success');
+          } else {
+            // Show error notification
+            showNotification(response.message, 'error');
+          }
+        },
+        error: function (xhr, errmsg, error) {
+          console.log(xhr.status + ": " + xhr.message);
+          showNotification(xhr.message, 'error');
+        },
+        complete: function () {
+          submitBtn.prop('disabled', false).text(originalBtnText);
+          resetSelections();
+          // Re-enable submit button and restore original text
+        }
+      });
+    });
+
+    // Function to get CSRF token from cookie
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i].trim();
+          // Check if the cookie name matches the desired name
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            // Extract and return the cookie value
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    var selectedNumbers = {};
+
+    function resetSelections() {
+      selectedNumbers = {};
+      var elements = document.querySelectorAll('.selected-balls');
+      elements.forEach(function (element) {
+        if (element.tagName === 'INPUT') {
+          element.value = '';
+        }
+      });
+      $(".selectedKeno").removeClass("selectedKeno");
+      $('#quantity').val(10);
+      $('.clear').hide();
+      kenoOdds();
+      var submitBtn = $('#stake-form button[type="submit"]');
+      submitBtn.prop('disabled', true);
+    }
+
+
+    // Function to show the notification
+    function showNotification(message, type) {
+      var notification = $('#notification');
+      notification.removeClass('alert-success alert-danger');
+
+      if (type === 'success') {
+        notification.addClass('alert-success');
+      } else if (type === 'error') {
+        notification.addClass('alert-danger');
+      }
+
+      notification.find('#messageNotify').html(message);
+      notification.show();
+      // Automatically hide the notification after 2 seconds
+      setTimeout(function () {
+        notification.hide();
+      }, 3000);
+    }
+
+    // Function to hide the notification
+    function hideNotification() {
+      $('#notification').hide();
+    }
+
+
+    function addZBall(ballNumber) {
+      var ballId = "#ball" + ballNumber;
+      var ball = document.querySelector(ballId + ' .balls_span');
+      var submitBtn = $('#stake-form button[type="submit"]');
+      ball.classList.toggle("selectedKeno");
+      if (ball.classList.contains("selectedKeno")) {
+        if (Object.keys(selectedNumbers).length < 10) {
+          selectedNumbers[ballNumber] = true;
+        } else {
+          ball.classList.remove("selectedKeno");
+          showNotification('You can only select up to 10 numbers.', 'error');
+        }
+      } else {
+        delete selectedNumbers[ballNumber];
+      }
+      updateSelections();
+      $('.clear').show();
+      if (Object.keys(selectedNumbers).length < 1) {
+        $('.clear').hide();
+        submitBtn.prop('disabled', true);
+      } else {
+        submitBtn.prop('disabled', false);
+      }
+    }
+
+    function updateSelections() {
+      var selectionsDisplay = document.querySelector(".selected-balls");
+      selectionsDisplay.value = "";
+
+      var selectionsHTML = '';
+      for (var key in selectedNumbers) {
+        if (selectedNumbers.hasOwnProperty(key)) {
+          selectionsHTML += key + ', ';
+        }
+      }
+      selectionsDisplay.value += selectionsHTML.slice(0, -2); // Remove the last comma and space
+      kenoOdds();
+    }
+
+    $(document).ready(function () {
+
+      $('.clear').hide();
+      $('.bet_info').hide();
+      var count = 1;
+      for (var row = 1; row <= 8; row++) {
+        var rowHtml = "<tr>";
+        for (var col = 1; col <= 10; col++) {
+          rowHtml += "<td onclick=addZBall(" + count + ") class='tdball'  id='ball" + count + "'><span class='balls_span'>" + count + "</span></td>";
+          count++;
+        }
+        rowHtml += "</tr>";
+        $("#num-row-table").append(rowHtml);
+      }
+
+    });
+
+
+    function turnodds(_len) {
+      var u = '';
+      var odds;
+      if (u == 'mohio') {
+        odds = [4, 15, 50, 100, 300, 500, 1000, 2000, 4200, 5000, 2, 2, 4];
+      } else {
+        odds = [4, 15, 35, 100, 300, 1800, 2150, 3000, 4200, 5000, 2, 2, 4];
+      }
+      return odds[_len - 1]; // Adjust index by 1 because JavaScript arrays are 0-indexed
+    }
+
+    function kenoOdds() {
+      var odd;
+      var won; // Define won here
+      var keys = Object.keys(selectedNumbers);
+      var selectedNumberLen = keys.length;
+      if (selectedNumberLen > 0) {
+        $('.bet_info').show();
+        odd = turnodds(selectedNumberLen);
+        stake = $('#quantity').val();
+        won = odd * stake;
+        $("#ExtraDescriptionOdd").text('odd: ' + odd);
+        $("#ExtractDescriptionWonAmount").text('max won: ' + won + ' ETB');
+      } else {
+        $('.bet_info').hide();
+      }
+    }
+
+    // Function to fetch data and fill the table
+    function fetchData() {
+      var csrftoken = getCookie('csrftoken');
+
+      var requestbet = {
+        action: 'ticket_history',
+        time: new Date().getTime()
+      };
+
+      console.log(requestbet);
+      $.ajax({
+        url: "{% url 'mobile:keno_req' %}",
+        method: 'POST',
+        data: JSON.stringify(requestbet),
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function (response) {
+          var tableBody = $('#historyTable');
+          tableBody.empty();
+          var currentDraw = null;
+          var rowClass = ''; // Initialize row class
+          var mark;
+          $.each(response, function (index, item) {
+            console.log(item.mark);
+            if (item.draw !== currentDraw) {
+              // If the draw number changes, reset the row class
+              currentDraw = item.draw;
+              rowClass = rowClass === 'even' ? 'odd' : 'even'; // Toggle row class for striping
+            }
+            if (item.mark === 3) {
+              mark = '<i class="fa-solid fa-thumbs-up text-success"></i>';
+            } else if (item.mark === 2) {
+              mark = '<i class="fa-solid fa-thumbs-down text-danger"></i>';
+            } else {
+              mark = '<i class="fa-solid fa-hourglass-start"></i>';
+            }
+            var row = '<tr class="' + rowClass + '">' + // Add class for striping
+              '<td>' + item.draw + '</td>' +
+              '<td>' + item.selection + '</td>' +
+              '<td>' + item.stake + '</td>' +
+              '<td>' + item.won + '</td>' +
+              '<td>' + mark + '</td>' +
+              '</tr>';
+            tableBody.append(row);
+          });
+          // var responseLength = response.length;
+          // $('.bet_badge').text(responseLength);
+        },
+
+
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    }
+
+    // Optionally, you can refresh the data periodically using setInterval
+    // setInterval(fetchData, 5000); // Refresh data every 5 seconds (adjust interval as needed)
+    function fetchReport() {
+      var csrftoken = getCookie('csrftoken');
+
+      var requestbet = {
+        action: 'balance_report',
+        time: new Date().getTime(),
+        date: null,
+      };
+
+      console.log(requestbet);
+      $.ajax({
+        url: "{% url 'mobile:keno_req' %}",
+        method: 'POST',
+        data: JSON.stringify(requestbet),
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function (response) {
+          console.log(response);
+          var listContainer = $('#historyList');
+          listContainer.empty();
+
+          // Today's data
+          var todayData = response.today;
+          var todayBets = todayData.bets.amount || 0;
+          var todayRedeemed = todayData.redeemed.amount || 0;
+          var todayCanceled = todayData.canceled.amount || 0;
+
+          // Yesterday's data
+          var yesterdayData = response.yesterday;
+          var yesterdayBets = yesterdayData.bets.amount || 0;
+          var yesterdayRedeemed = yesterdayData.redeemed.amount || 0;
+          var yesterdayCanceled = yesterdayData.canceled.amount || 0;
+
+          // Render today's data
+          var todayHtml = '<li class="list-group-item">Today: Bets - ' + todayBets + ', Redeemed - ' + todayRedeemed + ', Canceled - ' + todayCanceled + '</li>';
+          listContainer.append(todayHtml);
+
+          // Render yesterday's data
+          var yesterdayHtml = '<li class="list-group-item">Yesterday: Bets - ' + yesterdayBets + ', Redeemed - ' + yesterdayRedeemed + ', Canceled - ' + yesterdayCanceled + '</li>';
+          listContainer.append(yesterdayHtml);
+        },
+
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    }
+    function isValidDateFormat(dateString) {
+      // Define a regular expression for the expected date format
+      var dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+      // Test if the date string matches the expected format
+      return dateFormatRegex.test(dateString);
+    }
+    $(document).ready(function () {
+      // Attach submit event listener to the form
+      $('#dateForm').submit(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var csrftoken = getCookie('csrftoken');
+        var requestedDate = $('#datepicker').val(); // Assuming you have a datepicker input field
+
+        if (isValidDateFormat(requestedDate)) {
+          console.log("Date format is correct.");
+        } else {
+          console.log("Date format is incorrect.");
+          requestedDate = null;
+        }
+
+        var requestreport = {
+          action: 'balance_report',
+          date: requestedDate,
+          time: new Date().getTime()
+        };
+        console.log(requestreport);
+        $.ajax({
+          url: "{% url 'mobile:keno_req' %}",
+          method: 'POST',
+          data: JSON.stringify(requestreport),
+          contentType: 'application/json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken); // Set CSRF token header
+          },
+          success: function (response) {
+            console.log(response);
+            var listContainer = $('#historyList');
+            listContainer.empty();
+
+            var bets = response.bets.amount || 0;
+            var redeemed = response.redeemed.amount || 0;
+            var canceled = response.canceled.amount || 0;
+
+            var todayHtml = '<li class="list-group-item">date ' + requestedDate + ': Bets - ' + bets + ', Redeemed - ' + redeemed + ', Canceled - ' + canceled + '</li>';
+            listContainer.append(todayHtml);
+          },
+          error: function (xhr, status, error) {
+            // Handle errors
+            console.error(error);
+          }
+        });
+      });
+    });
+
+
+    function fetchKenoResult() {
+      $.ajax({
+        url: "{% url 'mobile:keno_results' %}",  // Pointing to the keno:get_results URL
+        method: 'POST',
+        contentType: 'application/json',
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+
+        success: async function (response) {
+          console.log(response);
+          removeResultClass();
+          resetSelections();
+          disableAllBalls();
+          await showVideo();
+          await animateBalls(response);
+          setTimeout(function () {
+            removeResultClass();
+            enableAllBalls();
+          }, 1000);
+        },
+
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+        }
+      });
+    }
+    function addResultClass(ball, ballNumber, animationContainer) {
+      ball.classList.add("resultNum");
+      var imgSrc = '{% static "great/images/balls/" %}' + ballNumber + '.png';
+      var img = $('<img>', { src: imgSrc });
+      animationContainer.append(img);
+    }
+
+    function animateScale(ball, scale) {
+      ball.style.transform = "scale(" + scale + ")";
+    }
+
+    async function animateBalls(response) {
+      var animationContainer = $('.animation-container');
+      for (let index = 0; index < response.length; index++) {
+        const ballNumber = response[index];
+        const ballId = "#ball" + ballNumber;
+        const ball = document.querySelector(ballId + ' .balls_span');
+
+        // Delay before adding the resultNum class
+        await new Promise(resolve => setTimeout(resolve, 500));
+        addResultClass(ball, ballNumber, animationContainer);
+
+        animateScale(ball, 1.3);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        animateScale(ball, 1.0);
+        animationContainer.empty();
+      }
+      // Delay before removing the last image
+    }
+
+
+    function removeResultClass() {
+      var prevBall = $('.balls_span');
+      prevBall.removeClass('resultNum');
+      prevBall.css('transform', 'scale(1)');
+    }
+
+    function disableAllBalls() {
+      $('.animation-container').css('display', 'block');
+      // animationContainer.attr('hidden', false);
+      $('.tdball').addClass('disabled');
+      $('.selection-and-live').hide();
+      console.log('disabling');
+
+    }
+
+    function enableAllBalls() {
+      $('.animation-container').css('display', 'none');
+      $('.tdball').removeClass('disabled');
+      showWithZoomOut();
+      console.log('enabling');
+    }
+
+
+    function showWithZoomOut() {
+      // $('#result-table').addClass('sel-live-zoom-out');
+      $('.selection-and-live').show();
+      $('.selection-and-live').addClass('sel-live-zoom-out');
+      setTimeout(function () {
+        // $('#result-table').removeClass('sel-live-zoom-out');
+        $('.selection-and-live').removeClass('sel-live-zoom-out');
+      }, 500); // 0.5s animation duration
+    }
+
+
+    async function showVideo() {
+      $('.video-container').css('display', 'block');
+      var video = document.getElementById('shuffleVideo');
+      video.play(); // Start playing the video
+      await new Promise(resolve => setTimeout(resolve, 7000));
+      hideVideo();
+    }
+
+    // Function to hide the video when it finishes playing
+    function hideVideo() {
+      $('.video-container').css('display', 'none');
+    }
+
+
+  </script>
+  {% endblock %}
+</div>

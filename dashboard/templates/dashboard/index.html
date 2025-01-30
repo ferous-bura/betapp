@@ -1,0 +1,571 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+{% block chartscript %} 
+<script>
+	/* global Chart */
+
+'use strict';
+
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
+
+window.randomScalingFactor = function() {
+	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+};
+
+(function(global) {
+	var Months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
+
+	var Samples = global.Samples || (global.Samples = {});
+	Samples.utils = {
+		// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+		srand: function(seed) {
+			this._seed = seed;
+		},
+
+		rand: function(min, max) {
+			var seed = this._seed;
+			min = min === undefined? 0 : min;
+			max = max === undefined? 1 : max;
+			this._seed = (seed * 9301 + 49297) % 233280;
+			return min + (this._seed / 233280) * (max - min);
+		},
+
+		numbers: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 1;
+			var from = cfg.from || [];
+			var count = cfg.count || 8;
+			var decimals = cfg.decimals || 8;
+			var continuity = cfg.continuity || 1;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var data = [];
+			var i, value;
+
+			for (i=0; i<count; ++i) {
+				value = (from[i] || 0) + this.rand(min, max);
+				if (this.rand() <= continuity) {
+					data.push(Math.round(dfactor * value) / dfactor);
+				} else {
+					data.push(null);
+				}
+			}
+
+			return data;
+		},
+
+		labels: function(config) {
+			var cfg = config || {};
+			var min = cfg.min || 0;
+			var max = cfg.max || 100;
+			var count = cfg.count || 8;
+			var step = (max-min) / count;
+			var decimals = cfg.decimals || 8;
+			var dfactor = Math.pow(10, decimals) || 0;
+			var prefix = cfg.prefix || '';
+			var values = [];
+			var i;
+
+			for (i=min; i<max; i+=step) {
+				values.push(prefix + Math.round(dfactor * i) / dfactor);
+			}
+
+			return values;
+		},
+
+		months: function(config) {
+			var cfg = config || {};
+			var count = cfg.count || 12;
+			var section = cfg.section;
+			var values = [];
+			var i, value;
+
+			for (i=0; i<count; ++i) {
+				value = Months[Math.ceil(i)%12];
+				values.push(value.substring(0, section));
+			}
+
+			return values;
+		},
+
+		transparentize: function(color, opacity) {
+			var alpha = opacity === undefined? 0.5 : 1 - opacity;
+			return Chart.helpers.color(color).alpha(alpha).rgbString();
+		},
+
+		merge: Chart.helpers.configMerge
+	};
+
+	Samples.utils.srand(Date.now());
+
+	// Google Analytics
+	if (document.location.hostname === 'www.chartjs.org') {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-28909194-3', 'auto');
+		ga('send', 'pageview');
+	}
+
+}(this));
+</script>
+
+{% endblock %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+				class="fas fa-download fa-sm text-white-50"></i>Generate Report</a>
+	</div>
+
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-success text-gray-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.ggr }}ETB</h5>
+                <p class="card-text">Daily GGR(Game Gross Revenue)</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-primary text-gray-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.net }}ETB</h5>
+                <p class="card-text">Daily Net</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.yesterday_stats.net }}ETB</h5>
+                <p class="card-text">Yesterday Net</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.weekly_stats.net }}</h5>
+                <p class="card-text">Weekly Net Balance</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.gross_stake }}ETB</h5>
+                <p class="card-text">Gross Stake</p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-info text-gray-100 text-lg">
+                <div class="card-body">
+                <h5 class="card-title">{{ total_agents }}</h5>
+                <p class="card-text">Agents</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100 text-lg">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.tickets }}</h5>
+                <p class="card-text">Tickets</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100 text-lg">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.claimed_winning }}ETB</h5>
+                <p class="card-text">Claimed: {{ all_agents_summary.daily_stats.claimed_count }}</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-warning text-gray-100 text-lg">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.unclaimed_winning }}ETB</h5>
+                <p class="card-text">Un-claimed: {{ all_agents_summary.daily_stats.unclaimed_count }}</p>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-danger text-gray-100 text-lg">
+                <div class="card-body">
+                <h5 class="card-title">{{ all_agents_summary.daily_stats.cancelled_stake }}ETB</h5>
+                <p class="card-text">Cancelled: {{ all_agents_summary.daily_stats.cancelled_count }}</p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- Content Row -->
+	<div class="row">
+
+		<!-- Content Column -->
+		<div class="col-lg-6">
+
+			<!-- Project Card Example -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+				</div>
+				<div class="card-body">
+					<h4 class="small font-weight-bold">Net Balance<span
+							class="float-right">{{ all_agents_summary.daily_stats.net_perc }}%</span></h4>
+					<div class="progress mb-4">
+						<div class="progress-bar" role="progressbar" style="width: {{ all_agents_summary.daily_stats.net_perc }}%; background-color: #4bc0c0;"
+							aria-valuenow="{{ all_agents_summary.daily_stats.net_perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<h4 class="small font-weight-bold">Redeemed Amount<span
+							class="float-right">{{ all_agents_summary.daily_stats.total_won_perc }}%</span></h4>
+					<div class="progress mb-4">
+						<div class="progress-bar" role="progressbar" style="width: {{ all_agents_summary.daily_stats.total_won_perc }}%; background-color: #ff6384;"
+							aria-valuenow="{{ all_agents_summary.daily_stats.total_won_perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<h4 class="small font-weight-bold">Gross Stake<span
+							class="float-right">{{ all_agents_summary.daily_stats.gross_stake }}ETB</span></h4>
+					<div class="progress mb-4">
+						<div class="progress-bar" role="progressbar" style="width: 100%; background-color: #36a2eb;"
+							aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<h4 class="small font-weight-bold">Open Agents<span
+							class="float-right">{{ open_agent_count_perc }}%</span></h4>
+					<div class="progress mb-4">
+						<div class="progress-bar bg-gradient-danger" role="progressbar" style="width: {{ open_agent_count_perc }}%"
+							aria-valuenow="{{ open_agent_count_perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					{% if user.is_admin %}
+					<div class="mt-2" style="display: inline-block;">
+
+						Total <span class="text-success">{{ total_agents }}</span> 
+						Agents <span><a href="{% url 'dashboard:manage_agent' %}" class="bg-info text-white px-2 rounded">view</a></span>
+						Total <span class="text-success">{{ total_companies }}</span> 
+						Companies <span><a href="{% url 'dashboard:manage_company' %}" class="bg-info text-white px-2 rounded">view</a></span>
+					</div>
+					{% else %}
+					<div class="mt-2">Total <span class="text-success">{{ total_cashiers_count }}</span> Cashiers <span><a href="{% url 'dashboard:manage_cashier' %}" class="bg-info text-white px-2 rounded">view</a></span></div>
+					<div class="mt-2">Total <span class="text-success">{{ total_agent_count }}</span> Agents <span><a href="{% url 'dashboard:manage_agent' %}" class="bg-info text-white px-2 rounded">view</a></span></div>
+					{% endif %}
+
+					<!-- <h4 class="small font-weight-bold">Margin Performance<span
+							class="float-right">Complete!</span></h4>
+					<div class="progress">
+						<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+							aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+					</div> -->
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Pie Chart -->
+		<div class="col-lg-6">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+					<div class="dropdown no-arrow">
+						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+							aria-labelledby="dropdownMenuLink">
+							<div class="dropdown-header">Dropdown Header:</div>
+							<a class="dropdown-item" href="#">Today</a>
+							<a class="dropdown-item" href="#">Yesterday</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Weekly</a>
+						</div>
+					</div>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="chart-pies pt-4 pb-2">
+						<canvas id="chartPie"></canvas>
+					</div>
+					<div class="mt-4 text-center small">
+						<span class="mr-2">
+							<i class="fas fa-circle" style="color: #4bc0c0;"></i> {{ all_agents_summary.daily_stats.net }}birr
+						</span>
+						<span class="mr-2">
+							<i class="fas fa-circle" style="color: #ff6384;"></i> {{ all_agents_summary.daily_stats.claimed_winning }}birr
+						</span>
+						<span class="mr-2">
+							<i class="fas fa-circle" style="color: #36a2eb;"></i> {{ all_agents_summary.daily_stats.gross_stake }}birr
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Content Row -->
+
+	<div class="row">
+
+		<!-- Area Chart -->
+		<div class="col-xl-12 col-lg-12">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+					<div class="dropdown no-arrow">
+						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+							aria-labelledby="dropdownMenuLink">
+							<div class="dropdown-header">Dropdown Header:</div>
+							<a class="dropdown-item" href="#">Today</a>
+							<a class="dropdown-item" href="#">Yesterday</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Weekly</a>
+						</div>
+					</div>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div class="chart-areas">
+						<canvas id="myAreaChart" height="400px;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+
+<script>
+
+// Pie Chart
+var randomScalingFactor = function() {
+    return Math.round(Math.random() * 100);
+};
+
+var netBalance = {{ all_agents_summary.daily_stats.net }};
+var redeemed = {{ all_agents_summary.daily_stats.claimed_winning }};
+var grossStake = {{ all_agents_summary.daily_stats.gross_stake }};
+var pieConfig = {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: [netBalance, redeemed, grossStake],
+            backgroundColor: [
+                window.chartColors.blue,
+                window.chartColors.green,
+                window.chartColors.red,
+            ],
+            label: 'Statistics'
+        }],
+        labels: [
+            "Net Balance",
+            "Redeemed Amount",
+            "Gross Stake",
+        ]
+    },
+    options: {
+        responsive: true,
+		tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var dataset = data.datasets[tooltipItem.datasetIndex];
+                    var currentValue = dataset.data[tooltipItem.index] || 0;
+                    return currentValue.toString();
+                }
+            }
+        }
+    }
+};
+
+window.onload = function() {
+    var pieCtx = document.getElementById("chartPie").getContext("2d");
+    window.myPie = new Chart(pieCtx, pieConfig);
+};
+var gameTicketStats = {{ zticket_statistics_area.game_ticket_stats | safe }};
+var areaConfig = {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: []
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+};
+
+// var gameTicketStats = {{ zticket_statistics_area.game_ticket_stats | safe }};
+// var areaConfig = {
+//     type: 'line',
+//     data: {
+//         labels: [],
+//         datasets: []
+//     },
+//     options: {
+//         responsive: true,
+//         maintainAspectRatio: false,
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// };
+
+// // Iterate over each game and its ticket statistics
+// Object.entries(gameTicketStats).forEach(([gameId, ticketStats]) => {
+//     var gameLabels = [];
+//     var gameTotalTicketsData = [];
+//     var gameTotalStakeData = [];
+//     var gameTotalWonData = [];
+
+//     // Iterate over ticket statistics for the current game
+//     ticketStats.forEach(stats => {
+//         gameLabels.push(stats.minute);
+//         gameTotalTicketsData.push(stats.total_tickets);
+//         gameTotalStakeData.push(stats.total_stake);
+//         gameTotalWonData.push(stats.total_won);
+//     });
+
+//     // Add datasets for each game to the area chart configuration
+//     areaConfig.data.datasets.push({
+//         label: 'Game ' + gameId + ' - Total Tickets',
+//         data: gameTotalTicketsData,
+//         backgroundColor: 'rgba(78, 115, 223, 0.05)',
+//         borderColor: 'rgba(78, 115, 223, 1)',
+//         borderWidth: 2,
+//         fill: true
+//     }, {
+//         label: 'Game ' + gameId + ' - Total Stake',
+//         data: gameTotalStakeData,
+//         backgroundColor: 'rgba(28, 200, 138, 0.05)',
+//         borderColor: 'rgba(28, 200, 138, 1)',
+//         borderWidth: 2,
+//         fill: true
+//     }, {
+//         label: 'Game ' + gameId + ' - Total Won',
+//         data: gameTotalWonData,
+//         backgroundColor: 'rgba(255, 193, 7, 0.05)',
+//         borderColor: 'rgba(255, 193, 7, 1)',
+//         borderWidth: 2,
+//         fill: true
+//     });
+    
+//     // Add game labels to the area chart configuration (assuming all games have the same labels)
+//     areaConfig.data.labels = gameLabels;
+// });
+
+// // Initialize the area chart
+// document.addEventListener('DOMContentLoaded', function() {
+//     var areaCtx2 = document.getElementById("my2ndAreaChart").getContext("2d");
+//     window.myLine = new Chart(areaCtx2, areaConfig);
+// });
+
+
+// Area Chart
+var labels = {{ statistics_area.labels | safe }};
+var totalTicketsData = {{ statistics_area.total_tickets_data | safe }};
+var totalStakeData = {{ statistics_area.total_stake_data | safe }};
+var totalWonData = {{ statistics_area.total_won_data | safe }};
+var totalNetData = {{ statistics_area.net_balance_data | safe }};
+var areaConfig = {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Total Tickets',
+            data: totalTicketsData,
+            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+            borderColor: 'rgba(78, 115, 223, 1)',
+            borderWidth: 2
+        }, {
+            label: 'Total Stake',
+            data: totalStakeData,
+            backgroundColor: 'rgba(28, 200, 138, 0.05)',
+            borderColor: 'rgba(28, 200, 138, 1)',
+            borderWidth: 2
+        }, {
+            label: 'Total Won',
+            data: totalWonData,
+            backgroundColor: 'rgba(255, 193, 7, 0.05)',
+            borderColor: 'rgba(255, 193, 7, 1)',
+            borderWidth: 2
+        }, {
+            label: 'Total Net Balance',
+            data: totalNetData,
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    var areaCtx = document.getElementById("myAreaChart").getContext("2d");
+    window.myLine = new Chart(areaCtx, areaConfig);
+});
+
+</script>
+
+{% endblock %}

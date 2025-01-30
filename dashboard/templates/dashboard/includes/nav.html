@@ -1,0 +1,24 @@
+{% load static %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+	<!-- Sidebar Toggle (Topbar) -->
+	<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+		<i class="fa fa-bars"></i>
+	</button>
+
+	<!-- Header -->
+	<div class="p-5 navbar-header">
+		<a class="navbar-brand" href="{% url 'dashboard:dashboard_view' %}">
+			<span>{{ request.user.first_name }} {{ request.user.last_name }}</span>
+		</a>
+	</div>
+
+	<div class="ml-auto btn btn-danger">
+		<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+			<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-white"></i>
+			Logout
+		</a>
+	</div>
+</nav>
+<!-- End of Topbar -->

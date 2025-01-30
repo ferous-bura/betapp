@@ -1,0 +1,70 @@
+<script>
+    function turnOdds(u = 'kiron') {
+    if (u === 'mohio') {
+        return {
+            1: 4,
+            2: 15,
+            3: 50,
+            4: 100,
+            5: 300,
+            6: 500,
+            7: 1000,
+            8: 2000,
+            9: 4200,
+            10: 5000,
+            'heads': 2,
+            'tails': 2,
+            'evens': 4
+        };
+    } else {
+        return {
+            1: 4,
+            2: 15,
+            3: 35,
+            4: 100,
+            5: 300,
+            6: 1800,
+            7: 2150,
+            8: 3000,
+            9: 4200,
+            10: 5000,
+            'heads': 2,
+            'tails': 2,
+            'evens': 4
+        };
+    }
+}
+
+function kenoOdd() {
+    const odds = turnOdds('kkkhhh');
+    var keys = Object.keys(kenoSelected.selectionI);
+
+    if (keys.length === 0) {
+        valyval = 0;
+        $("#SmartPlayKenoAddToSlipDiv").hide();
+        $("#SmartPlayKenoTutorialPanel").show();
+        $("#stakeKenoIn").val(10);
+    } else {
+        $("#SmartPlayKenoAddToSlipDiv").show();
+        $("#SmartPlayKenoTutorialPanel").hide();
+
+        $("#ExtraDescriptionSelection").text(keys.join('-'));
+
+        var selectedKeyLength = keys.length;
+        var selectedKey = Object.keys(kenoSelected.selectionI)[0];
+
+        if (selectedKey === 'heads' || selectedKey === 'tails' || selectedKey === 'evens') {
+            $("#ExtraDescriptionOdd").text(odds[selectedKey]);
+            $("#kenoToWin").text("Br " + thousandsSeparators(odds[selectedKey] * $("#stakeKenoIn").val()));
+            $("#placeSingleKenoBetAmount").text("Br " + $("#stakeKenoIn").val());
+        } else {
+            $("#ExtraDescriptionOdd").text(odds[selectedKeyLength]);
+            $("#kenoToWin").text("Br " + thousandsSeparators(odds[selectedKeyLength] * $("#stakeKenoIn").val()));
+            $("#placeSingleKenoBetAmount").text("Br " + $("#stakeKenoIn").val());
+        }
+
+        $("#ExtraDescriptionWinLen").text(selectedKeyLength);
+    }
+}
+
+</script>

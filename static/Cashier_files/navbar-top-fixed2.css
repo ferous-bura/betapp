@@ -1,0 +1,2073 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+ }
+}
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+.b-example-vr {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 100vh;
+}
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.button:hover{
+  scale: 1.1 1.1;
+}
+.b{
+  border: 1px solid red;
+}
+.main{
+  width: 100% !important;
+  margin: auto;
+}
+.alert{
+  float: right;
+  z-index: 3;
+}
+.timeCount{
+  position: absolute;
+  top: 15px;
+  color: white;
+  width: auto;
+  background-color: brown;
+}
+.randSelection{
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  height: 4.5vh;
+}
+.headTail{
+  margin-left: 30%;
+  width: 520px;
+}
+.headTail button{
+  border: none;
+  margin: 0vw 0.2vw;
+  color: rgb(255, 255, 255);
+  padding:0vw 1vw 0vw 3.6vw;
+}
+.headTail button i{
+  position: relative;
+  font-size: larger;
+  border: none;
+  color: rgb(66, 66, 66);
+  margin:0.2vw 0vw 0.2vw 2.5vw;
+}
+.headTail button:hover i{
+  color: rgb(197, 197, 197);
+}
+.mybtn{
+  padding:0vw 1vw 0vw 0.5vw 
+}
+.mybtn:hover{
+  scale: 1 1 !important;
+}
+.noscale:hover{
+  scale: 1 1 !important;
+}
+.notification{
+  position: absolute;
+ /* Stay in place */
+  right: 1%;
+  z-index: 4;
+}
+.numbers{
+  float: left;
+  width: 45%;
+  height: auto;
+  margin-top: 10px;
+}
+.mainTickets{
+  margin-top: 5px;
+  float: left;
+  width: 55%;
+  height: auto;
+}
+.addTicket{
+  float: left;
+  width: 45%;
+  height: auto;
+  margin: 0px;
+}
+.tickets{
+  float: right;
+  width: 55%;
+  height: auto;
+  margin: 0px;
+}
+.selection{
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  top: 180px;
+}
+#kenoPanel{
+  min-width: 700px;
+}
+.KenoPanelWrapper{
+  width:100%;
+  display:inline-block;
+  vertical-align:top;
+  margin: 0px 25px;
+}
+.col-9{
+  -ms-flex:0 0 75%;
+  flex:0 0 75%;
+  max-width:100%;
+}
+.KenoPanel{
+  display:flex;
+  justify-content:space-between;
+  flex-flow:row wrap;
+  margin: 0px 3px;
+}
+.p-0{
+  padding:0!important 
+}
+.DividerBar{
+  height:1px;
+  margin:5px 20px;
+  display:block;
+  flex:1 100%;
+  background:linear-gradient(270deg,rgba(251,130,127,0),#fb827f,rgba(251,130,127,0));
+}
+.ballsResult{
+  flex:1 10%;
+  padding:2px 0;
+  text-align:center;
+}
+.ballsResult span{
+  width:35px;
+  height: 35px;
+  font-size: 17px;
+  display:block;
+  margin:0 auto;
+  padding:5px 0;
+  text-align:center;
+  border-radius:50%;
+  background-color: #c45902;
+  color: azure;
+}
+#resultCard{
+  margin-left: 2%;
+
+}
+.balls{
+  flex:1 10%;
+  padding:2px 0;
+  text-align:center;
+}
+.balls span{
+  width:40px;
+  height: 40px;
+  font-size: 17px;
+  display:block;
+  margin:0 auto;
+  padding:5px 0;
+  text-align:center;
+  border-radius:50%;
+  background-color: #c45902;
+  color: azure;
+}
+.balls:active{
+  background-color: #c45902;
+  border-radius: 10%;
+}
+.balls:not(.nohover):hover span{
+  background-color:rgba(0,128,0,.4) !important;
+  transform:scale(1.1,1.1);
+  box-shadow:0 0 10px 2px rgba(0,0,0,.2);
+  cursor:pointer;
+}
+.selectedKeno{
+  background-color:rgba(0,128,0,.4) !important;
+}
+.resultCard .balls span{
+  width:30px !important;
+  height: 30px !important;
+}
+.theAddTicket{
+  width: 100%;
+  margin: auto;
+  height: 250px;
+  background-color: rgb(202, 206, 209);
+  border-top-left-radius: 7%;
+  border-top-right-radius: 7%;
+}
+.theTicket{
+  position: relative;
+  top: -50px;
+  width: 90%;
+  margin: auto;
+  height: 380px;
+  background-color: rgb(202, 206, 209);
+}
+.p-0 {
+  padding: 0!important;
+}
+.col-9 {
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.col-3 {
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+.BetPanelToggle .MainContent .BetSlip .ButtonPanel {
+  width: 80%;
+  bottom: 0;
+}
+.ButtonPanel2 {
+  position: absolute;
+  width: 100%;
+  margin:auto;
+  bottom: 0;
+}
+@media screen and (max-width: 1024px){
+  .ButtonPanel {
+      font-size: .8em;
+ }
+}
+.ClearButton {
+  color: #fff;
+  background-color: #fb827f;
+  border: none;
+  font-size: .8em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 8px;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+}
+.clear:hover{
+  background-color: rgb(80, 80, 80);
+}
+.clear{
+  float: left;
+  padding: 7px 0px;
+  margin: 0px;
+  width: 30%;
+  background-color: rgb(102, 102, 102);
+  border: none;
+  color: white;
+}
+.print{
+  float: left;
+  padding: 7px 0px;
+  margin: 0px;
+  width: 50%;
+  background-color: rgb(184, 128, 8);
+  border: none;
+  color: white;
+}
+.cancel{
+  float: left;
+  padding: 7px 0px;
+  margin: 0px;
+  width: 50%;
+  background-color: rgb(184, 8, 8);
+  border: none;
+  color: white;
+}
+.placeBet{
+  margin: 0px;
+  float: left;
+  padding: 7px 0px;
+  width: 70%;
+  background-color: rgb(109, 2, 2);
+  color: white;
+  border: none;
+}
+.spD{
+  background-color: rgb(145, 0, 0);
+  padding: 0px 0.5vw 0.1vw 0.5vw;
+  border-radius: 5%;
+  margin: 0vw 0.5vw;
+}
+.placeBet:hover{
+  background-color: rgb(88, 1, 1);
+}
+.placeBet:hover .spD{
+}
+.addBtn:hover{
+  background-color: rgb(0, 82, 7);
+}
+.addBtn{
+  margin: 0px 0px;
+  float: left;
+  padding: 7px 0px;
+  width: 70%;
+  background-color: rgb(0, 99, 8);
+  color: white;
+  border: none;
+}
+.badge{
+  cursor: pointer !important;
+}
+.input-group-text{
+  cursor: pointer !important;
+}
+.input-group-text:hover{
+  background-color: rgb(75, 75, 75);
+  color:white 
+}
+.Denominations {
+  margin: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.Denominations button:nth-child(1) {
+  background: #c9580f;
+}
+.Denominations button {
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 100%;
+  position: relative;
+  border: 1px solid rgba(230,231,233,.8);
+  border-radius: 5px 5px 5px 5px;
+  margin: 0 2px;
+  color: #fff;
+  padding: 15px 3px 5px 3px;
+  background-color: #e6e7e9;
+  box-shadow: rgb(0 0 0 / 20%) 0 0 5px 0;
+  cursor: pointer;
+}
+[type=reset], [type=submit], button, html [type=button] {
+  -webkit-appearance: button;
+}
+button {
+  font: 300 100% "OpenSans",sans-serif;
+  outline: none;
+}
+button, select {
+  text-transform: none;
+}
+.InfoMessage {
+  font-size: .9em;
+  opacity: .7;
+  text-align: center;
+  padding: 5px 0;
+}
+.BetPanelToggle .MainContent .BetSlip #single-bets-container {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+.Denominations button i {
+  position: absolute;
+  font-size: 10px;
+  font-style: normal;
+  padding: 0 2px;
+  top: 2px;
+  left: 2px;
+  color: #fff;
+  border-radius: 0 0 5px 0;
+}
+.Denominations button:nth-child(3) {
+  background: #8830ad;
+}
+.Denominations button:nth-child(2) {
+  background: #c93362;
+}
+.Denominations button:nth-child(4) {
+  background: #5a95f0;
+}
+.Denominations button:nth-child(5) {
+  background: #688a37;
+}
+.KenoAside .CTAcell {
+  text-align: center;
+  margin: 10px 0;
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+.PayTable_Accord.active button.accordion {
+  background-color: #af0000 ;
+  color: #e6e7e9 ;
+}
+.PayTable_Accord button.accordion {
+  padding: 5px 20px 5px 0;
+}
+button.accordion {
+  display: inherit;
+}
+button.accordion, div[data-accordion='Event'].accordion {
+  background-color: #e6e7e9;
+  color: #af0000;
+  border: none;
+  border-top: 1px solid #af0000;
+  cursor: initial;
+  padding: 5px 5px 5px 0;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: .4s;
+  position: relative;
+}
+.pl-1, .px-1 {
+  padding-left: 0.25rem!important;
+}
+button {
+  font: 300 100% "OpenSans",sans-serif;
+  outline: none;
+}
+[type=reset], [type=submit], button, html [type=button] {
+  -webkit-appearance: button;
+}
+button, select {
+  text-transform: none;
+}
+button, input {
+  overflow: visible;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+button {
+  border-radius: 0;
+}
+button.accordion i, div[data-accordion='Event'].accordion i {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.KenoAside .PayTable .accordionPanel {
+  padding-left: 10px;
+}
+div.accordionPanel.show {
+  display: block !important;
+}
+div.accordionPanel {
+  position: relative;
+  display: none;
+  -webkit-animation-name: ExpandAccordion;
+  -webkit-animation-duration: .3s;
+  animation-name: ExpandAccordion;
+  animation-duration: .3s;
+}
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+.KenoAside .PayTable table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+}
+table {
+  border-collapse: collapse;
+  margin: auto;
+  text-align: center;
+  color: white;
+}
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+  margin: auto;
+}
+.KenoAside .PayTable table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+}
+.KenoAside .PayTable td {
+  background-color: rgba(175,0,0,.2);
+  color: #373737;
+  border-bottom: 1px solid rgba(55,55,55,.2);
+  border-top: none;
+  text-align: center;
+  padding: 5px 0;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.ConfirmButton {
+  margin: 0;
+  box-shadow: 1px 1px 5px rgb(0 0 0 / 40%);
+  letter-spacing: .05em;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #af0000;
+  padding: 8px 10px;
+  border: 1px solid #af0000;
+  color: #ffe000;
+  font-size: 1em;
+  font-weight: 400;
+  border-radius: 0;
+}
+button {
+  font: 300 100% "OpenSans",sans-serif;
+  outline: none;
+}
+table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: 1px;
+  border-color: rgb(255, 254, 254);
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+button.accordion i, div[data-accordion='Event'].accordion i {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+i {
+  font-style: italic;
+}
+.PayTable_Accord.active button.accordion {
+  background-color: #af0000 ;
+  color: #ffffff ;
+  text-align: center;
+}
+button.accordion, div[data-accordion='Event'].accordion {
+  background-color: #e6e7e9;
+  color: #af0000;
+  border: none;
+  border-top: 1px solid #af0000;
+  cursor: initial;
+  padding: 5px 5px 5px 0;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: .4s;
+  position: relative;
+}
+button {
+  font: 300 100% "OpenSans",sans-serif;
+  outline: none;
+}
+button, select {
+  text-transform: none;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+button {
+  writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  cursor: default;
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+.KenoAside .PayTable table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0;
+}
+.KenoAside {
+  width: 18%;
+  display: inline-block;
+}
+.p-0hi {
+  padding: 0!important;
+}
+.col-3hi {
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 100%;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+.TutorialPanel {
+  background-color: #727272;
+  color: #fff;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 2px;
+  position: relative;
+  display: block;
+}
+.TutorialPanel:before {
+  content: '';
+  background-color: #727272;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: -10px;
+  top: 35%;
+  transform: rotate(45deg);
+}
+.AddToSlipDiv{
+  display: none;
+}
+.blockme{
+  display: block !important;
+}
+td{
+  color: rgb(173, 173, 173) !important;
+  min-height: 0.5vw !important;
+}
+.ConfirmButton {
+  margin-top: -1px;
+  margin-bottom: 1px;
+  box-shadow: 1px 1px 5px rgb(0 0 0 / 40%);
+  letter-spacing: .05em;
+  font-weight: 400;
+  text-transform: capitalize;
+  cursor: pointer;
+  background-color: #079413;
+  padding: 6.7px 10px;
+  border: 1px solid #111;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 400;
+  border-radius: 3px;
+  width: 70%;
+}
+.pb-3, .py-3 {
+  padding-bottom: 1rem!important;
+}
+.pt-3, .py-3 {
+  padding-top: 1rem!important;
+}
+.pl-0, .px-0 {
+  padding-left: 0!important;
+}
+.pr-0, .px-0 {
+  padding-right: 0!important;
+}
+.col {
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  max-width: 100%;
+}
+.ConfirmButton .globalStakeAmount {
+  padding: 7px 6px;
+  border-radius: 3px;
+  border: 1px #0be61d;
+  background-color: #00740a !important;
+}
+.ConfirmButton:hover{
+  background-color: #078011 !important;
+}
+.ExpandAnimation {
+  -webkit-animation-name: Expand;
+  -webkit-animation-duration: .8s;
+  animation-name: Expand;
+  animation-duration: .3s;
+}
+.PlacedBet {
+  padding: 0 3px 0 3px;
+  margin: 3px 0 0 0;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  position: relative;
+  border-radius: 2px;
+  color: #373737;
+  background-color: #d3d3d3;
+  font-size: 1.1em;
+  position: relative;
+}
+.pb-1, .py-1 {
+  padding-bottom: 0.25rem!important;
+}
+.BetDetails, .BetDetails .cursor-pointer {
+  min-height: 40px;
+}
+.BetDetails {
+  padding: 0 0 0 30px;
+  position: relative;
+  margin-bottom: 0;
+}
+.BetDetails .icon {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 18px;
+  width: 25px;
+  margin: 0;
+  fill: #373737;
+}
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+.PlacedBet h3 {
+  color: #373737;
+}
+.BetDetails h2, .BetDetails h3, .BetDetails h4 {
+  background: none;
+  position: relative;
+  margin: -1px 0 -1px 0;
+  padding: 0 20px 0 0;
+  font-size: .67em;
+  vertical-align: top;
+  font-weight: 400;
+}
+h3 {
+  font-size: 1.17em;
+}
+.h3, h3 {
+  font-size: 1.75rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.ExtraDescription {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+.BetDetails .Bet {
+  white-space: nowrap;
+  background-color: #373737;
+  color: #ffe000;
+  padding: 0 0.5em;
+  font-size: .9em;
+  box-shadow: none;
+}
+.Bet.nohover {
+  cursor: not-allowed;
+  box-shadow: none;
+  background-color: rgba(175,0,0,.6);
+  color: rgba(255,255,255,.7);
+  position: relative;
+}
+.nohover {
+  cursor: default;
+}
+.Bet {
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 2px 7px;
+  border: 1px solid #af0000;
+  border-radius: 3px;
+  background-color: #af0000;
+  box-shadow: none;
+  text-align: center;
+  margin-left: 5px;
+  transition: all .25s ease;
+}
+b, strong {
+  font-weight: bolder;
+}
+.BetPanelToggle .MainContent .BetSlip #single-bets-container {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+.PlacedBet .ToWinAmount {
+  text-align: right;
+  padding-right: 20px;
+  padding-top: 12px;
+  font-size: .7em !important;
+}
+.PlacedBet .Remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.PlacedBet .Remove i {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  fill: #bfbfbf;
+  transition: all .3s ease;
+  color: #373737;
+}
+.glyphicon {
+  position: relative;
+  padding-bottom: 10px !important;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+}
+.glyphicon-remove:before {
+  content: "x";
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.Stake input {
+  border: 1px solid #af0000;
+  font-size: .9em !important;
+  border-radius: 0;
+  background: #fff;
+  padding: 0 8px;
+  color: #000;
+  text-shadow: none;
+  float: left;
+  width: 70%;
+  height: 22px;
+  text-align: right;
+  font: 300 100% "OpenSans",sans-serif;
+  font-size: .9em;
+}
+.Stake {
+  margin-top: 4px;
+  font-size: .9em;
+  font-weight: 700;
+  display: block;
+  height: 22px;
+  padding-left: 27px;
+  margin-bottom: 1px;
+}
+.Stake .DecreaseAmount {
+  margin-top: 4px;
+  border-radius: 5px 0 0 5px;
+}
+.Stake .DecreaseAmount, .Stake .IncreaseAmount {
+  text-align: center;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  vertical-align: middle;
+  border: 1px solid #af0000;
+  background-color: #af0000;
+  float: left;
+  transition: all .3s ease;
+}
+.Stake i {
+  color: #ffe000;
+  top: -2px;
+  font-size: 16px;
+}
+.Stake .DecreaseAmount:hover, .Stake .IncreaseAmount:hover {
+  background-color: #e20000;
+  box-shadow: inset 0 0 10px rgb(0 0 0 / 20%), 0 0 0 rgb(0 0 0 / 90%);
+}
+.Stake .IncreaseAmount {
+  margin-top: 4px;
+  border-radius: 0 5px 5px 0 !important;
+}
+.Stake .DecreaseAmount, .Stake .IncreaseAmount {
+  text-align: center;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  vertical-align: middle;
+  border: 1px solid #af0000;
+  background-color: #af0000;
+  float: left;
+  transition: all .3s ease;
+  border-radius: 5px 0 0 5px;
+}
+.glyphicon-minus:before {
+  content: "−";
+}
+.glyphicon-plus:before {
+  content: "+";
+}
+.kenoTicket{
+  margin: auto;
+  width: 300px;
+  height: 90%;
+  background-color: rgb(255, 255, 255);
+}
+.title{
+  position: relative;
+  text-align: right;
+  float: right;
+  height: 50px;
+  right: 15px;
+  font-family:monospace;
+}
+.titlei{
+  font-family:monospace;
+  position: relative;
+  text-align: right;
+  float: left;
+  height: 50px;
+  top: 10px;
+  left: 10px;
+  font-size: 11px;
+}
+.title p{
+  position: relative;
+  top: 10px;
+  font-size: 11px;
+  padding: 0;
+  margin: 0;
+}
+.ticketWin{
+  position: relative;
+  text-align: left;
+  left: 11px;
+  width: 275px;
+  height: 20px;
+}
+.headerKeno{
+  height: 75px;
+  position: relative;
+}
+.kenoTicket .ticketWin span{
+}
+.ticketWin p{
+  position: absolute;
+  left: 0;
+  font-size: 12.5px;
+  font-weight: bold;
+  margin: 0;
+}
+.ticketWin div{
+  position: absolute;
+  font-size: 11.5px;
+  font-weight: normal;
+  margin: 0;
+}
+.ticketWin .sel{
+  left:0;
+}
+.ticketWin .odd{
+  right: 0;
+  font-weight: bold;
+}
+.tikTot{
+  position: relative;
+  text-align: left;
+  left: 11px;
+  width: 275px;
+  height: 40px;
+  border: 0.5px solid black;
+}
+.tikTot div{
+  position: relative;
+  height: 20px;
+  top: -1px;
+  font-size: 12.5px;
+}
+.tikTot div .lefty{
+  position: absolute;
+  left: 4px;
+}
+.tikTot div .righty{
+  position: absolute;
+  right: 4px;
+}
+.foot{
+  position: relative;
+  top: 5px;
+  margin: auto;
+  text-align: center;
+}
+.foot span{
+  font-size: 10px !important;
+}
+@media print{
+  #printBtnNegn{
+      display: none;
+ }
+  #kenoTicket{
+      position: absolute !important;
+      top: -50px !important;
+ }
+}
+#printJS-form *{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.ticketWinPar{
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteTable {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  margin: -10px auto auto auto;
+  padding: 20px 0;
+  background: #1b401b;
+}
+*, :before, :after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+div {
+  display: block;
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+body {
+  font: 300 100% "InterFace Regular",sans-serif;
+  font-size: 1em;
+  -webkit-text-size-adjust: 100%;
+  background: #111;
+  color: #fff;
+  margin: 0 0 75px 0;
+  text-rendering: optimizeLegibility;
+}
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+}
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+html {
+  -webkit-text-size-adjust: none;
+}
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+.RouletteTable>div:first-child {
+  width: 50px;
+}
+.RouletteTable>div:first-child, .RouletteTable>div:last-child {
+  display: inline-block;
+  vertical-align: top;
+}
+.Green-Btn, #SW-0, .SW-0, #SW-0.SelectedBet, .SW-0.SelectedBet {
+  background-color: #008000 ;
+  color: #fff;
+}
+.RouletteTable>div:first-child .SW-0 {
+  height: 154px;
+  display: table;
+  width: 50px;
+  right: -2px;
+}
+.SW-Number {
+  position: relative;
+  flex: 1 8.3%;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  display: inline-block;
+  height: 50px;
+}
+
+.RouletteTable>div:first-child .SW-0 h3 {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+.DetailsList h3 {
+  font-weight: 300;
+  font-size: 1.17em;
+  margin: 0;
+}
+.SW-Number h3 {
+  padding: 12.5px 0 0 0;
+}
+.RouletteTable>div:first-child .SW-0 .SW-TR, .RouletteTable>div:first-child .SW-0 .SW-R, .RouletteTable>div:first-child .SW-0 .SW-BR, .RouletteTable>div:first-child .SW-0 .SW-B {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  top: 77px;
+  bottom: 77px;
+  left: 25px;
+  right: 25px;
+}
+.SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  background-color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  opacity: 0;
+  transition: opacity .2s,top .2s,right .2s,bottom .2s,left .2s;
+}
+.coin, .SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  cursor: pointer;
+}
+.RouletteTable>div:first-child .SW-0 .SW-TR, .RouletteTable>div:first-child .SW-0 .SW-R, .RouletteTable>div:first-child .SW-0 .SW-BR, .RouletteTable>div:first-child .SW-0 .SW-B {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  top: 77px;
+  bottom: 77px;
+  left: 25px;
+  right: 25px;
+}
+.SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  background-color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  opacity: 0;
+  transition: opacity .2s,top .2s,right .2s,bottom .2s,left .2s;
+}
+.coin, .SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  cursor: pointer;
+}
+.RouletteTable {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  margin: -10px auto auto auto;
+  padding: 20px 0;
+  background: #1b401b;
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+.SW-Number {
+  position: relative;
+  flex: 1 8.3%;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  display: inline-block;
+  height: 50px;
+}
+.Red-Btn, #SW-1, #SW-3, #SW-5, #SW-7, #SW-9, #SW-12, #SW-14, #SW-16, #SW-18, #SW-19, #SW-21, #SW-23, #SW-25, #SW-27, #SW-30, #SW-32, #SW-34, #SW-36, .SW-1, .SW-3, .SW-5, .SW-7, .SW-9, .SW-12, .SW-14, .SW-16, .SW-18, .SW-19, .SW-21, .SW-23, .SW-25, .SW-27, .SW-30, .SW-32, .SW-34, .SW-36 {
+  background-color: #f00 ;
+  color: #fff;
+}
+.DetailsList h3 {
+  font-weight: 300;
+  font-size: 1.17em;
+  margin: 0;
+}
+.SW-Number h3 {
+  padding: 12.5px 0 0 0;
+}
+.SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  background-color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  opacity: 0;
+  transition: opacity .2s,top .2s,right .2s,bottom .2s,left .2s;
+}
+.coin, .SW-Number .SW-TL, .SW-Number .SW-T, .SW-Number .SW-TR, .SW-Number .SW-R, .SW-Number .SW-BR, .SW-Number .SW-B, .SW-Number .SW-BL, .SW-Number .SW-L {
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+  cursor: pointer;
+}
+.SW-Number {
+  position: relative;
+  flex: 1 8.3%;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  display: inline-block;
+  height: 50px;
+}
+.Black-Btn, #SW-2, #SW-4, #SW-6, #SW-8, #SW-10, #SW-11, #SW-13, #SW-15, #SW-17, #SW-20, #SW-22, #SW-24, #SW-26, #SW-28, #SW-29, #SW-31, #SW-33, #SW-35, .SW-2, .SW-4, .SW-6, .SW-8, .SW-10, .SW-11, .SW-13, .SW-15, .SW-17, .SW-20, .SW-22, .SW-24, .SW-26, .SW-28, .SW-29, .SW-31, .SW-33, .SW-35 {
+  background-color: #000 ;
+  color: #fff;
+}
+.DetailsList h3 {
+  font-weight: 300;
+  font-size: 1.17em;
+  margin: 0;
+}
+.SW-Number h3 {
+  padding: 12.5px 0 0 0;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+div {
+  display: block;
+}
+.RouletteTable {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  margin: -10px auto auto auto;
+  padding: 20px 0;
+  background: #1b401b;
+}
+.BettingPanel {
+  position: relative;
+  margin: 0;
+  padding: 10px 0;
+  white-space: normal;
+}
+.GameSelection {
+  width: 100%;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+}
+#SW-35, .SW-2, .SW-4, .SW-6, .SW-8, .SW-10, .SW-11, .SW-13, .SW-15, .SW-17, .SW-20, .SW-22, .SW-24, .SW-26, .SW-28, .SW-29, .SW-31, .SW-33, .SW-35 {
+  background-color: #000 ;
+  color: #fff;
+}
+.Red-Btn, #SW-1, #SW-3, #SW-5, #SW-7, #SW-9, #SW-12, #SW-14, #SW-16, #SW-18, #SW-19, #SW-21, #SW-23, #SW-25, #SW-27, #SW-30, #SW-32, #SW-34, #SW-36, .SW-1, .SW-3, .SW-5, .SW-7, .SW-9, .SW-12, .SW-14, .SW-16, .SW-18, .SW-19, .SW-21, .SW-23, .SW-25, .SW-27, .SW-30, .SW-32, .SW-34, .SW-36 {
+  background-color: #f00 ;
+  color: #fff;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+.SW-Btn {
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  text-align: center;
+  height: 50px;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+.SW-Btn {
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  text-align: center;
+  height: 50px;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+.Red-Btn, #SW-1, #SW-3, #SW-5, #SW-7, #SW-9, #SW-12, #SW-14, #SW-16, #SW-18, #SW-19, #SW-21, #SW-23, #SW-25, #SW-27, #SW-30, #SW-32, #SW-34, #SW-36, .SW-1, .SW-3, .SW-5, .SW-7, .SW-9, .SW-12, .SW-14, .SW-16, .SW-18, .SW-19, .SW-21, .SW-23, .SW-25, .SW-27, .SW-30, .SW-32, .SW-34, .SW-36 {
+  background-color: #f00;
+  color: #fff;
+}
+.SW-Btn {
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  text-align: center;
+  height: 50px;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+.DetailsList h3 {
+  font-weight: 300;
+  font-size: 1.17em;
+  margin: 0;
+}
+.SW-Btn h3 {
+  text-align: center;
+  padding: 12.5px 0 0 0;
+}
+.Black-Btn, #SW-2, #SW-4, #SW-6, #SW-8, #SW-10, #SW-11, #SW-13, #SW-15, #SW-17, #SW-20, #SW-22, #SW-24, #SW-26, #SW-28, #SW-29, #SW-31, #SW-33, #SW-35, .SW-2, .SW-4, .SW-6, .SW-8, .SW-10, .SW-11, .SW-13, .SW-15, .SW-17, .SW-20, .SW-22, .SW-24, .SW-26, .SW-28, .SW-29, .SW-31, .SW-33, .SW-35 {
+  background-color: #000;
+  color: #fff;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteColumn {
+  display: flex;
+  width: 100%;
+}
+.Colours {
+  flex-wrap: wrap;
+}
+.RouletteColumn .ColourA {
+  background-color: #ff8f17;
+  color: #fff !important;
+}
+.RouletteColumn .ColourB {
+  background-color: #163fff;
+  color: #fff !important;
+}
+.RouletteColumn .ColourC {
+  background-color: #ff5aff;
+  color: #fff !important;
+}
+.RouletteColumn .ColourD {
+  background-color: #00cf9e;
+  color: #fff !important;
+}
+.RouletteColumn .ColourE {
+  background-color: #fff300;
+  color: #808080 !important;
+}
+.RouletteColumn .ColourF {
+  background-color: #fff;
+  color: #808080 !important;
+}
+.RouletteTable>div:last-child {
+  width: 8%;
+}
+.RouletteTable>div:first-child, .RouletteTable>div:last-child {
+  display: inline-block;
+  vertical-align: top;
+}
+.RouletteTable {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  margin: -10px auto auto auto;
+  padding: 20px 0;
+  background: #1b401b;
+}
+.DetailsList h3 {
+  font-weight: 300;
+  font-size: 1.17em;
+  margin: 0;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteNeighbors {
+  background: #1b401b;
+  padding-bottom: 15px;
+}
+.NavSelection .tab-content h2 {
+  padding-left: 5px;
+}
+.DetailsList h2 {
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1em;
+  color: #fff;
+}
+.RouletteNeighbors h2 {
+  color: #fff !important;
+}
+.ScrollSelection .scrollMover {
+  width: 1692px;
+  position: relative;
+  left: 5px;
+  white-space: nowrap;
+}
+.ScrollSelection .SW-Number {
+  width: 50px;
+  margin: 0 -2px;
+  display: table-cell;
+}
+.SW-Number {
+  position: relative;
+  flex: 1 8.3%;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  display: inline-block;
+  height: 50px;
+}
+
+.form-control, .container, .container-fluid, .row, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.pl-0, .px-0 {
+  padding-left: 0!important;
+}
+.pr-0, .px-0 {
+  padding-right: 0!important;
+}
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.form-control, .container, .container-fluid, .row, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.NextRepeatRow {
+  align-items: center !important;
+  display: table;
+}
+.mb-3, .my-3 {
+  margin-bottom: 1rem!important;
+}
+.ml-0, .mx-0 {
+  margin-left: 0!important;
+}
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.NextRepeatRow>div:first-of-type {
+  background: #f00;
+  border-radius: 3px 0 0 3px;
+}
+.NextRepeatRow>div {
+  display: table-cell;
+}
+.col-auto {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+}
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.NextDraw div:first-of-type {
+  color: #fff;
+  padding: 2px;
+}
+.NextDraw div:last-of-type {
+  color: #ff0;
+  min-width: 45px;
+}
+.NextDraw div:last-of-type {
+  color: #ff0;
+  min-width: 45px;
+}
+.NextRepeatRow>div:last-of-type {
+  background: #09b517;
+  border-radius: 0 3px 3px 0;
+}
+.NextRepeatRow>div {
+  display: table-cell;
+}
+.RepeatBet {
+  background: #09b517;
+  color: #fff;
+  font-size: 1em;
+  border-radius: 0 3px 3px 0;
+  padding: 3px;
+  min-width: 110px;
+}
+.align-items-center {
+  -ms-flex-align: center!important;
+  align-items: center!important;
+}
+.NextRepeatRow .RepeatBet [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: top;
+}
+.RepeatBet {
+  background: #09b517;
+  color: #fff;
+  font-size: 1em;
+  border-radius: 0 3px 3px 0;
+  padding: 3px;
+  min-width: 110px;
+}
+select:not(:-internal-list-box) {
+  overflow: visible !important;
+}
+user agent stylesheet select {
+  writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: fieldtext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  box-sizing: border-box;
+  align-items: center;
+  white-space: pre;
+  -webkit-rtl-ordering: logical;
+  background-color: field;
+  cursor: default;
+  margin: 0em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+  border-radius: 0px;
+}
+.RepeatBet select {
+  border-radius: 3px;
+  border: none;
+}
+button, select {
+  text-transform: none;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+option {
+  font-weight: normal;
+  display: block;
+  white-space: nowrap;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}
+.pad-top-15 {
+  padding-top: 15px;
+}
+.RouletteTable {
+  position: absolute;
+  width: 50% !important;
+  padding: 20px 20px 20px 20px;
+  background: #1b401b;
+  left: 0px;
+}
+.RouletteTable>div:first-child .SW-0 {
+  height: 154px;
+  display: table;
+  width: 48px;
+  right: -2px;
+}
+.SW-Number {
+  position: relative;
+  flex: 1 8.3%;
+  border: 1px solid #fff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 0;
+  display: inline-block;
+  height: 50px;
+}
+
+*, :before, :after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+div {
+  display: block;
+}
+.RouletteTable>div:last-child {
+  width: 8%;
+}
+.RouletteTable>div:first-child, .RouletteTable>div:last-child {
+  display: inline-block;
+  vertical-align: top;
+}
+.RouletteColumn div:hover{
+  background-color: #832500fb ;
+  color: white !important;
+}
+.hover{
+  background-color: #c5a800c7 ;
+  color: white !important;
+}
+.SW-0:hover{
+  background-color: #832500fb !important;
+  color: white !important;
+}
+.ticketSpin{
+  width: 50%;
+  float: right;
+  height: 428px;
+}
+.nextB{
+  width: auto;
+}
+/* The Modal (background) */
+.modal2 {
+  display: none;
+  position: fixed;
+ /* Stay in place */
+  z-index: 3;
+ /* Sit on top */
+  padding-top: 100px;
+ /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+ /* Full width */
+  height: 100%;
+ /* Full height */
+  overflow: auto;
+ /* Enable scroll if needed */
+  background-color : rgba(0,0,0,0.8);
+ /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content2 {
+  font-weight: lighter;
+  color: #fefefe;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.full{
+  position: absolute !important;
+  width: 50%;
+  z-index: 2;
+}
+/* Show it is fixed to the top */
+body {
+  min-width: 680px !important;
+  overflow-x: auto;
+  width: 100%;
+  padding-top: 4.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgb(0, 0, 0);
+}
+html{
+  min-width: 680px !important;
+  overflow-x: auto;
+}
+#spinPanel{
+  min-height: 100% !important;
+}
+.alert{
+  animation: myfirst 0.1s ease-in-out;
+}
+@keyframes myfirst {
+  0% {
+      opacity: 0;
+ }
+  100% {
+     opacity: 1;
+ }
+}
+.close_Game_res{
+  float: right;
+  padding: 5px 15px;
+  color: red;
+  cursor: pointer;
+  font-size: 35px !important;
+}
+.close_Game_res:hover{
+  animation: mysec 0.2s ease-in-out;
+  scale: 1.4 1.4;
+}
+@keyframes mysec {
+  0% {
+      scale: 0.8 0.8;
+ }
+  100% {
+     scale: 1.4 1.4;
+ }
+}
+.disable{
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #111;
+}
+.modal-confirm {
+  color: #ffc400;
+  width: 400px;
+}
+.modal-confirm .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+.modal-confirm .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+}
+.modal-confirm .modal-body {
+  color: #999;
+}
+.modal-confirm .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+  color: #999;
+}
+.modal-confirm .icon-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #8a8a8a;
+}
+.modal-confirm .icon-box i {
+  color: #5e5e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #1f8528;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+  background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+  background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+  background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+  background: #ee3535;
+}
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
+}
+.modal-titli{
+  color: #00740a;
+}
+.btn-successi{
+  background-color: #00740a !important;
+}
+.endaleBeqa{
+  margin: auto;
+  width: 390px;
+  background-color: white;
+}
+.mainDivTik{
+  display: none;
+}
+#reportPrintHere{
+  display: none;
+}
+#AddToSlipDivLoader{
+  display: none; 
+  width: 23%; 
+  height:245px; 
+  opacity: 0.7; 
+  background-color: rgb(63, 63, 63); 
+  position: absolute; 
+  z-index: 4;
+}
+
+@media (max-width: 780px) {
+  .selection {
+      min-width: 680px !important;
+ }
+  .numbers{
+      float: left;
+      width: 100%;
+      margin: auto;
+      height: auto;
+ }
+  .mainTickets{
+      float: left;
+      width: 100%;
+      height: auto;
+ }
+  .addTicket{
+      float: left;
+      height: auto;
+      margin: 0px;
+ }
+  .tickets{
+      position: relative;
+      float: left;
+      top: 50px;
+      height: auto;
+      margin: 0px;
+ }
+  .ticketSpin{
+      position: relative;
+      float: left;
+      top: 400px;
+      width: 100%;
+      height: auto;
+      margin: 0px;
+ }
+  .RouletteTable {
+      position: absolute;
+      width: 100% !important;
+      padding: 20px 20px 20px 20px;
+      background: #1b401b;
+      left: 0px;
+ }
+  .headTail{
+      margin-left: 50%;
+      width: 320px;
+      z-index: 2;
+ }
+ #AddToSlipDivLoader{
+  display: none; 
+  width: 41% ; 
+  height:245px; 
+  opacity: 0.7; 
+  background-color: rgb(63, 63, 63); 
+  position: absolute; 
+  z-index: 4;
+}
+}

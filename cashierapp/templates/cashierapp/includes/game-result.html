@@ -1,0 +1,43 @@
+<div class="w3-container" style="z-index: 10; width: 30% !important;">
+    <div class="w3-modal" id="game_result_open" style="display: none;">
+      <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <header class="w3-container w3-orange b"> 
+          <span onclick="$('#game_result_open').toggle()" class="close_Game_res w3-xlarge w3-display-topright">×</span>
+        </header>
+        <div id="today" class="w3-container city" style=" height: 400px;display: block;">
+          <br>
+          <div style="width: 400px;">
+            <h3>Game result</h3>
+            <div class="row g-3">
+              <br>
+              <div class="col-auto">
+                <label for="inputPassword2" class="visually-hidden">game id</label>
+                <!-- <input type="date"  placeholder="day"> -->
+                <div class="container mt-5">
+                  <div class="row">
+                      <div class="col-md-3">
+                      </div>
+                      <div class="col-md-6">                        
+                      <label for="datepicker">Select a Date:</label>
+                      <input type="date" id="datepicker" name="datepicker">
+                      </div>
+                      <div class="col-md-3">
+                      </div>
+                  </div>
+              </div>
+                <br>
+                <input type="text" class="form-control" id="inputGameId" placeholder="game id">
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button onclick="game_resultv1()" id="game_result_man" type="button" style=" margin: 5px 2px; border: none; background-color: #07a343; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-search"></i>search</button>
+              </div>
+              <div class="card" id="resultCard">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: none;" id="gameresultprint"></div>

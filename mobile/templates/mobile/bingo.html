@@ -1,0 +1,637 @@
+{% extends 'mobile/_base.html' %}
+{% load static %}
+{% block style %}
+<style>
+  .bg-texture-dark {
+    background-image: linear-gradient(to bottom right, #343a40, #000000);
+    min-height: 120px;
+    max-height: 120px;
+    color: #fff;
+    border: 0.4px solid #2c2c2c;
+  }
+
+  .tickets {
+    color: #fff;
+    border: 0.4px solid #2c2c2c;
+    border-radius: 2px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 5px;
+  }
+
+  .bg-texture-primary {
+    background-image: linear-gradient(to bottom right, #007bff, #0056b3);
+    min-height: 125px;
+    max-height: 125px;
+  }
+
+  .bg-texture-danger {
+    background-image: linear-gradient(to bottom right, #dc3545, #a52a34);
+    min-height: 190px;
+    max-height: 190px;
+  }
+
+  .selected-ticket {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    border-radius: 8px;
+    border-bottom: 0.4px solid #2c2c2c21;
+    background-color: rgba(245, 245, 245, 0.034);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+  }
+
+  table th,
+  table td {
+    text-align: center;
+    font-size: 12px;
+    width: 8px;
+    height: 13px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .ball {
+    border-radius: 30%;
+    text-align: center;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+  }
+
+  .col-2 {
+    width: 40px;
+  }
+
+  .bingo-card {
+    height: 100%;
+  }
+
+  #bingo-board {
+    color: whitesmoke;
+  }
+
+  .ball-display {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    border-radius: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: inset 20px 20px 20px 5px rgba(255, 255, 255, 0.2), inset -10px -10px 20px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  .ball-display .content {
+    text-align: center;
+    border-radius: 100%;
+    background: radial-gradient(circle at 20% 20%, var(--white), var(--light-gray));
+    color: var(--black);
+    position: relative;
+    width: calc(70px - 40%);
+    height: calc(70px - 40%);
+    padding: 25%;
+    box-shadow: inset -10px -10px 15px 0 rgba(0, 0, 0, 0.16), 0 0 0 3px var(--white);
+  }
+
+  .ball-display .content .ball-content {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: inline-flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 100%;
+    border: rgba(0, 0, 0, 0.596) solid 3px;
+  }
+
+  .ball-display .content .ball-content .ball-letter {
+    font-size: calc(70px * 0.3);
+    font-weight: bold;
+    line-height: 0.75;
+    font-family: Arial, sans-serif;
+  }
+
+  .ball-display .content .ball-content .ball-number {
+    font-size: calc(70px * 0.28);
+    line-height: 1;
+    font-family: Arial, sans-serif;
+  }
+
+  #bingo-board tr th {
+    border-bottom: 2px solid rgb(153, 153, 153);
+    font-size: 10px;
+    color: #284e03f5;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    background-color: whitesmoke;
+  }
+
+  #bingo-board tr td:nth-child(1) {
+    font-size: 12px;
+    color: #f3dadd;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+  }
+
+  #bingo-board tr td {
+    border-radius: 25%;
+  }
+
+  #bingo-board tr th:nth-child(1),
+  #bingo-board tr th:nth-child(6),
+  #bingo-board tr th:nth-child(11),
+  #bingo-board tr td:nth-child(1),
+  #bingo-board tr td:nth-child(6),
+  #bingo-board tr td:nth-child(11) {
+    border-right: 2px solid rgb(153, 153, 153);
+  }
+</style>
+
+<script>
+  function playWinSound() {
+    var winSound = document.getElementById('winSound');
+    winSound.play();
+  }
+
+  function styleTdByNumber(number) {
+  // Loop through each td element
+  $('td:not(#bingo-board td)').each(function() {
+    // Get the text content of the td and convert it to an integer
+    var tdNumber = parseInt($(this).text().trim());
+    // Check if the td contains the specified number
+    if (tdNumber === number) {
+      // Apply styling based on the range the number falls into
+      if (number >= 1 && number <= 15) {
+        $(this).css({
+          'background-color': 'yellow',
+          'font-weight': 'bold',
+          'color': 'black'
+        });
+      } else if (number >= 16 && number <= 30) {
+        $(this).css({
+          'background-color': 'green',
+          'font-weight': 'bold'
+        });
+      } else if (number >= 31 && number <= 45) {
+        $(this).css({
+          'background-color': 'blue',
+          'font-weight': 'bold'
+        });
+      } else if (number >= 46 && number <= 60) {
+        $(this).css({
+          'background-color': 'orange',
+          'font-weight': 'bold'
+        });
+      } else if (number >= 61 && number <= 75) {
+        $(this).css({
+          'background-color': 'red',
+          'font-weight': 'bold'
+        });
+      }
+    }
+  });
+}
+
+  function createBallLetter(letter) {
+    return `<span class="letter">${letter}</span>`;
+  }
+
+  function createBallNumber(number) {
+    return `<span class="letter">${number}</span>`;
+  }
+
+  function updateBallDisplay(letter, num, row, tdnth) {
+    const ballLetter = createBallLetter(letter);
+    const ballNumber = createBallNumber(num);    
+    styleTdByNumber(num);
+
+    document.querySelector('.ball-letter').innerHTML = ballLetter;
+    document.querySelector('.ball-number').innerHTML = ballNumber;
+    const targetCell = document.querySelector(`#bingo-board #row-${letter} td:nth-child(${tdnth + 2})`);
+
+    if (targetCell) {
+      switch (letter) {
+        case 'B':
+          targetCell.style.backgroundColor = 'yellow';
+          targetCell.style.color = 'black';
+          break;
+        case 'I':
+          targetCell.style.backgroundColor = 'green';
+          break;
+        case 'N':
+          targetCell.style.backgroundColor = 'blue';
+          break;
+        case 'G':
+          targetCell.style.backgroundColor = 'orange';
+          break;
+        case 'O':
+          targetCell.style.backgroundColor = 'red';
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  function showApiResults(bingoResults) {
+    const bingo = ['B', 'I', 'N', 'G', 'O'];
+
+    function populateRow(letter, numbers, i) {
+  var row = $('#row-' + letter);
+  var tdIndex = 0;
+  var num;
+  let tdnth;
+
+  row.find('td:gt(0):not(.bingo-result)').each(function () {
+    num = numbers[tdIndex];
+    if (i === 0) {
+      tdnth = tdIndex;
+    } else if (i === 1) {
+      tdnth = tdIndex + 5;
+    } else if (i === 2) {
+      tdnth = tdIndex + 10;
+    }
+
+    if (tdIndex < numbers.length) {
+      var $this = $(this);
+        $this.text(num);
+        $this.addClass('bingo-result');
+        updateBallDisplay(letter, num, row, tdnth);
+      tdIndex++;
+    }
+  });
+}
+
+
+    var storedResults = {
+      'B': [],
+      'I': [],
+      'N': [],
+      'G': [],
+      'O': []
+    };
+
+    bingoResults.forEach(function (results, index) {
+      results.forEach(function (result, i) {
+        var letter = bingo[i];
+        storedResults[letter].push(result);
+      });
+    });
+
+    function processLetter(letter, index) {
+      var currentList = storedResults[letter];
+      if (index < currentList.length) {
+        populateRow(letter, currentList[index], index);
+          processLetter(letter, index + 1);
+      }
+    }
+
+    for (var letter in storedResults) {
+      if (storedResults.hasOwnProperty(letter)) {
+        processLetter(letter, 0);
+      }
+    }
+  }
+
+  $(document).ready(function () {
+    function fetchBingoResults() {
+      $.ajax({
+        url: "{% url 'mobile:bingo_results' %}",
+        type: 'GET',
+        success: function (apiResults) {
+          showApiResults(apiResults);;
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching bingo results:', error);
+        }
+      });
+    }
+    setTimeout(function () {
+      fetchBingoResults();
+    }, 100);
+
+    function generateNumbers(start, end) {
+      var numbers = [];
+      for (var i = start; i <= end; i++) {
+        numbers.push(i);
+      }
+      return numbers;
+    }
+
+    var numbersB = generateNumbers(1, 15);
+    var numbersI = generateNumbers(16, 30);
+    var numbersN = generateNumbers(31, 45);
+    var numbersG = generateNumbers(46, 60);
+    var numbersO = generateNumbers(61, 75);
+
+    function populateRow(rowId, numbers) {
+      var row = $('#' + rowId);
+      numbers.forEach(function (number) {
+        row.append('<td class="ordered-bingo-nums">' + number + '</td>');
+      });
+    }
+
+    populateRow('row-B', numbersB);
+    populateRow('row-I', numbersI);
+    populateRow('row-N', numbersN);
+    populateRow('row-G', numbersG);
+    populateRow('row-O', numbersO);
+  });
+
+</script>
+{% endblock %}
+{% block content %}
+<audio id="winSound" src="{% static 'sound/bingo_sound.mp3' %}"></audio>
+
+<div class="bingo">
+</div>
+<div class="row">
+  <div class="col-2 p-0 mt-3">
+    <div class="ball-display">
+      <div class="content">
+        <div class="ball-content">
+          <div class="ball-letter"></div>
+          <div class="ball-number"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-10 bg-texture-dark p-0">
+    <table id="bingo-board">
+      <tr>
+        <th>-</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+      </tr>
+      <tr id="row-B">
+        <td>B</td>
+      </tr>
+      <tr id="row-I">
+        <td>I</td>
+      </tr>
+      <tr id="row-N">
+        <td>I</td>
+      </tr>
+      <tr id="row-G">
+        <td>G</td>
+      </tr>
+      <tr id="row-O">
+        <td>O</td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<div class="row selected-ticket">
+  <div class="col-5 m-0 p-0">
+    <div class="row m-0">
+      <div class="tickets col-12 bg-texture-danger p-0">
+        <div class="bingo-card"></div>
+      </div>
+      <div class="tickets col-12 bg-texture-danger p-0">
+        <div class="bingo-card"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-7 m-0">
+    <div class="row">
+      <div class="tickets col-12 bg-texture-primary p-0">
+        <div class="bingo-card"></div>
+      </div>
+      <div class="tickets col-12 bg-texture-primary p-0">
+        <div class="bingo-card"></div>
+      </div>
+      <div class="tickets col-12 bg-texture-primary p-0">
+        <div class="bingo-card"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="temp"></div>
+{% endblock %}
+
+{% block footer %}
+<footer class="sticky-footer" onclick="fetchKenoResult()">
+  <div class="container p-1 selection-and-live">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="button" class="quantity-left-minus btn btn-sm btn-warning btn-number" data-type="minus"
+                data-field="">
+                <i class="fas fa-minus" style="color: white;"></i>
+              </button>
+            </span>
+            <input style="background-color: rgb(1, 16, 39); color: azure;" type="number" id="quantity" name="quantity"
+              class="form-control form-control-sm input-number" value="10" min="1" required disabled>
+            <span class="input-group-btn">
+              <button type="button" class="quantity-right-plus btn btn-sm btn-success btn-number" data-type="plus"
+                data-field="">
+                <i class="fas fa-plus"></i>
+              </button>
+            </span>
+            <ul class="list-inline" style="margin-left: 20px;">
+              <li class="list-inline-item">
+                <button type="button" class="btn btn-light btn-sm static-value" data-value="10">10</button>
+              </li>
+              <li class="list-inline-item">
+                <button type="button" class="btn btn-light btn-sm static-value" data-value="50">50</button>
+              </li>
+              <li class="list-inline-item">
+                <button type="button" class="btn btn-light btn-sm static-value" data-value="100">100</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-9">
+        <form id="stake-form" method="post">
+          <input type="hidden" id="stake-value" name="stake-value">
+          <button type="submit" class="btn btn-block btn-light" disabled>Submit</button>
+        </form>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-light btn-block" data-toggle="modal"
+          data-target="#exampleModalCenter">Menu</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="animation-container" style="display: none;">
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+  $(document).ready(function () {
+    var quantitiy = 0;
+    $('.quantity-right-plus').click(function (e) {
+      e.preventDefault();
+      var quantity = parseInt($('#quantity').val());
+      if (quantity < 10) {
+        $('#quantity').val(quantity + 1);
+      } else
+        if (quantity >= 500) {
+          $('#quantity').val(quantity + 100);
+        } else
+          if (quantity >= 100) {
+            $('#quantity').val(quantity + 50);
+          } else
+            if (quantity >= 50) {
+              $('#quantity').val(quantity + 10);
+            } else {
+              $('#quantity').val(quantity + 5);
+            }
+    });
+
+    $('.quantity-left-minus').click(function (e) {
+      e.preventDefault();
+      var quantity = parseInt($('#quantity').val());
+      if (quantity <= 1) {
+        $('#quantity').val(1);
+      } else
+        if (quantity < 10) {
+          $('#quantity').val(quantity - 1);
+        } else
+          if (quantity >= 500) {
+            $('#quantity').val(quantity - 100);
+          } else
+            if (quantity >= 100) {
+              $('#quantity').val(quantity - 50);
+            } else
+              if (quantity >= 50) {
+                $('#quantity').val(quantity - 10);
+              } else {
+                $('#quantity').val(quantity - 5);
+              }
+    });
+
+    $('.static-value').click(function (e) {
+      e.preventDefault();
+      var value = $(this).data('value');
+      $('#quantity').val(value);
+    });
+
+
+  });
+
+  $(document).on('click', 'td', function (e) {
+    e.preventDefault();
+    var $parent = $(this).closest('.tickets');
+    if ($parent.hasClass('bg-texture-danger')) {
+      $(this).css({
+        'background-color': 'blue',
+        'font-weight': 'bold'
+      });
+    } else {
+      $(this).css({
+        'background-color': 'red',
+        'font-weight': 'bold'
+      });
+    }
+  });
+
+  $(document).ready(function () {
+    function fetchBingoCards() {
+      $.ajax({
+        url: '{% url "mobile:get-bingo-cards" %}',
+        type: 'GET',
+        success: function (response) {
+          displayBingoCards(response);
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching bingo cards:', error);
+        }
+      });
+    }
+
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateBingoCard() {
+      var card = [];
+      var columnRanges = [[1, 15], [16, 30], [31, 45], [46, 60], [61, 75]];
+
+      for (var i = 0; i < 5; i++) {
+        var column = [];
+        var min = columnRanges[i][0];
+        var max = columnRanges[i][1];
+
+        while (column.length < 5) {
+          var randomNumber = getRandomNumber(min, max);
+          if (!column.includes(randomNumber)) {
+            column.push(randomNumber);
+          }
+        }
+
+        card.push(column);
+      }
+
+      card[2][2] = "X";
+
+      return card;
+    }
+
+    function displayBingoCard(card, targetElement) {
+      var bingoCardHTML = '<table>';
+      bingoCardHTML += '<tr><th>B</th><th>I</th><th>N</th><th>G</th><th>O</th></tr>';
+      for (var i = 0; i < card.length; i++) {
+        bingoCardHTML += '<tr>';
+        for (var j = 0; j < card[i].length; j++) {
+          var cellValue = card[i][j];
+          var cellClass = '';
+          if (cellValue === 'X') {
+            cellClass = ' class="marked"';
+          }
+          bingoCardHTML += '<td' + cellClass + '>' + cellValue + '</td>';
+        }
+        bingoCardHTML += '</tr>';
+      }
+      bingoCardHTML += '</table>';
+      targetElement.html(bingoCardHTML);
+    }
+
+    function displayBingoCards(cards) {
+      var targetElements = $('.bingo-card');
+      for (var i = 0; i < cards.length; i++) {
+        displayBingoCard(cards[i], $(targetElements[i]));
+      }
+    }
+
+    fetchBingoCards();
+  });
+</script>
+{% endblock %}

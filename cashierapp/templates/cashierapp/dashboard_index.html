@@ -1,0 +1,505 @@
+{% extends 'cashierapp/dashboard_base.html' %}
+{% load static %}
+{% block jsScripts %}
+
+{% endblock %}
+
+{% block content %}
+<style>
+    #dataTable_info,
+    #dataTable_previous,
+    #dataTable_next,
+    .dataTables_empty {
+        display: none;
+    }
+
+    th,
+    td {
+        font-size: 80% !important;
+        font-weight: 400 !important;
+        color:aliceblue !important;
+    }
+</style>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <h1 class="h3 mb-0 text-gray-800">
+        <i class="fas fa-user-circle"></i> Welcome, {{ agent.full_name }}
+    </h1>
+
+    <!-- Template code -->
+
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-success text-gray-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.ggr }}ETB</h5>
+                    <p class="card-text">Daily GGR(Game Gross Revenue)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-primary text-gray-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.net }}ETB</h5>
+                    <p class="card-text">Daily Net</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.yesterday_stats.net }}ETB</h5>
+                    <p class="card-text">Yesterday Net</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.weekly_stats.net }}</h5>
+                    <p class="card-text">Weekly Net Balance</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.gross_stake }}ETB</h5>
+                    <p class="card-text">Gross Stake</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-info text-gray-100 text-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ all_cashiers.count }}</h5>
+                    <p class="card-text">Cashiers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100 text-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.tickets }}</h5>
+                    <p class="card-text">Tickets</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-dark text-gray-100 text-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.claimed_winning }}ETB</h5>
+                    <p class="card-text">Claimed: {{ cashiers_summary.daily_stats.claimed_count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-warning text-gray-100 text-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.unclaimed_winning }}ETB</h5>
+                    <p class="card-text">Un-claimed: {{ cashiers_summary.daily_stats.unclaimed_count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <div class="card text-center bg-gradient-danger text-gray-100 text-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cashiers_summary.daily_stats.cancelled_stake }}ETB</h5>
+                    <p class="card-text">Cancelled: {{ cashiers_summary.daily_stats.cancelled_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr width="auto">
+    <!-- Game statistics Table -->
+    <div class="row mb-4 bg-gradient-dark">
+        <!-- Form Section -->
+        <div class="col-12">
+            <form class="statistics-form">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="selectCashiers">Select Cashiers</label>
+                        <select class="form-control select2" id="selectCashiers" name="selectCashiers" multiple>
+                            {% for cashier in all_cashiers %}
+                            {% with cashier.cashier as cashier %}{{ cashier.id }}
+                            <option value="{{ cashier.id }}">{{ cashier.username }}</option>
+                            {% endwith %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="dateDropdown">Select Date</label>
+                        <select class="form-control" id="dateDropdown" name="dateDropdown">
+                            <option value=""></option>
+                            <option value="today">today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="this_week">This Week</option>
+                            <option value="last_week">Last Week</option>
+                            <option value="this_month">This Month</option>
+                            <option value="last_month">Last Month</option>
+                            <option value="this_year">This Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="fromDate">From Date</label>
+                        <input type="date" class="form-control" id="fromDate" name="fromDate">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="toDate">To Date</label>
+                        <input type="date" class="form-control" id="toDate" name="toDate">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="submit">When you are ready</label>
+                        <button class="form-control text-lg btn btn-primary" type="submit">Load Tickets History</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <div class="py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Daily Statistics</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataStatTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Cashier</th>
+                            <!-- <th>Start Date</th>
+                            <th>End Date</th> -->
+                            <th>Net</th>
+                            <th>GGR</th>
+                            <th>Tickets</th>
+                            <th>Gross Stake</th>
+                            <th>Claimed Count</th>
+                            <th>Claimed Winning</th>
+                            <th>Unclaimed Count</th>
+                            <th>Unclaimed Winning</th>
+                            <th>Cancelled Count</th>
+                            <th>Cancelled Stake</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Populate this section dynamically with your data -->
+                        <!-- Example row -->
+                        <!-- Inside the table body where ticket statistics are displayed -->
+                        {% for statistics in ticket_statistics %}
+                        <tr>
+                            <td>{{ statistics.cashier.cashier }}</td>
+                            <!-- <td>{{ statistics.start_date }}</td>
+                            <td>{{ statistics.end_date }}</td> -->
+                            <td>{{ statistics.net }}</td>
+                            <td>{{ statistics.ggr }}</td>
+                            <td>{{ statistics.tickets }}</td>
+                            <td>{{ statistics.gross_stake }}</td>
+                            <td>{{ statistics.claimed_count }}</td>
+                            <td>{{ statistics.claimed_winning }}</td>
+                            <td>{{ statistics.unclaimed_count }}</td>
+                            <td>{{ statistics.unclaimed_winning }}</td>
+                            <td>{{ statistics.cancelled_count }}</td>
+                            <td>{{ statistics.cancelled_stake }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr width="auto">
+
+    <div class="row mb-4 bg-gradient-dark">
+        <div class="col-12">
+            <div class="py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Tickets</h6>
+            </div>
+            <form class="tickets-form">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="selectOneCashiers">Select Cashiers</label>
+                        <select class="form-control" id="selectOneCashiers" name="selectOneCashiers">
+                            {% for cashier in all_cashiers %}
+                            {% with cashier.cashier as cashier %}{{ cashier.id }}
+                            <option value="{{ cashier.id }}">{{ cashier.username }}</option>
+                            {% endwith %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="dateAllDropdown">Select Date</label>
+                        <select class="form-control" id="dateAllDropdown" name="dateAllDropdown">
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="this_week">This Week</option>
+                            <option value="last_week">Last Week</option>
+                            <option value="this_month">This Month</option>
+                            <option value="last_month">Last Month</option>
+                            <option value="this_year">This Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="submit">When you are ready</label>
+                        <button class="form-control text-lg btn btn-primary" type="submit">Get All Tickets</button>
+                    </div>
+
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTicketTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th>Ticket Number</th>
+                            <th>Status</th>
+                            <th>Won Amount</th>
+                            <th>Gross Stake</th>
+                            <th>Game Number</th>
+                            <th>Game Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- Populate this section dynamically with your data -->
+                        <!-- Example row -->
+                        <!-- Inside the table body where ticket statistics are displayed -->
+                        {% for statistics in ticket_property %}
+                        <tr>
+                            <td>{{ statistics.ticket }}</td>
+                            <td>{{ statistics.ticket_number }}</td>
+                            <td>{{ statistics.status }}</td>
+                            <td>{{ statistics.won_amount }}</td>
+                            <td>{{ statistics.gross_stake }}</td>
+                            <td>{{ statistics.game_number }}</td>
+                            <td>{{ statistics.game_type }}</td>
+                            <td>{{ statistics.start_date }}</td>
+                            <td>{{ statistics.end_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr width="auto">
+
+    <div class="row mb-4 bg-gradient-dark">
+        <div class="col-12">
+            <div class="py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Game Result</h6>
+            </div>
+            <form class="game-form">
+                <div class="form-row">
+                    <input type="hidden" value="{{ agent.id }}" name="agent_id"></option>
+                    <div class="form-group col-md-3">
+                        <label for="getDate">From Date</label>
+                        <input type="date" class="form-control" id="getDate" name="getDate" required>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="game_num">Game ID</label>
+                        <input type="number" class="form-control" id="game_num" name="game_num" required min="1">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="submit">when you are done</label>
+                        <button name="submit" class="form-control text-lg btn btn-primary" type="submit">Load Game Result
+                            History</button>
+                    </div>
+                </div>
+            </form>
+            <div class="table-responsive" id="dataGameTableContainer">
+                <table class="table table-bordered table-striped" id="dataGameTable" width="100%"
+                    cellspacing="0">
+                    <thead class="bg-gradient-dark text-gray-100">
+                        <tr>
+                            <th>Shop</th>
+                            <th>Game ID</th>
+                            <th>Action</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $('#start_date').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $('#end_date').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $(document).ready(function () {
+
+        $('.select2').select2({
+            placeholder: 'Select Cashiers',
+            tags: true
+        });
+
+        $('.statistics-form').submit(function (event) {
+            event.preventDefault();
+            var selectedCashiers = $('#selectCashiers').val();
+            var fromDate = $('#fromDate').val();
+            var toDate = $('#toDate').val();
+            var selectedDate = $('#dateDropdown').val();
+            $.ajax({
+                type: 'GET',
+                url: '{% url "cashierapp:cashier_tickets" %}',
+                data: {
+                    selectCashiers: selectedCashiers,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    selectedDate: selectedDate  // Send the selected date value
+                },
+                success: function (response) {
+                    if (!$.fn.DataTable.isDataTable('#dataStatTable')) {
+                        $('#dataStatTable').DataTable({
+                            dom: 't', // This removes the search box, pagination, and other controls
+                            paging: false,
+                            info: false
+                        });
+                    }
+                    $('#dataStatTable').show();
+                    var dataTable = $('#dataStatTable').DataTable();
+                    dataTable.clear().draw();
+
+                    $.each(response.ticket_statistics, function (index, statistics) {
+                        var row = [
+                            statistics.cashier,
+                            statistics.net,
+                            statistics.ggr,
+                            statistics.tickets,
+                            statistics.gross_stake,
+                            statistics.claimed_count,
+                            statistics.claimed_winning,
+                            statistics.unclaimed_count,
+                            statistics.unclaimed_winning,
+                            statistics.cancelled_count,
+                            statistics.cancelled_stake
+                        ];
+                        dataTable.row.add(row).draw();
+                    });
+
+                },
+
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        $('.game-form').submit(function (event) {
+            event.preventDefault();
+            var getDate = $('#getDate').val();
+            var game_num = $('#game_num').val();
+            console.log('getDate:', getDate);
+
+            $.ajax({
+                type: 'GET',
+                url: '{% url "cashierapp:game_results_stats" %}',
+                data: {
+                    getDate: getDate,
+                    game_num: game_num,
+                },
+                success: function (response) {
+                    if (!$.fn.DataTable.isDataTable('#dataGameTable')) {
+                        $('#dataGameTable').DataTable({
+                            dom: 't', // This removes the search box, pagination, and other controls
+                            paging: false,
+                            info: false
+                        });
+                    }
+                    $('#dataGameTable').show();
+                    var dataTable = $('#dataGameTable').DataTable();
+                    dataTable.clear().draw();
+
+                    var row = [
+                        response.game_results.shop,
+                        response.game_results.game_id,
+                        response.game_results.action,
+                        response.game_results.result,
+                    ];
+                    dataTable.row.add(row).draw();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        $('.tickets-form').submit(function (event) {
+            event.preventDefault();
+            var selectedCashiers = $('#selectOneCashiers').val();
+            var selectedDate = $('#dateAllDropdown').val();
+            console.log('selectedDate');
+            console.log(selectedDate);
+            $.ajax({
+                type: 'GET',
+                url: '{% url "cashierapp:all_tickets" %}',
+                data: {
+                    selectCashiers: selectedCashiers,
+                    selectedDate: selectedDate  // Send the selected date value
+                },
+                success: function (response) {
+                    if (!$.fn.DataTable.isDataTable('#dataTicketTable')) {
+                        $('#dataTicketTable').DataTable({
+                            dom: 't', // This removes the search box, pagination, and other controls
+                            paging: false,
+                            info: false
+                        });
+                    }
+                    $('#dataTicketTable').show();
+                    var dataTable = $('#dataTicketTable').DataTable();
+                    dataTable.clear().draw();
+
+                    $.each(response.ticket_property, function (index, statistics) {
+                        var row = [
+                            statistics.ticket_number,
+                            statistics.ticket,
+                            statistics.status,
+                            statistics.won_amount,
+                            statistics.gross_stake,
+                            statistics.game_number,
+                            statistics.game_type,
+                            statistics.start_date,
+                            statistics.end_date,
+                        ];
+                        dataTable.row.add(row).draw();
+                    });
+
+                },
+
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+    });
+</script>
+{% endblock %}

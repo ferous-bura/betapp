@@ -1,0 +1,106 @@
+{% load static %}
+{% csrf_token %}
+<script>
+
+function refreshBalance() {
+    balance_report();
+    $('#refreshBalance').html('<i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-arrow-clockwise"></i>Refreshing...');
+    
+    setTimeout(() => {
+        $('#refreshBalance').html('<i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-arrow-clockwise"></i>Refresh');
+    
+    }, 1000);
+}
+
+$(function() {
+    $('#cashier_check_cash').click(balance_report);
+});
+
+function balance_report() {
+
+    $('#report1001').text("Loading...");
+    $('#report1002').text("Loading...");
+    $('#report1003').text("Loading...");
+    $('#report1004').text("Loading...");
+    $('#report1005').html("<strong>Loading...</strong>");
+
+    $('#report2001').text("Loading...");
+    $('#report2002').text("Loading...");
+    $('#report2003').text("Loading...");
+    $('#report2004').text("Loading...");
+    $('#report2005').html("<strong>Loading...</strong>");
+    $('#id01').show();
+
+        var requestData = {
+            action: 'balance_report',
+            cashier_report: true,
+            time: new Date().getTime(),
+        };
+
+        $.ajax({
+            url: "{% url 'cashierapp:cashier_url' %}",
+            method: 'POST',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+        success: function(data) {
+            console.log(data);
+            report_data = data;
+            $('#report1001').text("Br " + thousands_separators(data["today"]["bets"]["amount"]));
+            $('#report1002').text("Br " + thousands_separators(data["today"]["redeemed"]["amount"]));
+            $('#report1003').text("Br " + thousands_separators(data["today"]["canceled"]["amount"]));
+            $('#report1004').text("Br " + thousands_separators(data["today"]["deposited"]["amount"]));
+            $('#report1005').html("<strong>Net: " + thousands_separators(data["today"]["bets"]["amount"] - data["today"]["redeemed"]["amount"] - data["today"]["canceled"]["amount"] + data["today"]["deposited"]["amount"]) + "</strong>");
+
+            $('#report2001').text("Br " + thousands_separators(data["yesterday"]["bets"]["amount"]));
+            $('#report2002').text("Br " + thousands_separators(data["yesterday"]["redeemed"]["amount"]));
+            $('#report2003').text("Br " + thousands_separators(data["yesterday"]["canceled"]["amount"]));
+            $('#report2004').text("Br " + thousands_separators(data["yesterday"]["deposited"]["amount"]));
+            $('#report2005').html("<strong>Net: " + thousands_separators(data["yesterday"]["bets"]["amount"] - data["yesterday"]["redeemed"]["amount"] - data["yesterday"]["canceled"]["amount"] + data["yesterday"]["deposited"]["amount"]) + "</strong>");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $('#id01').hide();
+            notify("error", "በኔቶርክ መቆራረጥ ምክኒያት መረጃውን ማግኘት አልተቻለም።");
+        }
+    });
+
+}
+
+
+function print_balance() {
+    var idresult = document.getElementById("yesterday").style.display;
+    var day = "today";
+    if (idresult == "block") {
+        day = "yesterday";
+    }
+
+    $.ajax({
+        url: "{% url 'cashierapp:cashier_url' %}?type=printBalance",
+        method: 'GET',
+        success: function(data) {
+            console.log('data');
+            console.log(data.agent, data.cashier, data.date, data.betCount, data.payin, data.payout, data.canceled, data.net);
+
+            $("#kenoSlipTime").html(aTime(+3));
+            $("#kenoSlipId").html(data.agent + ' -> ' + data.cashier);
+            $("#dateKenoSlipy").html(data.date);
+            $("#betCountKenoSlipy").html(thousands_separators(data.betCount));
+            $("#payinKenoSlipy").html("Br " + thousands_separators(data.payin));
+            $("#payoutKenoSlipy").html("Br " + thousands_separators(data.payout));
+            $("#canceledBetKenoSlipy").html("Br " + thousands_separators(data.canceled));
+            $("#netKenoSlipy").html("Br " + thousands_separators(data.net));
+            printJS({
+                printable: 'reportPrintHere',
+                type: 'html',
+                css: '{% static "Cashier_files/css/ticket.css" %}'
+            });
+        },
+        error: function() {
+            notify("warning", "በኔቶርክ መቆራረጥ ምክኒያት መረጃውን ማግኘት አልተቻለም።");
+        }
+    });
+}
+
+</script>

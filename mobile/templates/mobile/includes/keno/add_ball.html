@@ -1,0 +1,26 @@
+<script>
+    function addZBall(b) {
+    if (!disableClick) {
+        var index = Object.keys(kenoSelected.selectionI);
+        if (index.length == 5) {
+            notify("warning", "ከፍተኛው የውርርድ ምርጫ ላይ ደርሷል! ለመጨመር ቀድመው ከመረጧቸው ቁጥሮች መቀነስ ይኖርቦታል።");
+        } else if (kenoSelected.selectionI[b] == true) {
+            $("#ball" + b).removeClass("selectedKeno").addClass('red');
+            delete kenoSelected.selectionI[b];
+            var keys = Object.keys(kenoSelected.selectionI);
+            index = Object.keys(kenoSelected.selectionI);
+            if (index.length < 5 && !$('#notify_warning_text').text().trim()) {
+                $('#notify_warning_text').empty();
+            }
+        } else if (index.length < 5 && !$('#notify_warning_text').text().trim()) {
+            $("#ball" + b).removeClass('red').addClass("selectedKeno");
+            kenoSelected.selectionI[b] = true;
+            var keys = Object.keys(kenoSelected.selectionI);
+            console.log(kenoSelected.selectionI);
+        } else {
+            alert('ይህን ለማድረግ አስቀድሞ የመረጡትን ውርርድ ማጥፋት አልያም መመደብ ይኖርቦታል።።');
+        }
+    }
+}
+
+</script>

@@ -1,0 +1,137 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    #dataTable_info, #dataTable_previous, #dataTable_next, .dataTables_empty{
+        display: none;
+    }
+</style>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="container mt-4">
+        <!-- Form Section -->
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="selectCashiers">Select Agent</label>
+              <select class="form-control select2" id="selectCashiers" name="selectCashiers" multiple>
+                {% for cashier in all_cashiers %}
+                {% with cashier.cashier as cashier %}{{ cashier.id }}
+                <option value="{{ cashier.id }}">{{ cashier.username }}</option>
+                {% endwith %}
+                {% endfor %}
+              </select>
+            </div>
+    
+            <div class="form-group col-md-3">
+              <label for="fromDate">From Date</label>
+              <input type="date" class="form-control" id="fromDate" name="fromDate">
+            </div>
+    
+            <div class="form-group col-md-3">
+              <label for="toDate">To Date</label>
+              <input type="date" class="form-control" id="toDate" name="toDate">
+            </div>
+    
+            <div class="form-group col-md-3">
+              <label for="submit">When you Finish</label>
+              <button class="form-control text-lg btn btn-primary" type="submit">Load Tickets History</button>
+            </div>
+          </div>
+        </form>
+    
+      </div>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Statistics</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive" id="dataTableContainer">
+        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+          <thead class="bg-gradient-dark text-gray-100">
+            <tr>
+              <th>No</th>
+              <th>Agent Name</th>
+              <th>Cashier Username</th>
+              <th>Gross Stake</th>
+              <th>Game Num</th>
+              <th>Net Winning</th>
+              <th>Ticket ID</th>
+              <th>Date</th>
+              <th>Redeemed</th>
+              <th>Cancelled</th>
+            </tr>
+          </thead>
+          <tbody class="table-striped">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    var page = 1;
+    var pageSize = 10;
+
+    $('form').submit(function(event) {
+        event.preventDefault();
+        var selectedCashiers = $('#selectCashiers').val();
+        var fromDate = $('#fromDate').val();
+        var toDate = $('#toDate').val();
+        $.ajax({
+            type: 'GET',
+            url: '{% url "dashboard:tickets_statistics" %}',
+            data: {
+                page: page,
+            page_size: pageSize,
+            selectCashiers: selectedCashiers,
+            fromDate: fromDate,
+            toDate: toDate
+            },
+            success: function(response) {
+            // Show the table
+            $('#dataTableContainer').show();
+            $('#dataTable').DataTable().clear().draw();
+            $.each(response.ticket_statistics, function(index, statistics) {
+                var row = '<tr>' +
+                '<td>' + ((page - 1) * pageSize + index + 1) + '</td>' +
+                '<td>' + statistics.agent_name + '</td>' +
+                '<td>' + statistics.cashier_username + '</td>' +
+                '<td>' + statistics.gross_stake + '</td>' +
+                '<td>' + statistics.game_num + '</td>' +
+                '<td>' + statistics.net_winning + '</td>' +
+                '<td>' + statistics.code + '</td>' +
+                '<td>' + statistics.date + '</td>' +
+                '<td>' + statistics.redeemed + '</td>' +
+                '<td>' + statistics.cancelled + '</td>' +
+                '</tr>';
+                $('#dataTable tbody').append(row);
+            });
+
+            // If no more data, hide the Load More button
+            if (!response.has_next) {
+                $('#loadMoreBtn').hide();
+            }
+            },
+            error: function(xhr, status, error) {
+            console.error('Error:', error);
+            }
+        });
+        });
+
+    $('.select2').select2({
+        placeholder: 'Select Cashiers',
+        tags: true
+    });
+
+  });
+</script>
+{% endblock %}

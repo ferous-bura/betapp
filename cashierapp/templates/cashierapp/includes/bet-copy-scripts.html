@@ -1,0 +1,44 @@
+<script>
+var copyTicket221;
+
+function kenoPrintcopy(params) {
+    kenoPrintGodhii(copyTicket221[params] , 'copy');
+}
+function tickethistory(game = "keno") {
+    $("#copythetick").addClass("iamactive");
+    $("#scanthetick").removeClass("iamactive");
+   
+    $("#pleaseScanTickeDiv").hide();
+    $("#pleaseScanBarCodeSpinnercopy").show();
+    $("#pleaseScanTickeDivcopy").show();
+    console.log('-----copy');
+
+    $.ajax({
+        url: "{% url 'cashierapp:cashier_url' %}?type=ticket_history",
+        method: 'GET',
+        success: function(data) {
+            copyTicket221 = data;
+            $("#pleaseScanBarCodeSpinnercopy").hide();
+            $("#copyprinttablediv").show();
+            console.log(data);
+            var copyconcat = "";
+            for (file in data) {
+                var low_level = String(data[file].code);
+                var gamy_id_here = low_level[2].concat(low_level[3]).concat(low_level[4]).concat(low_level[5]);
+                if (gamy_id_here < 1361) {
+                    copyconcat += '<tr><td data-label="Account">#' + data[file].code + '</td><td data-label="Account">Keno</td><td data-label="Account">#' + data[file].id + '</td><td data-label="Due Date">' + data[file].on + '</td> <td data-label="Amount">Br ' + data[file].stake + '</td><td data-label="Period"><i style="font-size: 18px; padding: 0px; color: #ff6a00;" onclick="kenoPrintcopy(' + file + ')" class="bi p-1 bi-printer"></i></td></tr>';
+                }
+                if (gamy_id_here > 2999) {
+                    copyconcat += '<tr><td data-label="Account">#' + data[file].code + '</td><td data-label="Account">Keno</td><td data-label="Account">#' + data[file].id + '</td><td data-label="Due Date">' + data[file].on + '</td> <td data-label="Amount">Br ' + data[file].stake + '</td><td data-label="Period"><i style="font-size: 18px; padding: 0px; color: #ff6a00;" onclick="kenoPrintcopy(' + file + ')" class="bi p-1 bi-printer"></i></td></tr>';
+                }
+            }
+            $("#copyprinttable").html(copyconcat);
+        },
+        error: function() {
+            closethetik();
+            notify("error", "No internet connection!");
+        }
+    });
+}
+
+</script>

@@ -1,0 +1,89 @@
+{% load static %}
+<script>
+    function game_resultv1() {
+    var idresult = $("#inputGameId").val();
+    var resultDate = $("#datepicker").val();
+    console.log(resultDate);
+    if (!isNaN(idresult) && idresult.length == 4) {
+        var requestData = {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            action: 'get_result',
+            game_id: idresult,
+            time: resultDate,
+            cashier_name: "cashier_name",
+            result_type: 'keno'
+        };
+
+    $.ajax({
+        url: "{% url 'cashierapp:cashier_url' %}",
+        method: 'POST',
+        data: JSON.stringify(requestData),
+        contentType: 'application/json',
+        beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+        success: function(data) {
+                printresvar = data;
+                console.log(printresvar);
+                //data = JSON.parse(data);
+            if (data.status === "keno") {
+                $("#resultCard").html('<div class="card-header">Keno Result : ' + data.message + ' </div><div class="card-body KenoPanel"><div class="ballsResult"><span>' + data.balls[0] + '</span> </div><div class="ballsResult"><span>' + data.balls[1] + '</span> </div><div class="ballsResult"><span>' + data.balls[2] + '</span> </div><div class="ballsResult"><span>' + data.balls[3] + '</span> </div><div class="ballsResult"><span>' + data.balls[4] + '</span> </div><div class="ballsResult"><span>' + data.balls[5] + '</span> </div><div class="ballsResult"><span>' + data.balls[6] + '</span> </div><div class="ballsResult"><span>' + data.balls[7] + '</span> </div><div class="ballsResult"><span>' + data.balls[8] + '</span> </div><div class="ballsResult"><span>' + data.balls[9] + '</span> </div><div class="ballsResult"><span>' + data.balls[10] + '</span> </div><div class="ballsResult"><span>' + data.balls[11] + '</span> </div><div class="ballsResult"><span>' + data.balls[12] + '</span> </div><div class="ballsResult"><span>' + data.balls[13] + '</span> </div><div class="ballsResult"><span>' + data.balls[14] + '</span> </div><div class="ballsResult"><span>' + data.balls[15] + '</span> </div><div class="ballsResult"><span>' + data.balls[16] + '</span> </div><div class="ballsResult"><span>' + data.balls[17] + '</span> </div><div class="ballsResult"><span>' + data.balls[18] + '</span> </div><div class="ballsResult"><span>' + data.balls[19] + '</span> </div></div><div class="d-grid gap-2 d-md-flex justify-content-md-end"><button onclick="print_result()" type="button" style=" margin: 5px 2px; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-printer"></i></i>Print</button></div>');
+            } else if (data.status === "spin") {
+                $("#resultCard").html('<div class="card-header">Spin Result : ' + data.message + ' </div><div class="card-body KenoPanel"><div class="ballsResult"><span>' + data.balls[0] + '</span> </div></div><div class="d-grid gap-2 d-md-flex justify-content-md-end"><button onclick="print_result(\'spin\')" type="button" style=" margin: 5px 2px; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-printer"></i></i>Print</button></div>');
+            } else {
+                // Handle other cases
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Handle error
+                notify("error", "የማይታወቅ የጨዋታ መለያ ቁጥር! እባክዎ ቁጥሩ በትትክል ያስገቡ።");
+                $('#game_result_open').hide()
+        }
+    },
+    );
+    } else {
+        notify("warning", "የማይታወቅ የጨዋታ መለያ ቁጥር! እባክዎ ቁጥሩ በትትክል ያስገቡ።");
+    }
+
+
+}
+
+
+function print_result(typeg = "keno") {
+    var idresult = document.getElementById("yesterday").style.display;
+    var day = "today";
+    if (idresult == "block") {
+        day = "yesterday";
+    }
+
+    var res = "";
+   
+    if (typeg == "keno") {
+        // Iterate over the balls array and concatenate each value to the res string
+        for (let index = 0; index < printresvar.balls.length; index++) {
+            if (index === 0) {
+                res = res.concat(printresvar.balls[index]);
+            } else {
+                res = res.concat(", " + printresvar.balls[index]);
+            }
+        }
+        
+        var dividiv = '<div style="margin: 20px 20px; margin-top: 9px;  height: 300px;font-family: Arial, Helvetica, sans-serif;"><div style="width: 200px; position: relative;"><div style="width: 220px;"> <center><div class="divTable gapy"><strong> GAME RESULT</strong></div><div class="divTable"><span style="margin-top: 2px; font-family: monospace; font-size: 10px;">game id : <span id="kenoSlipId">#' + printresvar.game_num + '</span> </span></div><div style="width: 100%; height:15px"></div><div class="divTable"><div class="_1"><span style="font-size:13px"></span></div><hr style="margin-top: 0px;">' + res + '</div><hr style="margin-top: 5px;"><span  style="margin-top: 2px; font-family: monospace; font-size: 10px;" id="kenoSlipTime">' + new Date() + '</span></center></div></div> </div>';
+    }
+    if (typeg == "spin") {
+        // Concatenate the single value from the result directly
+        res = res.concat(printresvar.message);
+        var dividiv = '<div style="margin: 20px 20px; margin-top: 9px;  height: 300px;font-family: Arial, Helvetica, sans-serif;"><div style="width: 200px; position: relative;"><div style="width: 220px;"> <center><div class="divTable gapy"><strong> GAME RESULT</strong></div><div class="divTable"><span style="margin-top: 2px; font-family: monospace; font-size: 10px;">game id : <span id="kenoSlipId">#' + printresvar.game_num + '</span> </span></div><div style="width: 100%; height:15px"></div><div class="divTable"><div class="_1"><span style="font-size:13px"></span></div><hr style="margin-top: 0px;">' + res + '</div><hr style="margin-top: 5px;"><span  style="margin-top: 2px; font-family: monospace; font-size: 10px;" id="kenoSlipTime">' + new Date() + '</span></center></div></div> </div>';
+    }
+
+    $("#gameresultprint").html(dividiv);
+    console.log(dividiv);
+
+    printJS({
+        printable: 'gameresultprint',
+        type: 'html',
+        css: '{% static "Cashier_files/css/ticket.css" %}'
+    });
+}
+
+</script>

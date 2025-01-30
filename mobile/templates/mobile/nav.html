@@ -1,0 +1,38 @@
+{% load static %}
+<header class="sticky-header">
+    <nav class="navbar navbar-expand navbar-dark pt-0 pb-0">
+        <a class="navbar-brand p-0 mr-4" href="#">
+            <img src="{% static 'img/mayabets_logo.jpg' %}" class="img rounded-circle" alt="Logo" width="30"
+                height="30">
+        </a>
+
+          <ul class="navbar-nav mr-auto small">
+            <li class="nav-item {% if active_tab == 'keno' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'mobile:keno' %}">
+                    <i class="bi bi-layers"></i> Keno
+                </a>
+            </li>
+            <li class="nav-item {% if active_tab == 'bingo' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'mobile:bingo' %}">
+                    <i class="bi bi-grid"></i> Bingo
+                </a>
+            </li>
+            <li class="nav-item {% if active_tab == 'spin' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'mobile:spin' %}">
+                    <i class="bi bi-arrow-repeat"></i> Spin
+                </a>
+            </li>
+            <li class="nav-item {% if active_tab == 'aviator' %}active{% endif %}">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-airplane"></i> Aviator
+                </a>
+            </li>
+            <li class="nav-item {% if active_tab == 'dice' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'mobile:dice' %}">
+                    <i class="bi bi-dice"></i> Dice
+                </a>
+            </li>
+          </ul>
+          
+      </nav>
+</header>

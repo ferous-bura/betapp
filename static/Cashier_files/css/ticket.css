@@ -1,0 +1,74 @@
+#gameresultprint{
+    display: block !important;
+    left: 0px;
+}
+.paylater{
+    display: block !important;
+}
+.mainDivTik{
+    display: block;
+    width: 254px;
+    height: auto;
+    font-family: sans-serif;
+    font-size: 11px;
+}
+.mainDivTik .div1{
+    height: 50px;
+    width: 100%;
+}
+.mainDivTik .div2{
+    width: 100%;
+}
+.mainDivTik .div2 div{
+    width: 100%;
+}
+.mainDivTik .div3{
+    border: 1px solid black;
+    margin-top: 5px;
+    width: 98%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    
+}
+.mainDivTik .div3 div{
+    margin: 0px;
+    padding: 0px;
+    height: 12px;
+}
+.mainDivTik .div4{
+    height: 50px;
+    width: 100%;
+}
+.floatLeft{
+    float: left;
+    margin-left: 3px;
+}
+.floatRight{
+    float: right;
+    margin-right: 3px;
+}
+.barcode{
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.minitext{
+    font-family: monospace;
+    font-size: 11px;
+}
+.selectionsConti{
+    width: 100%;
+    height: auto ;
+}
+.b{
+    border: 1px solid black;
+}
+.selectionsConti{
+    position: relative !important;
+    height: 20px !important;
+}
+#TPTstake{
+    font-weight: 600;
+}
+#reportPrintHere{
+    display: block;
+}

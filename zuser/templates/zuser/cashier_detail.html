@@ -1,0 +1,49 @@
+{% extends "dashboard/_base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Cashier Detail</h6>
+        </div>
+                <div class="card-body">
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <input type="hidden" class="form-control" id="cashier_id" name="cashier_id" value="{{ cashier.id }}" readonly>
+                            <div class="form-group col-md-12">
+                                <label for="cashier_name"{% if cashier.has_access %} class="text-primary"{% endif %}>{% if cashier.has_access %}Admin Cashier{% else %}Cashier Name:{% endif %}</label>
+                                <input type="text" class="form-control" id="cashier_name" name="cashier_name" value="{{ cashier.cashier }}">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="agent">Agent:</label>
+                                <input type="text" class="form-control" id="agent" name="agent" value="{{ cashier.agent }}" readonly>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="password">Change Password:</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="*********">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="has_access" name="has_access" {% if cashier.has_access %}checked{% endif %}>
+                                    <label class="form-check-label" for="has_access">
+                                        Has Admin Access
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="form-control btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                
+    </div>
+</div>
+</div>
+<div class="col-md-2"></div>
+</div>
+</div>
+{% endblock %}

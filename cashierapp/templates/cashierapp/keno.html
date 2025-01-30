@@ -1,0 +1,330 @@
+{% load static %}
+
+<main class="main" id="kenoPanel" style="display: block;">
+    <div id="myModalTicket_keno" class="modal2" style="z-index: 3;"></div>
+    <div class="bg-d" style="height: 30px;">
+      <button style="visibility: hidden;" type="button" class="btn btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-vinyl-fill"></i> keno</button>
+      <button style="visibility: hidden;" id="" onclick="" type="button" class="btn  btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-life-preserver"></i>spin</button>
+    </div>
+    <div class="full">
+      <div class="timeCount">
+        <span style="margin: 0px 8px;">
+          Next draw : <span style="color: rgb(239, 255, 11);" id="ktimer"></span>
+          <!-- - next game : <span style="color: rgb(239, 255, 11);" id="latest_keno">Loading...</span> -->
+        </span>
+      </div>
+      <div class="randSelection">
+        <div class="dropdown" style="float: left;">
+          <button class="btn btn-success dropdown-toggle btn-sm mybtn" type="button" style="position: absolute;">
+          Quick pick
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <button type="button" class="btn btn-outline-success btn-sm">1</button>
+              <button type="button" class="btn btn-outline-success btn-sm">2</button>
+              <button type="button" class="btn btn-outline-success btn-sm">3</button>
+              <button type="button" class="btn btn-outline-success btn-sm">4</button>
+              <button type="button" class="btn btn-outline-success btn-sm">5</button>
+              <button type="button" class="btn btn-outline-success btn-sm">6</button>
+              <button type="button" class="btn btn-outline-success btn-sm">7</button>
+              <button type="button" class="btn btn-outline-success btn-sm">8</button>
+              <button type="button" class="btn btn-outline-success btn-sm">9</button>
+              <button type="button" class="btn btn-outline-success btn-sm">10</button>
+            </li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="headTail" style="float: left;" role="group" aria-label="Basic mixed styles example">
+          <button onclick="balladdx('heads')" id="heads" type="button" style="  background-color: rgb(218, 143, 6); " class="noscale btn btn-warning btn-sm">Heads<i class="bi bi-2-square-fill"></i></button>
+          <button onclick="balladdx('evens')" id="evens" type="button" class="noscale btn btn-secondary  btn-sm">Evens<i class="bi bi-4-square-fill"></i></button>
+          <button onclick="balladdx('tails')" id="tails" type="button" style="  background-color: rgb(218, 143, 6); " class="noscale btn btn-warning  btn-sm">Tails<i class="bi bi-2-square-fill"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="selection">
+      <div class="numbers ">
+        <div class="KenoPanel">
+          <div onclick="balladd(1)" class="balls"><span id="1">1</span> </div>
+          <div onclick="balladd(2)" class="balls"><span id="2">2</span> </div>
+          <div onclick="balladd(3)" class="balls"><span id="3">3</span> </div>
+          <div onclick="balladd(4)" class="balls"><span id="4">4</span> </div>
+          <div onclick="balladd(5)" class="balls"><span id="5">5</span> </div>
+          <div onclick="balladd(6)" class="balls"><span id="6">6</span> </div>
+          <div class="balls" onclick="balladd(7)"><span id="7">7</span> </div>
+          <div class="balls" onclick="balladd(8)"><span id="8">8</span> </div>
+          <div class="balls" onclick="balladd(9)"><span id="9">9</span> </div>
+          <div class="balls" onclick="balladd(10)"><span id="10">10</span> </div>
+          <div class="balls" onclick="balladd(11)"><span id="11">11</span> </div>
+          <div class="balls" onclick="balladd(12)"><span id="12">12</span> </div>
+          <div class="balls" onclick="balladd(13)"><span id="13">13</span> </div>
+          <div class="balls" onclick="balladd(14)"><span id="14">14</span> </div>
+          <div class="balls" onclick="balladd(15)"><span id="15">15</span> </div>
+          <div class="balls" onclick="balladd(16)"><span id="16">16</span> </div>
+          <div class="balls" onclick="balladd(17)"><span id="17">17</span> </div>
+          <div class="balls" onclick="balladd(18)"><span id="18">18</span> </div>
+          <div class="balls" onclick="balladd(19)"><span id="19">19</span> </div>
+          <div class="balls" onclick="balladd(20)"><span id="20">20</span> </div>
+          <div class="balls" onclick="balladd(21)"><span id="21">21</span> </div>
+          <div class="balls" onclick="balladd(22)"><span id="22">22</span> </div>
+          <div class="balls" onclick="balladd(23)"><span id="23">23</span> </div>
+          <div class="balls" onclick="balladd(24)"><span id="24">24</span> </div>
+          <div class="balls" onclick="balladd(25)"><span id="25">25</span> </div>
+          <div class="balls" onclick="balladd(26)"><span id="26">26</span> </div>
+          <div class="balls" onclick="balladd(27)"><span id="27">27</span> </div>
+          <div class="balls" onclick="balladd(28)"><span id="28">28</span> </div>
+          <div class="balls" onclick="balladd(29)"><span id="29">29</span> </div>
+          <div class="balls" onclick="balladd(30)"><span id="30">30</span> </div>
+          <div class="balls" onclick="balladd(31)"><span id="31">31</span> </div>
+          <div class="balls" onclick="balladd(32)"><span id="32">32</span> </div>
+          <div class="balls" onclick="balladd(33)"><span id="33">33</span> </div>
+          <div class="balls" onclick="balladd(34)"><span id="34">34</span> </div>
+          <div class="balls" onclick="balladd(35)"><span id="35">35</span> </div>
+          <div class="balls" onclick="balladd(36)"><span id="36">36</span> </div>
+          <div class="balls" onclick="balladd(37)"><span id="37">37</span> </div>
+          <div class="balls" onclick="balladd(38)"><span id="38">38</span> </div>
+          <div class="balls" onclick="balladd(39)"><span id="39">39</span> </div>
+          <div class="balls" onclick="balladd(40)"><span id="40">40</span> </div>
+          <div class="DividerBar"></div>
+          <div class="balls" onclick="balladd(41)"><span id="41">41</span> </div>
+          <div class="balls" onclick="balladd(42)"><span id="42">42</span> </div>
+          <div class="balls" onclick="balladd(43)"><span id="43">43</span> </div>
+          <div class="balls" onclick="balladd(44)"><span id="44">44</span> </div>
+          <div class="balls" onclick="balladd(45)"><span id="45">45</span> </div>
+          <div class="balls" onclick="balladd(46)"><span id="46">46</span> </div>
+          <div class="balls" onclick="balladd(47)"><span id="47">47</span> </div>
+          <div class="balls" onclick="balladd(48)"><span id="48">48</span> </div>
+          <div class="balls" onclick="balladd(49)"><span id="49">49</span> </div>
+          <div class="balls" onclick="balladd(50)"><span id="50">50</span> </div>
+          <div class="balls" onclick="balladd(51)"><span id="51">51</span> </div>
+          <div class="balls" onclick="balladd(52)"><span id="52">52</span> </div>
+          <div class="balls" onclick="balladd(53)"><span id="53">53</span> </div>
+          <div class="balls" onclick="balladd(54)"><span id="54">54</span> </div>
+          <div class="balls" onclick="balladd(55)"><span id="55">55</span> </div>
+          <div class="balls" onclick="balladd(56)"><span id="56">56</span> </div>
+          <div class="balls" onclick="balladd(57)"><span id="57">57</span> </div>
+          <div class="balls" onclick="balladd(58)"><span id="58">58</span> </div>
+          <div class="balls" onclick="balladd(59)"><span id="59">59</span> </div>
+          <div class="balls" onclick="balladd(60)"><span id="60">60</span> </div>
+          <div class="balls" onclick="balladd(61)"><span id="61">61</span> </div>
+          <div class="balls" onclick="balladd(62)"><span id="62">62</span> </div>
+          <div class="balls" onclick="balladd(63)"><span id="63">63</span> </div>
+          <div class="balls" onclick="balladd(64)"><span id="64">64</span> </div>
+          <div class="balls" onclick="balladd(65)"><span id="65">65</span> </div>
+          <div class="balls" onclick="balladd(66)"><span id="66">66</span> </div>
+          <div class="balls" onclick="balladd(67)"><span id="67">67</span> </div>
+          <div class="balls" onclick="balladd(68)"><span id="68">68</span> </div>
+          <div class="balls" onclick="balladd(69)"><span id="69">69</span> </div>
+          <div class="balls" onclick="balladd(70)"><span id="70">70</span> </div>
+          <div class="balls" onclick="balladd(71)"><span id="71">71</span> </div>
+          <div class="balls" onclick="balladd(72)"><span id="72">72</span> </div>
+          <div class="balls" onclick="balladd(73)"><span id="73">73</span> </div>
+          <div class="balls" onclick="balladd(74)"><span id="74">74</span> </div>
+          <div class="balls" onclick="balladd(75)"><span id="75">75</span> </div>
+          <div class="balls" onclick="balladd(76)"><span id="76">76</span> </div>
+          <div class="balls" onclick="balladd(77)"><span id="77">77</span> </div>
+          <div class="balls" onclick="balladd(78)"><span id="78">78</span> </div>
+          <div class="balls" onclick="balladd(79)"><span id="79">79</span> </div>
+          <div class="balls" onclick="balladd(80)"><span id="80">80</span> </div>
+        </div>
+      </div>
+      <div class="mainTickets">
+        <div class="addTicket">
+          <div class="KenoAside col-3hi p-0hi " style="width: 90%;">
+            <div id="AddToSlipDivLoader" style="color:red">
+              <span id="pleaseScanBarCodeSpinner" style="margin-top: 70px; margin-left: 45%; position: absolute;">
+                <div class="spinner-border text-warning" role="status">
+                  <span class="sr-only"> </span>
+                </div>
+              </span>
+            </div>
+            <div id="SmartPlayKenoTutorialPanel" class="TutorialPanel">
+              <p>Pick 1 to 10 numbers from 80. The more you pick the more you could win.</p>
+            </div>
+            <div class="AddToSlipDiv" id="SmartPlayKenoAddToSlipDiv">
+              <div id="SmartPlayKeno_13-19-11876278_PayTable">
+                <div class="PayTable">
+                  <div class="accordionPanel show">
+                    <section class="content">
+                      <nav id="BetSlipTab" class="Toggle" data-group="betslip">
+                        <section class="tab-content current" id="tab-single-bets" data-group="betslip">
+                          <div id="single-bets-container">
+                            <div class="PlacedBet pb-1 ExpandAnimation" onclick="onBetClick(this)">
+                              <div class="BetDetails">
+                                <div class="SmartPlayKenoIcon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.86 49.81" data-svg-id="SmartPlayKenoSVG" class="icon" alt="SmartPlayKeno" src="/Content/Images/Icons/SmartPlayKenoIcon.svg">
+                                    <path class="cls-1" d="M.55,19.86A.7.7,0,0,1,.61,20a13.67,13.67,0,0,0,1,3,3.32,3.32,0,0,0,.37.62q.33.46.69.91a8.14,8.14,0,0,0,1.93,1.79,13,13,0,0,0,1.7,1,1.75,1.75,0,0,1,.56.4A2.18,2.18,0,0,0,8,28.33a.4.4,0,0,0,.18,0,9.24,9.24,0,0,1,3.07-.23,7.46,7.46,0,0,1,2.94.8,1.91,1.91,0,0,0,1.35.1c.08,0,.17-.13.21-.22.35-.76.69-1.52,1-2.28a.79.79,0,0,1,.18-.24A16.73,16.73,0,0,0,15.55,30l-.48-.23,0,0a1.18,1.18,0,0,0,.23.22.4.4,0,0,1,.19.51,15.52,15.52,0,0,0,.73,8.91c.35.84.78,1.64,1.17,2.45.05.11.09.2,0,.32a9.38,9.38,0,0,1-2.67,2.36,8.69,8.69,0,0,1-13-8.76,8.8,8.8,0,0,1,2.82-5.39c.3-.28.29-.28,0-.61a18.26,18.26,0,0,1-2.1-3.2A16.94,16.94,0,0,1,.62,20.95c0-.3-.08-.6-.12-.9a1.41,1.41,0,0,1,0-.17Zm10.52,11a1.08,1.08,0,0,0-.11-.18c-.34-.34-.67-.71-1-1a1.33,1.33,0,0,0-1.54-.19l-.15.05a6.64,6.64,0,0,0-3,2.23c-.15.2-.12.22.09.33q.78.4,1.53.83c.27.15.29.17.51-.06a6.85,6.85,0,0,1,3.51-1.9A1.28,1.28,0,0,0,11.06,30.83ZM8.7,32.45a.81.81,0,0,0-.82.78.66.66,0,0,0,.68.64.79.79,0,0,0,.81-.78A.62.62,0,0,0,8.7,32.45Z"></path>
+                                    <path class="cls-1" d="M20.6,45.71l.28.14A8,8,0,0,0,24.81,47a10.77,10.77,0,0,0,3.39-.44c.14,0,.31,0,.46,0a7.56,7.56,0,0,0,1.25-.42c.72-.36,1.43-.75,2.11-1.17a17.59,17.59,0,0,0,1.78-1.25c.6-.48,1.16-1,1.72-1.56a16.27,16.27,0,0,0,1.22-1.24c.44-.51.83-1.06,1.22-1.61s.58-.86.84-1.31a2.06,2.06,0,0,0,.1-.44c.07-.21.14-.42.23-.62.15-.36.34-.71.46-1.08s.17-.81.28-1.21.24-.7.37-1,.23-.52.34-.78.14-.27.2-.41h.08a1.27,1.27,0,0,1,.15.3,8.06,8.06,0,0,1,.1.81c0,.44.16.55.59.49A8.91,8.91,0,0,1,44,33.95c.3,0,.37,0,.38-.34a12.87,12.87,0,0,0-.8-4.51,14.81,14.81,0,0,0-2-3.83,1.63,1.63,0,0,1-.39-.74l.15,0,.23,0c0-.08,0-.18,0-.24-.34-.55-.7-1.09-1.05-1.64l-.15-.21,0,0a2.83,2.83,0,0,0,.28.21,6.54,6.54,0,0,1,2,2.06A15.39,15.39,0,0,1,44.8,29a14.39,14.39,0,0,1,.72,4.22,19.6,19.6,0,0,1-.11,2.62,15.42,15.42,0,0,1-1.31,4.6,15.58,15.58,0,0,1-3.56,4.95,15.25,15.25,0,0,1-5.25,3.19,14.72,14.72,0,0,1-4.15.85,14.28,14.28,0,0,1-4-.34,14.78,14.78,0,0,1-4.87-2.07c-.54-.36-1-.78-1.56-1.17a.86.86,0,0,1-.11-.12Z"></path>
+                                    <path class="cls-1" d="M12.34,13.71c.17.32.33.58.45.85A3.89,3.89,0,0,1,13,16.81a7.72,7.72,0,0,1-1.6,3.13,5.89,5.89,0,0,1-1.25,1.3,2.44,2.44,0,0,1-2.37.49,5.39,5.39,0,0,1-2-1.27,27.36,27.36,0,0,1-2-2A6.93,6.93,0,0,1,3,17.13a4.67,4.67,0,0,1-.6-1.47,4.14,4.14,0,0,1,.31-2.29,9.29,9.29,0,0,1,1.6-2.6,2.8,2.8,0,0,1,2.19-1.1c.14,0,.24,0,.15-.2a1.78,1.78,0,0,1,.13-1.92,9.84,9.84,0,0,1,2.1-2.44,3.74,3.74,0,0,1,2.46-1,3.9,3.9,0,0,1,.82.13,13.33,13.33,0,0,1,1.41.38,17.84,17.84,0,0,1,1.76.73,11.05,11.05,0,0,1,1.36.79,10.53,10.53,0,0,1,1.27,1,2,2,0,0,1,.19,2.64c-.15.23-2.23,3.55-3.71,3.78a3.26,3.26,0,0,1-1.65.13A3.27,3.27,0,0,0,12.34,13.71Zm-2.18,1.2a2.13,2.13,0,0,0-.23-.74A9,9,0,0,0,8.72,13a6.44,6.44,0,0,0-1.86-1.21.72.72,0,0,0-.85.12,6.34,6.34,0,0,0-1.56,2.36,1.3,1.3,0,0,0,.18,1.23,4,4,0,0,0,.63.77c.56.53,1.12,1.07,1.73,1.55a.92.92,0,0,0,1.1.14,4.14,4.14,0,0,0,1.12-1.12A9,9,0,0,0,10,15.43,3.94,3.94,0,0,0,10.16,14.91Zm4.52-6.5A1.08,1.08,0,0,0,14.5,8a2.76,2.76,0,0,0-.67-.53c-.71-.37-1.44-.72-2.18-1a1.29,1.29,0,0,0-1-.12,2.83,2.83,0,0,0-.82.54,5.86,5.86,0,0,0-.72.88,6.73,6.73,0,0,0-.51.85.62.62,0,0,0,.17.8c.17.16.36.29.54.44a8.08,8.08,0,0,0,2.47,1.45,1,1,0,0,0,1.07-.21,13.18,13.18,0,0,0,1.3-1.36A2.35,2.35,0,0,0,14.68,8.41Z"></path>
+                                    <path class="cls-1" d="M29.59,31.48H26.07c-.3,0-.34,0-.32-.34s0-.57.06-.86a6.28,6.28,0,0,1,.11-1A6.68,6.68,0,0,1,27.1,27,33.21,33.21,0,0,1,30,23.55c.53-.55,1.08-1.07,1.61-1.61a.67.67,0,0,1,.56-.22l3.15.22a.37.37,0,0,1,.36.38c.12,1.08.27,2.15.37,3.23s.16,2.3.23,3.46c0,.21.1.29.3.29l.88,0c.27,0,.39.12.4.38q.05.79.09,1.58c0,.27-.08.36-.36.35l-1,0c-.19,0-.26.07-.26.26q0,1.21,0,2.42c0,.39-.07.46-.46.45l-2.07,0c-.37,0-.42,0-.42-.41,0-.81,0-1.61,0-2.42,0-.34,0-.36-.36-.36H29.59Zm3.61-8.1-.1-.06a1,1,0,0,1-.11.18c-.58.65-1.18,1.29-1.76,2-1,1.15-2,2.31-2.95,3.47a.73.73,0,0,0-.08.25.8.8,0,0,0,.23.07c.3,0,.6,0,.91,0l3.7,0c.34,0,.36,0,.35-.36q-.08-2.58-.16-5.16C33.23,23.58,33.21,23.48,33.2,23.38Z"></path>
+                                    <path class="cls-1" d="M23.28,22.74a6.21,6.21,0,0,0-2,.36,6.09,6.09,0,0,0-2.55,1.63,3.23,3.23,0,0,0-.43.48,14.42,14.42,0,0,0-.75,1.42A12.36,12.36,0,0,0,17,28.12a13,13,0,0,0-.3,1.36c-.12.63-.25,1.26-.3,1.89a6.49,6.49,0,0,0,.09,2.13,1.32,1.32,0,0,0,.65.91,4.1,4.1,0,0,0,1.84.4,7.47,7.47,0,0,0,2.87-.33,2.54,2.54,0,0,0,1.32-.9A3.47,3.47,0,0,0,23.82,32c.07-.47.17-2.44.16-2.95a3.74,3.74,0,0,0-.17-1.49c-.5-1.09-2.77-.82-2.83-.81a3.79,3.79,0,0,0-2.7,1.31.42.42,0,0,1,0-.11c.17-.63.32-1.28.53-1.9A1.84,1.84,0,0,1,19.55,25a5.4,5.4,0,0,1,2.08-.8c.5-.07.68.09.68.59a1.15,1.15,0,0,1,0,.21c0,.2,0,.24.23.21L24.16,25a.26.26,0,0,0,.17-.16,7.29,7.29,0,0,0,.07-1A1,1,0,0,0,23.28,22.74Zm-4.66,6.35a3.79,3.79,0,0,1,.7-.24c.62-.16,2-.44,2.37-.13s.15,1,.13,1.16c-.09.53-.18,1.07-.29,1.6a1.08,1.08,0,0,1-.78,1,6.14,6.14,0,0,1-2.42.17c-.23,0-.46-.13-.49-.39a10,10,0,0,1-.08-1.13,3.69,3.69,0,0,1,.07-.65A1.59,1.59,0,0,1,18.62,29.08Z"></path>
+                                    <path class="cls-1" d="M34.65,11.29A17.94,17.94,0,0,1,36,19.35a.67.67,0,0,1-.15,0l-1.18-.42c-.13,0-.16-.09-.15-.26a12.36,12.36,0,0,0-.11-1.71c0-.32-.34-.5-.59-.69s-.24-.25-.15-.55.18-.81.26-1.22c0-.08,0-.15.06-.23s.15.11.18.18c.21.63.42,1.26.62,1.89.06.18.09.36.14.54S35,17,35,17s.09-.09.09-.15c0-.46.12-.92.12-1.39a11.54,11.54,0,0,0-.34-2.93c-.09-.35-.2-.7-.29-1.05a1.58,1.58,0,0,1,0-.19Z"></path>
+                                    <path class="cls-1" d="M31,18.22a15.33,15.33,0,0,0-9.9,3.19L21,21.33l.18-.1a15.63,15.63,0,0,1,3.49-2c.52-.2,1-.41,1.57-.56a11.19,11.19,0,0,1,1.49-.34c.69-.11,1.39-.17,2.09-.25a6.84,6.84,0,0,1,.69-.07,2.42,2.42,0,0,1,.46.08Z"></path>
+                                    <path class="cls-1" d="M30.49,5.34l1,1C31.28,6.34,30.48,5.6,30.49,5.34Z"></path>
+                                    <path class="cls-1" d="M15.58,35.76a.33.33,0,0,1,0-.2l-.77-.14a5.36,5.36,0,0,1,.1.69l.69.11A1.12,1.12,0,0,1,15.58,35.76Z"></path>
+                                    <path class="cls-1" d="M35,11.12A18.21,18.21,0,1,0,4.87,30.59a3.15,3.15,0,0,1,.53-.4,17.55,17.55,0,1,1,30.35-12q0,.72-.06,1.42.3.11.59.25h0l0,0q.08-.84.08-1.68A18.09,18.09,0,0,0,35,11.12Z"></path>
+                                    <path class="cls-1" d="M17.76,42q-.16-.22-.31-.46A8.48,8.48,0,0,1,1.77,37.1,8.4,8.4,0,0,1,4.9,30.57a3.15,3.15,0,0,1,.49-.37,8.49,8.49,0,0,1,10.35.5.36.36,0,0,1,0-.2,2.37,2.37,0,0,0,.11-.41.33.33,0,0,1,0-.09,9.07,9.07,0,1,0,1.92,12.11Z"></path>
+                                    <path class="cls-1" d="M41.3,22.56a15.26,15.26,0,0,0-22,0,16.27,16.27,0,0,0,0,22.58,15.26,15.26,0,0,0,22,0,16.27,16.27,0,0,0,0-22.58Zm-11,26.6A15.05,15.05,0,0,1,15.6,36.31a.65.65,0,0,1,0-.33,15.76,15.76,0,0,1,.19-5.34.36.36,0,0,1,0-.08,15,15,0,0,1,14.55-12A15.13,15.13,0,0,1,45.2,33.84,15.13,15.13,0,0,1,30.31,49.16Z"></path>
+                                  </svg>
+                                </div>
+                                <h3 style="padding: 5px; font-size: 13px;">
+                                  <strong> Win [ <span id="ExtraDescriptionWinLen"></span> ]</strong>
+                                </h3>
+                                <h3><span id="ExtraDescriptionSelection" class="ExtraDescription"> - </span><span class="Bet nohover" id="ExtraDescriptionOdd">0</span></h3>
+                              </div>
+                              <div class="Stake">
+                                <div class="DecreaseAmount" style="color:red" onclick="onDenominationClick('-10');">
+                                  <i class="glyphicon glyphicon-minus"></i>
+                                </div>
+                                <input id="stakeKenoIn" class="Stake " type="text" value="10" min="10" max="1000" readonly="readonly">
+                                <div class="IncreaseAmount" style="color:red" onclick="onDenominationClick('+5');">
+                                  <i class="glyphicon glyphicon-plus"></i>
+                                </div>
+                              </div>
+                              <div class="ToWinAmount"> 
+                                <span> To Win: <b><span id="kenoToWin">Br 00.00</span></b></span>
+                              </div>
+                              <!--
+                                <div class="Remove" onclick="removeBetFromSlip(event, '17');">
+                                  <i class="bi bi-backspace-fill"></i>
+                                </div>
+                                -->
+                            </div>
+                          </div>
+                          <div>
+                            <div id="Denominations" class="Denominations">
+                              <button type="button mtsh" value="5" onclick="onDenominationClick(this.value)">
+                              5<i name="CurrencySymbol">Br</i>
+                              </button>
+                              <button type="button" value="10" onclick="onDenominationClick(this.value)">
+                              10<i name="CurrencySymbol">Br</i>
+                              </button>
+                              <button type="button" value="20" onclick="onDenominationClick(this.value)">
+                              20<i name="CurrencySymbol">Br</i>
+                              </button>
+                              <button type="button" value="50" onclick="onDenominationClick(this.value)">
+                              50<i name="CurrencySymbol">Br</i>
+                              </button>
+                              <button type="button" value="100" onclick="onDenominationClick(this.value)">
+                              100<i name="CurrencySymbol">Br</i>
+                              </button>
+                            </div>
+                          </div>
+                        </section>
+                        <div class="CTAcell">
+                          <button style="float: right;" id="SmartPlayKeno_13-19-11876278_AddToSlipBtn" class="ConfirmButton" type="button" onclick="addSingleBetToSlip(event)">
+                          <i class="bi bi-file-plus"></i>
+                          Add Betslip 
+                          </button>
+                          <button onclick="clearKenoThings()" class="clear" style="float: left;border-radius: 3px;">
+                          <i class="bi bi-clipboard2-minus" style="padding: 0px 0px; top: 0px; position: relative;"></i>
+                          Clear
+                          </button>
+                        </div>
+                        <button id="kenoSinglePlaceBet" class="strictTouch placeBet" style="width: 100%;" onclick="kenoBetSingle('single')">
+                        <i id="kenoPlaceSingleIcon" class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+                        <span id="kenoPlaceSingleSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        Place bet
+                        <span class="spD"><span id="placeSingleKenoBetAmount">10</span> </span>
+                        </button>
+                      </nav>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tickets">
+          <div class="theTicket" style="border-radius: 5%;">
+            <div style="overflow-y: auto; height: 90%;">
+              <div style="margin: 0px 15px; position: sticky; top: 0px;z-index: 5;background-color: rgb(173, 173, 173);border-radius: 5px; width: auto; margin: auto;text-align: center;">Bet slip</div>
+              <div id="kenoTicketLoader" style="display: none; width: 100%; height:95%; opacity: 0.7; background-color: rgb(63, 63, 63); position: absolute; z-index: 4;">
+                <span id="pleaseScanBarCodeSpinner" style="margin-top: 35%; margin-left: 45%; position: absolute;">
+                  <div class="spinner-border text-warning" role="status">
+                    <span class="sr-only"> </span>
+                  </div>
+                </span>
+              </div>
+              <div id="helloMyBrother">
+              </div>
+              <div id="printJsFormKenoDispy">
+                <div id="printJsFormKeno">
+                  <div class="kenoTicket" id="printJS-form">
+                    <div class="headerKeno">
+                      <div class="titlei" id="TBSkenoId"># -</div>
+                      <div class="title">
+                        <p id="TBSkenoDate">-</p>
+                        <p id="TBSkenoCashier">-</p>
+                        <p id="TBSkenoAgent">-</p>
+                      </div>
+                      <div class="ticketWinPar">Selection (<span id="TBSkenoWin">-</span>)</div>
+                    </div>
+                    <div id="TBSkenoSelection"> <div class="ticketWin"><div class="sel">-  x00.00 </div><div class="odd">Br 00.00</div></div></div>
+                    <div class="tikTot">
+                      <div class="tex ">
+                        <span class="lefty">
+                        Min Payout(incl. stake)
+                        </span>
+                        <span class="righty" id="TBSkenoToWinTotalMin">Br -</span>
+                      </div>
+                      <div class="amnt ">
+                        <span class="lefty ">
+                        Max Payout(incl. stake)
+                        </span>
+                        <span class="righty" id="TBSkenoToWinTotalMax">Br -</span>
+                      </div>
+                    </div>
+                    <div class="foot">
+                      <svg id="TBSkenoBarcode" style="transform: translate(0,0)" width="122px" height="49px" x="0px" y="0px" viewBox="0 0 122 49" xmlns="http://www.w3.org/2000/svg" version="1.1"><rect x="0" y="0" width="122" height="49" style="fill:#ffffff;"></rect><g transform="translate(0, 0)" style="fill:#000000;"><rect x="0" y="0" width="2.4" height="40"></rect><rect x="3.5999999999999996" y="0" width="1.2" height="40"></rect><rect x="7.199999999999999" y="0" width="3.5999999999999996" height="40"></rect><rect x="13.2" y="0" width="1.2" height="40"></rect><rect x="15.6" y="0" width="2.4" height="40"></rect><rect x="20.4" y="0" width="3.5999999999999996" height="40"></rect><rect x="26.4" y="0" width="1.2" height="40"></rect><rect x="31.2" y="0" width="1.2" height="40"></rect><rect x="33.6" y="0" width="2.4" height="40"></rect><rect x="39.599999999999994" y="0" width="3.5999999999999996" height="40"></rect><rect x="46.8" y="0" width="1.2" height="40"></rect><rect x="49.2" y="0" width="2.4" height="40"></rect><rect x="52.8" y="0" width="2.4" height="40"></rect><rect x="59.99999999999999" y="0" width="1.2" height="40"></rect><rect x="62.39999999999999" y="0" width="1.2" height="40"></rect><rect x="66" y="0" width="3.5999999999999996" height="40"></rect><rect x="70.8" y="0" width="1.2" height="40"></rect><rect x="73.2" y="0" width="4.8" height="40"></rect><rect x="79.2" y="0" width="3.5999999999999996" height="40"></rect><rect x="85.19999999999999" y="0" width="1.2" height="40"></rect><rect x="87.6" y="0" width="2.4" height="40"></rect><rect x="92.39999999999999" y="0" width="1.2" height="40"></rect><rect x="96" y="0" width="4.8" height="40"></rect><rect x="102" y="0" width="1.2" height="40"></rect><rect x="105.6" y="0" width="2.4" height="40"></rect><rect x="111.6" y="0" width="3.5999999999999996" height="40"></rect><rect x="116.39999999999999" y="0" width="1.2" height="40"></rect><rect x="118.8" y="0" width="2.4" height="40"></rect><text style="font: 9px monospace" text-anchor="middle" x="61" y="49">*123456789*</text></g></svg>
+                      <br>
+                      <span style="margin: auto; font-family:monospace;" id="TBSkenoCompany">standard shop terms &amp; condition apply.</span>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <script>
+               
+              </script>
+            </div>
+            <div class="ButtonPanel2" id="placeAndClearKeno" style="display: none;">
+              <button class="clear" onclick="clearKenoThingsMaster()">
+              <i class="bi bi-clipboard2-minus" style="padding: 0px 0px; top: -2px; position: relative;"></i>
+              Clear
+              </button>
+              <button onclick="kenoBetMultiple('multiple')" class="placeBet strictTouch" id="kenoMultiplePlaceBet">
+              <i class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+              <span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span>
+              Place bet
+              <span class="spD">Br <span id="kenoPlaceBetAmount">0</span></span>
+              </button>
+            </div>
+            <div class="ButtonPanel2" id="cancelAndReprintKeno" style="display: none;">
+              <button class="cancel strictTouch" id="kenoMultipleCancelBet" onclick="keno_cancel()">
+              <i class="bi bi-clipboard2-minus" style="padding: 0px 5px; top: -2px; position: relative;"></i>
+              <span class="spinner-border spinner-border-sm" role="status" style="display: none;" aria-hidden="true"></span>
+              Cancel
+              </button>
+              <button class="print" onclick=" reprint('keno')">
+              <i class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+              Re-print
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+    {% if messages %}
+  <div class="form-group messages bg-gradient-info">
+      {% for message in messages %}
+      <div class="msgalert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-success{% endif %} alert-dismissible fade show" role="alert">
+          {{ message }}
+      </div>
+      {% endfor %}
+  </div>
+  {% endif %}
+  <style>
+    .city {display:none}
+  </style>

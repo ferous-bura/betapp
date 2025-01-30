@@ -1,0 +1,67 @@
+<script>
+function kenoPlaceBet() {
+    var formattedSelection = Object.keys(kenoSelected.selectionI).map(function(key) {
+        return parseInt(key);
+    });
+
+    console.log(formattedSelection);
+
+    var requestData = {
+        selection: formattedSelection,
+        stake: kenoSelected.stakeI,
+        action: 'place_bet',
+        time: new Date().getTime()
+    };
+
+    $.ajax({
+        url: "{% url 'mobile:index' %}",
+        method: 'POST',
+        data: JSON.stringify(requestData),
+        contentType: 'application/json',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        },
+        success: function(data) {
+            if (data.status == 'success') {
+                console.log('status ' + data.status);
+            } else {
+                console.log('status: ' + data.status + '- message:' + data.message);
+            }
+            tricket = 1;
+            // $("#AddToSlipDivLoader").hide();
+            kenoSelected = {
+                selectionI: {},
+                stakeI: 10,
+            };
+            removeSelected();
+            kenoOdd();
+            notify("success", "በተሳካ ሁነታ ተወራርደዋል");
+            // kenoPrint(data);
+            lastTicketFullData = data;
+            lastTicketFullDataType = 'single';
+            // kenoTicketDisplay(lastTicketFullData, 'single');
+            if (addedKeno > 0) {
+                $("#helloMyBrother").hide();
+                $("#placeAndClearKeno").hide();
+                // visit("printJsFormKeno");
+                // visit("cancelAndReprintKeno");
+                setTimeout(() => {
+                    $("#helloMyBrother").show();
+                    $("#placeAndClearKeno").show();
+                    hidit("printJsFormKeno");
+                    hidit("cancelAndReprintKeno");
+                }, 2000);
+            }
+            //  else {
+            //     visit("cancelAndReprintKeno");
+            // }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#AddToSlipDivLoader").hide();
+            // notify("error", "በማይታወቅ ምክኒያት መረጃውን ማግኘት አልተቻለም። እባክዎ እንደገና ይሞክሩ።");
+            notify("error", "በኔቶርክ መቆራረጥ ምክኒያት መረጃውን ማግኘት አልተቻለም።");
+        }
+    });
+}
+
+</script>

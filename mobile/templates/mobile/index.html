@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keno: Simple</title>
+  <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'mobile/styles.css' %}" rel="stylesheet">
+  <link href="{% static 'mobile/bs.css' %}" rel="stylesheet">
+
+</head>
+<body class="tinted-image">
+{% block content %}
+{% endblock %}
+</body>
+<script src="{% static 'mobile/bs.js' %}"></script>
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+</html>

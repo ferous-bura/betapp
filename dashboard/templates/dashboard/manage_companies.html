@@ -1,0 +1,237 @@
+{% extends "dashboard/_base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Table</h1>
+        <a href="#" data-toggle="modal" data-target="#registrationModal">
+            <button type="submit" class="btn btn-primary mt-4">
+                <i class="fas fa-plus fa-sm text-white-50"></i> 
+                Add Company 
+            </button>
+        </a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3"> 
+            <h6>
+                <a href="#" data-toggle="modal" data-target="#permissionModal">Modal permission</a>
+            </h6>
+            <h6>
+                <a href="{% url 'dashboard:manage_permission_group' 1 %}">permissions</a>
+            </h6>
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone Number</th>
+                            <th>Capital</th>
+                            <th>Subscription Start</th>
+                            <th>Subscription End</th>
+                            <th>detail</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone Number</th>
+                            <th>Capital</th>
+                            <th>Subscription Start</th>
+                            <th>Subscription End</th>
+                            <th>detail</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for company in companies %}
+                        {% with comp=company.company %}
+                        <tr>
+                            <td>{{ comp.company_user.full_name }}</td>
+                            <td>{{ comp.company_address }}</td>
+                            <td>{{ comp.company_phone_number }}</td>
+                            <td>{{ comp.company_capital }}</td>
+                            <td>{{ comp.subscription_start }}</td>
+                            <td>{{ comp.subscription_end }}</td>
+                            <td><a class="update btn btn-primary" href="{{ comp.get_absolute_url }}">View</a></td>
+                        </tr>
+
+                        {% endwith %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+<!-- Permission Modal -->
+<div class="modal fade" id="permissionModal" tabindex="-1" role="dialog" aria-labelledby="permissionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="permissionModalLabel">Company Permissions</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <!-- Step 1: Permission Information -->
+                    <div id="Pstep1">
+                        <span>Permission list</span>
+                        
+                        {% for company in companies %}
+                        {% with comp=company.company %}
+                            {{ comp.first_name }}
+                            <span>permission list</span>
+                            
+                            {% for p in company.permissions %}
+                                {% if p == "change_company_custom" %}
+                                    <li><strong>{{ p }}</strong></li>
+                                {% else %}
+                                    <li>{{ p }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Step 2: Group Information -->
+                    <div id="Pstep2" style="display: none;">
+                        <span>group role</span>
+                        {% for company in companies %}
+                        {% with comp=company.company %}
+                        {% if company.groups %}
+                            {% for g in company.groups %}
+                                <li>{{ g }}</li>
+                            {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                        {% endfor %}
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <!-- Navigation buttons for steps -->
+                <button class="btn btn-secondary" onclick="showPStep(1)">Previous</button>
+                <button class="btn btn-primary" onclick="showPStep(2)">Next</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Company Registration</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'dashboard:manage_company' %}" method="post">
+                    <!-- Step 1: Personal Information -->
+                    <div id="step1">
+                        {{ form.company_user.label_tag }}
+                        {{ form.company_user }}
+                        {{ form.company_address.label_tag }}
+                        {{ form.company_address }}
+                        {{ form.company_phone_number.label_tag }}
+                        {{ form.company_phone_number }}
+                    </div>
+                
+                    <!-- Step 2: Address Information -->
+                    <div id="step2" style="display: none;">
+                        {{ form.company_capital.label_tag }}
+                        {{ form.company_capital }}
+                        {{ form.subscription_start.label_tag }}
+                        {{ form.subscription_start }}
+                        {{ form.subscription_end.label_tag }}
+                        {{ form.subscription_end }}
+                        <input type="hidden" name="action" value="company">
+                        <button type="submit" class="btn btn-primary mt-4">
+                             Submit
+                        </button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <!-- Navigation buttons for steps -->
+                <button class="btn btn-secondary" onclick="showStep(1)">Previous</button>
+                <button class="btn btn-primary" onclick="showStep(2)">Next</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showPStep(stepNumber) {
+        for (let i = 1; i <= 2; i++) {
+            document.getElementById('Pstep' + i).style.display = 'none';
+        }
+        document.getElementById('Pstep' + stepNumber).style.display = 'block';
+        if (stepNumber === 1) {
+            document.querySelector('.modal-footer button:nth-child(2)').style.display = 'block';
+            document.querySelector('.modal-footer button:nth-child(3)').style.display = 'none';
+        } else if (stepNumber === 2) {
+            document.querySelector('.modal-footer button:nth-child(2)').style.display = 'none';
+            document.querySelector('.modal-footer button:nth-child(3)').style.display = 'block';
+        }
+    }
+
+    function showStep(stepNumber) {
+        for (let i = 1; i <= 2; i++) {
+            document.getElementById('step' + i).style.display = 'none';
+        }
+        document.getElementById('step' + stepNumber).style.display = 'block';
+        if (stepNumber === 1) {
+            document.querySelector('.modal-footer button:nth-child(2)').style.display = 'block';
+            document.querySelector('.modal-footer button:nth-child(3)').style.display = 'none';
+        } else if (stepNumber === 2) {
+            document.querySelector('.modal-footer button:nth-child(2)').style.display = 'none';
+            document.querySelector('.modal-footer button:nth-child(3)').style.display = 'block';
+        }
+    }
+
+    function submitForm(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the form data
+        const formData = new FormData(document.querySelector('form'));
+
+        // Make a fetch request to submit the form data
+        fetch('/dashboard/manage-company/', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle success, e.g., update UI or show a success message
+                alert('Form submitted successfully');
+                $('#registrationModal').modal('hide');
+            } else {
+                // Handle errors, e.g., show an error message
+                alert('Form submission failed');
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            console.error('Error:', error);
+        });
+    }
+
+</script>
+
+{% endblock %}

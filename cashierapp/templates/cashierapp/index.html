@@ -1,0 +1,17 @@
+{% extends 'cashierapp/_base.html' %}
+{% load static %}
+{% block content %}
+{% include "cashierapp/includes/switch-button.html" %}
+{% include "cashierapp/includes/notification.html" %}
+{% include "cashierapp/includes/redeemed.html" %}
+{% include "cashierapp/includes/pay-slip.html" %}
+{% include 'cashierapp/includes/nav.html' %}
+{% include 'cashierapp/includes/modal-scan-ticket.html' %}
+{% include 'cashierapp/includes/logout.html' %}
+{% include 'cashierapp/spin.html' %}
+{% include 'cashierapp/keno.html' %}
+{% include 'cashierapp/includes/modal-report.html' %}
+{% include 'cashierapp/includes/game-result.html' %}
+{% include 'cashierapp/includes/print-report.html' %}
+{% include 'cashierapp/includes/print-ticket.html' %}
+{% endblock %}

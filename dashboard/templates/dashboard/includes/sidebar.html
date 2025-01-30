@@ -1,0 +1,100 @@
+{% load static %}
+<style>
+    /* Adjust font sizes */
+    .sidebar-brand-text {
+        font-size: 1.2rem; /* Increase sidebar brand text size */
+    }
+
+    .nav-link,
+    .font-weight-bold {
+        font-size: 1rem !important; /* Increase font size for links and bold text */
+    }
+
+    /* Reduce padding between nav items */
+    .nav-item {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Reduce spacing between sidebar items */
+    .nav-item:not(:last-child) {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Reduce spacing between sidebar divider and items */
+    .sidebar-divider {
+        margin: 0.5rem 0;
+    }
+
+    /* Reduce top and bottom margins of sidebar toggle button */
+    #sidebarToggle {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard:dashboard_view' %}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <img src="{% static 'img/mayabets_logo.jpg' %}" alt="Logo" style="max-height: 50px; border-radius: 50%;">
+        </div>
+        <div class="sidebar-brand-text mx-3">Dashboard</div>
+    </a>
+
+    <li class="nav-item">      
+        <a class="nav-link" href="{% url 'dashboard:shop_agent_reports' %}">
+            <i class="fas fa-chart-bar mr-2"></i> <span class="font-weight-bold">Shop/Agent Reports</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:tickets' %}">
+            <i class="fas fa-ticket-alt mr-2"></i> <span class="font-weight-bold">Tickets</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:game_results' %}">
+            <i class="fas fa-dice mr-2"></i> <span class="font-weight-bold">Game Results</span>
+        </a>
+    </li>
+{% if user.is_staff %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard:manage_company' %}">
+        <i class="fas fa-users mr-2"></i> <span class="font-weight-bold">Company Users</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard:manage_agent' %}">
+        <i class="fas fa-users mr-2"></i> <span class="font-weight-bold">Agent Users</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard:manage_cashier' %}">
+        <i class="fas fa-users mr-2"></i> <span class="font-weight-bold">Cashier Users</span>
+    </a>
+</li>
+
+{% else %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard:manage_cashier' %}">
+        <i class="fas fa-users mr-2"></i> <span class="font-weight-bold">Cashier Users</span>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'dashboard:manage_agent' %}">
+        <i class="fas fa-users mr-2"></i> <span class="font-weight-bold">Agent Users</span>
+    </a>
+</li>
+{% endif %}
+
+    <hr class="sidebar-divider">
+
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>

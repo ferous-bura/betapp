@@ -1,0 +1,193 @@
+<script>
+    // Global variables
+var disableClick = false;
+var showClosed = false;
+var addedKeno = 0;
+var ballContainer = $("#ball-container");
+
+// Object to store keno selections
+var kenoSelected = {
+    selectionI: {},
+    stakeI: 10,
+};
+
+// Function to display notification with type and content
+function notify(type, content) {
+    $("#notify_" + type + "_text").html(content);
+    $("#notify_" + type).show();
+    setTimeout(() => {
+        $("#notify_" + type).hide();
+    }, 4000);
+}
+
+// Function to remove selected keno balls
+function removeSelected() {
+    for (let index = 1; index < 37; index++) {
+        console.log('removing ball' + index);
+        $("#ball" + index).addClass("red").removeClass("selectedKeno");
+    }
+    // Uncomment below lines if necessary to remove other selected elements
+    // $("#heads").removeClass("selectedKeno");
+    // $("#tails").removeClass("selectedKeno");
+    // $("#evens").removeClass("selectedKeno");
+}
+
+// Function to disable click action
+function disableClickAction() {
+    disableClick = true;
+}
+
+// Function to enable click action
+function enableClickAction() {
+    disableClick = false;
+}
+
+// Function to hide closed elements
+function hideClosed() {
+    showClosed = false;
+}
+
+function updateZTable() {
+    disableClickAction();
+    showClosed = true;
+    
+    $('#loading').removeClass('yellow').addClass('red');
+    $('#closed').addClass('yellow').removeClass('red');
+    removeSelected();
+    
+    $.ajax({
+        url: '{% url "mobile:get_latest_result" %}',
+        type: 'GET',
+        success: handleSuccess,
+        error: handleError
+    });
+
+    function handleSuccess(response) {
+        var resultsString = response.latest_result;
+        var results = JSON.parse(resultsString);
+        var updateCount = 0;
+
+        updateCells();
+
+        function updateCells() {
+        var $cell = $("#ball" + results[updateCount]);
+        if ($cell.hasClass("red")) {
+            $cell.removeClass("red").addClass("yellow");
+        }
+        updateCount++;
+        if (updateCount < 9) {
+            setTimeout(updateCells, 900);
+        } else {
+            setTimeout(function() {
+            updateCount = 0;
+            $(".yellow").removeClass("yellow").addClass("red");
+            }, results.length * 1000);
+        }
+        }
+
+        Promise.all([createNumberedBalls(results), showResult(results)])
+        .then(function() {
+            console.log("Both functions completed");
+            setTimeout(function() {
+            toggleElements('tabs');
+            enableClickAction();
+            removeSelected();
+            }, 15000);
+        })
+        .catch(function(error) {
+            console.error("Error:", error);
+        });
+
+// Function to create and append numbered balls
+function createNumberedBalls(numbers) {
+    return new Promise(function(resolve, reject) {
+        $.each(numbers, function(index, number) {
+            
+            setTimeout(function() {
+                var ball = $("<div>").addClass("ball");
+                var numberElement = $("<div>").addClass("number").text(number);
+                ball.append(numberElement);
+                ballContainer.append(ball);
+
+                setTimeout(function() {
+                    ball.remove();
+                }, 800);
+            }, index * 1000);
+        });
+        resolve();
+    });
+}
+
+function showResult() {
+    return new Promise(function(resolve, reject) {
+        var rowHtml = "<li class='list-group-item active'>" + "game: ";
+        var lastrowHtml = "<span class='remove_me_next active'>Result: ";
+        for (var r = 0; r < results.length; r++) {
+        rowHtml += "<span class='ball" + r + "'>" + results[r] + "</span> | ";
+        lastrowHtml += "<span class='result-item'> " + results[r] + "</span>";
+        }
+        rowHtml += "</li>";
+        lastrowHtml += "</span>";
+
+        $('.list-group-item').removeClass('active');
+        var $result_list = $('.show-result-on-modal');
+        var $last_result = $('#last_result');
+        
+        $result_list.append(rowHtml);
+        $last_result.html(lastrowHtml);
+
+        resolve();
+    });
+}
+
+        var creationTime = new Date(response.creation_time);
+        var currentTime = new Date();
+        var timeDifference = currentTime.getTime() - creationTime.getTime();
+        var remainingTimeUntilNextMinute = 60000 - (timeDifference % 60000);
+        setTimeout(updateZTable, remainingTimeUntilNextMinute);
+        enableClickAction();
+    }
+
+    function handleError(xhr, errmsg, err) {
+        console.log(xhr.status + ": " + xhr.responseText);
+        setTimeout(updateZTable, 5000);
+    }
+
+    localStorage.setItem('lastExecutedTime', new Date().getTime());
+    }
+
+    function disableClickAction() {
+        disableClick = true;
+    }
+
+    function enableClickAction() {
+    disableClick = false;
+    }
+
+    function responseLogs(response) {
+    // Your logic for logging response data
+    }
+    
+    var disableClick = false;
+    
+    initialize();
+  
+    function initialize() {
+      generateResultTable();
+      updateZTable();
+    }
+  
+    function generateResultTable() {
+      var count = 1;
+      for (var row = 1; row <= 6; row++) {
+        var rowHtml = "<tr>";
+        for (var col = 1; col <= 6; col++) {
+          rowHtml += "<td class='balls red' data-ball='" + count + "'><button class='btn'>" + count + "</button></td>";
+          count++;
+        }
+        rowHtml += "</tr>";
+        $("#result-table-body").append(rowHtml);
+      }
+      $(".balls").on("click", addZBall);
+    }
+</script>

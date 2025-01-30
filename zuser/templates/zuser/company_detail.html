@@ -1,0 +1,25 @@
+{% extends "dashboard/_base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <p>
+        <a href="{% url 'dashboard:manage_company' %}">companies</a> > <span>{{ company.company_user }}</span>
+    </p>
+    <h2>
+        update profile
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+</div>
+<!-- /.container-fluid -->
+
+  
+
+{% endblock %}

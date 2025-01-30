@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Cashier</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Cashier_files/w3.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <!-- Include Glyphicons CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap-glyphicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Cashier_files/boot.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Cashier_files/spin.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Cashier_files/navbar-top-fixed2.css' %}" rel="stylesheet">
+    <script src="{% static 'Cashier_files/print.min.js' %}"></script>
+    <script src="{% static 'Cashier_files/print5.min.js' %}"></script>
+    <link href="{% static 'Cashier_files/css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+<div>
+    {% block content %}
+    {% endblock %}
+</div>
+{% include "cashierapp/includes/cancel-ticket.html" %}
+{% include "cashierapp/includes/all-zscript.html" %}
+<script src="{% static 'Cashier_files/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('.msgalert').alert('close');
+        }, 3000); // 5000 milliseconds = 5 seconds
+    });
+</script>
+<script>
+    // Initialize date picker
+    $('#start_date, #end_date').datepicker({
+        format: 'yyyy-mm-dd', // Set the date format
+        autoclose: true, // Close the datepicker when a date is selected
+        clearBtn: true, // Show a clear button
+        todayHighlight: true // Highlight today's date
+    });
+    // Initialize date picker
+    $('#selected_date').datepicker({
+        format: 'yyyy-mm-dd', // Set the date format
+        autoclose: true, // Close the datepicker when a date is selected
+        clearBtn: true, // Show a clear button
+        todayHighlight: true // Highlight today's date
+    });
+</script>
+</body>
+</html>

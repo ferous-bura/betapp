@@ -1,0 +1,63 @@
+{% load static %}
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+	<!-- Sidebar - Brand -->
+	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'cashierapp:dashboard' %}">
+		<div class="sidebar-brand-icon rotate-n-15">
+			<i class="fas fa-laugh-wink"></i>
+		</div>
+		<div class="sidebar-brand-text mx-3">Dashboard</div>
+	</a>
+
+	<!-- Divider -->
+	<hr class="sidebar-divider my-0">
+
+	<!-- Nav Item - Dashboard -->
+	<li class="nav-item active">
+		<a class="nav-link" href="{% url 'cashierapp:dashboard' %}">
+			<i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>{{ agent.full_name }}</span>
+		</a>
+	</li>
+
+	<!-- <li class="nav-item">
+		<a class="nav-link" href="{% url 'cashierapp:dashboard' %}">
+			<i class="fas fa-fw fa-chart-area"></i>
+			<span>Cahiers</span></a>
+	</li>
+
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'cashierapp:dashboard' %}">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Gamers</span></a>
+	</li> -->
+
+	<!-- Divider -->
+	<hr class="sidebar-divider">
+
+	<!-- Heading -->
+	<div class="sidebar-heading">
+		Cashiers List
+	</div>
+
+	<ul class="">
+	{% for cashier in all_cashiers %}
+	{% with cashier.cashier as cashier %}
+
+	<!-- Nav Item - Charts -->
+	<li class="nav-item">
+		<span>{{ cashier.username }}</span></a>
+	</li>
+
+	{% endwith %}
+	{% endfor %}
+	</ul>
+	<!-- Divider -->
+	<hr class="sidebar-divider d-none d-md-block">
+
+	<!-- Sidebar Toggler (Sidebar) -->
+	<div class="text-center d-none d-md-inline">
+		<button class="rounded-circle border-0" id="sidebarToggle"></button>
+	</div>
+</ul>

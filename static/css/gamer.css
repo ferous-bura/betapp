@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(to right, red, black);
+}
+
+#balls {
+    flex: 2; /* 2/3 of the width */
+    color: white; /* Text color for better visibility */
+    padding: 20px;
+}
+
+#time {
+    background: linear-gradient(to right, red, black);
+    flex: 1; /* 1/3 of the width */
+    color: white; /* Text color for better visibility */
+    padding: 20px;
+}
+
+#balls-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ball {
+    width: calc(10% - 10px); /* Adjust the width based on your needs */
+    height: 50px; /* Adjust the height based on your needs */
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    background: rgba(255, 0, 0, 0.1); /* Red background with 50% opacity */
+    border: 0.01px solid #000; /* Black border */
+    color: #000; /* Black text color */
+    border-radius: 10px; /* Adjust the border-radius for a rounded square */
+    font-size: 32px !important; /* Set the font size explicitly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

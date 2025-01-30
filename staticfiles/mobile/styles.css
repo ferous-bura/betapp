@@ -1,0 +1,235 @@
+
+#tab-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #110101;
+    display: flex;
+    }
+    
+    #tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    }
+    
+    #tab.active {
+    background-color: #ddd;
+    }
+    
+    .page {
+    display: none;
+    padding: 20px;
+    }
+    
+    .page.active {
+    display: block;
+    }
+
+#ball-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.ball {
+    width: 100px;
+    height: 100px;
+    /* background-color: #020202; */
+    border-radius: 50%;
+    position: absolute;
+    animation: zoomInOut 0.3s ease-out;
+    /* padding: 1px; */
+    box-shadow: inset burlywood ;
+    margin: 20px;
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 60px;
+    background-color: rgb(228, 245, 0);
+    border-radius: 50%;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+    transform: scale(0.9);
+    }
+    50% {
+    transform: scale(1.1);
+    }
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+.selectedKeno{
+    border: 5px;
+    border-radius: 3px rgba(0, 0, 255, 0.363) !important;
+}
+
+#selections-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.amount-input {
+display: flex;
+align-items: center;
+width: 100%;
+height: 30px;
+}
+
+.amount-btn {
+width: 30px;
+height: 100%;
+background-color: #f1f1f1;
+border: none;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.amount-value {
+flex: 1;
+height: 100%;
+border: none;
+text-align: center;
+}
+
+/* Style for plus and minus buttons */
+.plus-btn {
+border-left: 1px solid #ccc;
+}
+
+.minus-btn {
+border-right: 1px solid #ccc;
+}
+
+
+.container-fluid {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+table tr td {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent black */
+}
+
+.result-table-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* background-color: white;  */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  */
+  }
+    /* table {
+        background-color: rgb(177, 4, 4);
+    } */
+    .result-table {
+        width: 100%;
+        /* padding: 10px; */
+        /* border: 1px solid #ccc; */
+        border-collapse: collapse; /* Remove spacing between table cells */
+    }
+    
+    .result-table td {
+        border-radius: 5px;
+        padding: 15 !important;
+        border: 10px solid !important; 
+        text-align: center; 
+        /* background-color: rgba(48, 0, 0, 0.568); */
+        transition: background-color 0.01s ease-in;
+    }
+    .yellow {
+        border-radius: 5px rgba(255, 255, 255, 0.274) !important;
+        background-color: rgb(255, 238, 3) !important;
+        /* color: rgb(247, 247, 247); */
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    }
+    .red {
+        /* border-radius: 5px !important; */
+        background-color: rgba(202, 1, 1, 0.747) !important;
+    }
+    /* Responsive styles */
+    @media (max-width: 767px) {
+        .container-fluid {
+            padding-top: 20px; /* Add padding to top half */
+        }
+    }
+    /* Adjust width for larger devices */
+    @media (min-width: 768px) {
+        .col-md-8 {
+            width: 60%; /* Adjust width of result table column */
+        }
+        .col-md-4 {
+            width: 40%; /* Adjust width of timer column */
+        }
+    }
+
+    body {
+        min-height:100%;
+        background-color: black !important;
+        background:linear-gradient(0deg, rgba(0, 0, 0, 0.212), rgba(245, 150, 26, 0.055)), url('img/BG.jpg');
+        background-size:cover;
+        color: white !important;
+    }
+
+    #list-container {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        max-width: 300px;
+    }
+
+    .last-item {
+        cursor: pointer;
+        font-weight: bold;
+        color: blue;
+    }
+    
+    /*for last result  */
+    .horizontal-result {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+  
+    .result-item {
+          background-color: #4b4210;
+          padding: 3px;
+          margin: 1px;
+      }
+
+      #last_result{
+          background-color: #7c7c7c3b;
+          border: 0.5px solid #ccc;
+          border-radius: 2px;
+          padding: 3px;
+          margin: 1px;
+          cursor: pointer;        
+      }     #last_result{
+          background-color: #7c7c7c3b;
+          border: 0.5px solid #ccc;
+          border-radius: 2px;
+          padding: 3px;
+          margin: 1px;
+          cursor: pointer;        
+      }     #last_result{
+          background-color: #7c7c7c3b;
+          border: 0.5px solid #ccc;
+          border-radius: 2px;
+          padding: 3px;
+          margin: 1px;
+          cursor: pointer;        
+      }

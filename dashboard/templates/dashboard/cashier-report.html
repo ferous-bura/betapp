@@ -1,0 +1,126 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+{% block style %}
+<style>
+    .jumbotron-shadow {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .net-balance {
+      background-color: #28a745;
+      color: #fff;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <h2>Agent Statistics</h2>
+    <button id="fetchDataBtn" class="btn btn-primary">Fetch Ticket Statistics</button>
+    <div class="row" id="statisticsRow"></div>
+    <div id="statisticsTableContainer">
+        <table id="agentTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Agent Full Name</th>
+                    <th>Net</th>
+                    <th>Tickets</th>
+                    <th>Winning Amount</th>
+                    <th>Claimed Winning</th>
+                    <th>Claimed Count</th>
+                    <th>Unclaimed Amount</th>
+                    <th>Unclaimed Count</th>
+                    <th>Revoked Amount</th>
+                    <th>Revoked Count</th>
+                    <th>GGR</th>
+                    <th>Gross Stake</th> <!-- Added Gross Stake column -->
+                </tr>
+            </thead>
+            <tbody id="agentTableBody">
+                <!-- Agent statistics rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    
+  </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function() {
+      $('#fetchDataBtn').click(function() {
+        $.ajax({
+          url: "", // Replace with your backend API endpoint
+          method: 'GET',
+          data: {
+            start_date: 'your_start_date_value', // Replace with actual start date value
+            end_date: 'your_end_date_value', // Replace with actual end date value
+            agent_id: 'your_agent_id_value' // Replace with actual agent ID value
+          },
+          success: function(data) {
+            console.log(data);
+            renderDataTable(data);
+            renderStatistics(data);
+          },
+          error: function(xhr, status, error) {
+            console.error('AJAX Error:', error);
+          }
+        });
+      });
+      function renderStatistics(data) {
+        // Remove existing cards
+        $('#statisticsRow').empty();
+
+        // Iterate through the data and create Bootstrap cards
+        Object.keys(data).forEach(function(key) {
+          var card = $('<div class="col-md-3 mb-4">' +
+                          '<div class="card jumbotron jumbotron-shadow">' +
+                            '<div class="card-body text-center">' +
+                              '<h5 class="card-title">' + key + '</h5>' +
+                              '<h2 class="card-text">' + data[key] + '</h2>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>');
+          $('#statisticsRow').append(card);
+        });
+      }
+
+      
+      function renderDataTable(data) {
+        var tableBody = $('#agentTableBody');
+        tableBody.empty(); // Clear existing table body
+
+        // Check if data is an object and convert it to an array
+        if (!Array.isArray(data)) {
+            data = [data]; // Wrap the object in an array
+        }
+
+        // Iterate through the data and append rows to the table body
+        data.forEach(function(agentData) {
+            var row = $('<tr>');
+            Object.keys(agentData).forEach(function(key) {
+                row.append($('<td>').text(agentData[key]));
+            });
+            tableBody.append(row);
+        });
+
+        // Destroy existing DataTable (if any) and reinitialize it
+        if ($.fn.DataTable.isDataTable('#agentTable')) {
+            $('#agentTable').DataTable().destroy();
+        }
+
+        // Initialize DataTable on the table
+        $('#agentTable').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true
+        });
+    }
+
+
+
+    });
+  </script>
+{% endblock %}

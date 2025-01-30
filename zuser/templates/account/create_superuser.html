@@ -1,0 +1,14 @@
+<!-- templates/create_superuser.html -->
+<html>
+<head>
+    <title>Create Superuser</title>
+</head>
+<body>
+    <h2>Create Superuser</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Superuser</button>
+    </form>
+</body>
+</html>

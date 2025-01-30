@@ -1,0 +1,162 @@
+<script>
+
+function aTime(offset) {
+var b=new Date()
+var utc=b.getTime()+(b.getTimezoneOffset()*60000);
+var nd=new Date(utc+(3600000*offset));
+return nd;
+
+}
+//get specific country time
+var aa = aTime('+3');
+
+spinTimer();
+kenoTimer();
+// updateLatestGameNum();
+
+// function updateLatestGameNum() {
+//     $.ajax({
+//         url: '{% url "keno:latest_game" %}',
+//         type: 'GET',
+//         success: function(response) {
+//             $('#latest_keno').text(response.latest_game);
+            
+//             var creationTime = new Date(response.creation_time); // Assuming response.creation_time is in UTC format
+//             var currentTime = new Date();
+//             var timeDifference = currentTime.getTime() - creationTime.getTime();
+            
+//             var remainingTimeUntilNextMinute = 60000 - (timeDifference % 60000);
+//             setTimeout(updateLatestGameNum, remainingTimeUntilNextMinute);
+//         },
+//         error: function(xhr, errmsg, err) {
+//             console.log(xhr.status + ": " + xhr.responseText);
+//             setTimeout(updateLatestGameNum, 5000);
+//         }
+//     });
+// }
+
+function kenoTimer() {
+    avat = 1;
+
+    var date = aTime('+3');
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    var mino = minute * 60;
+
+    var minn = (minute * 60);
+    var a = 0;
+    var b = 239;
+    var c = 0;
+    var d = 0;
+    var e = 0;
+
+    for (let i = 1; i <= 16; i++) {
+        if (minn <= b && minn >= a) {
+            c = a;
+            d = b;
+            e = i;
+            break;
+        } else {
+            a = a + 240;
+            b = b + 240;
+        }
+    }
+    lap = (d - (minn + second)) * 1000;
+    var countDownDate = aTime('+3').getTime() + lap;
+    var x = setInterval(function() {
+        var now = aTime('+3').getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (seconds < 10) {
+            seconds = '0' + seconds
+        }
+        document.getElementById("ktimer").innerHTML = '0' + minutes + ':' + seconds;
+        
+        document.getElementById("game_result_man").disabled = false;
+
+        if (distance > 230000) {
+            document.getElementById("game_result_man").disabled = true;
+        }
+
+        if (distance < 10000) {
+            document.getElementById("game_result_man").disabled = true;
+        }
+
+        if (distance < 1) {
+            clearInterval(x);
+            avat = 0;
+        
+            document.getElementById("ktimer").innerHTML = "CLOSED";
+            setTimeout(() => {
+                kenoTimer();
+                //console.log(0);
+            }, 10000);
+
+        }
+    }, 1000);
+}
+
+function spinTimer() {
+
+    avat = 1;
+
+    //var date = aTime('+3');
+    var bimy = new Date();
+    var utc = bimy.getTime() + (bimy.getTimezoneOffset() * 60000);
+    var date = new Date(utc + (3600000 * "+3"));
+    date.setSeconds(date.getSeconds() + 120);
+
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    var mino = minute * 60;
+
+    var minn = (minute * 60);
+    var a = 0;
+    var b = 239;
+    var c = 0;
+    var d = 0;
+    var e = 0;
+
+    for (let i = 1; i <= 16; i++) {
+        if (minn <= b && minn >= a) {
+            c = a;
+            d = b;
+            e = i;
+            break;
+        } else {
+            a = a + 240;
+            b = b + 240;
+        }
+    }
+    lap = (d - (minn + second)) * 1000;
+    var countDownDate = aTime('+3').getTime() + lap;
+    var x = setInterval(function() {
+        var now = aTime('+3').getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if (seconds < 10) {
+            seconds = '0' + seconds
+        }
+        document.getElementById("spinTimer").innerHTML = '0' + minutes + ':' + seconds;
+        if (distance < 1) {
+            clearInterval(x);
+            avat = 0;
+            document.getElementById("spinTimer").innerHTML = "CLOSED";
+            setTimeout(() => {
+                spinTimer();
+                //console.log(0);
+            }, 10000);
+
+        }
+    }, 1000);
+}
+
+
+</script>
+

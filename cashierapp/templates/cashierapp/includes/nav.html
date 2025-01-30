@@ -1,0 +1,28 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'cashierapp:dashboard' %}">
+        <img src="{% static 'img/mayabets_logo.jpg' %}" alt="Logo" style="max-height: 50px; border-radius: 50%;">
+        <small>MayaBets @{{ cashier }} </small></a>
+      <div class="" role="group" aria-label="Basic outlined example">
+        <!-- <button id="cashier_check_cash" type="button" style="margin: 0vw 0.2vw; border: none; color: rgb(255, 255, 255); padding: 0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button">
+          <i style="font-size: 16px; padding: 0px;" class="fas fa-dollar-sign"></i>Cash
+      </button> -->
+        <button id="cashier_check_cash" type="button" style=" margin: 0vw 0.2vw; border: none; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button">
+          <i style="font-size: 16px; padding: 0px;" class="bi p-1 fas fa-dollar-sign"></i>Cash
+        </button>
+        <button onclick="$('#game_result_open').toggle()" type="button" style=" margin: 0vw 0.2vw; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-controller"></i>Game</button>
+        <button id="scanTicketStart" type="button" style="background-color: rgb(218, 143, 6); border: none; margin: 0vw 0.2vw; color: rgb(255, 255, 255); padding:0.2vw 0.7vw 0.2vw 0.4vw" class="button btn  btn-sm btn-warning"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-ticket-perforated"></i>Ticket</button>
+
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-outline-success" style="padding: 0px 10px 3px 10px">
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            Logout
+          </a>
+        </button>
+      </div>
+
+    </div>
+</nav>

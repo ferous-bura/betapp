@@ -1,0 +1,42 @@
+<script>
+    $(document).ready(function() {
+        $('.amount-btn').on('click', function() {
+            var $input = $(this).siblings('.amount-value');
+            var currentValue = parseInt($input.val(), 10);
+            
+            if ($(this).hasClass('minus-btn')) {
+                currentValue = Math.max(currentValue - 1, 5); // Ensure minimum value is 5
+            } else {
+                currentValue++;
+            }
+            
+            $input.val(currentValue);
+        });
+    });
+
+    var kenoSelected = {
+        selectionI: { 1: 'A', 2: 'B', 3: 'C' },
+        stakeI: 10,
+    };
+
+    // Function to update the selections display
+    function updateSelections() {
+        var container = document.getElementById('selections-container');
+        container.innerHTML = ''; // Clear previous content
+
+        // Display selectionI
+        var selectionsHTML = '<h3>Selections:</h3><ul>';
+        for (var key in kenoSelected.selectionI) {
+            selectionsHTML += '<li>' + key + ': ' + kenoSelected.selectionI[key] + '</li>';
+        }
+        selectionsHTML += '</ul>';
+
+        // Display stakeI
+        selectionsHTML += '<h3>Stake:</h3><p>' + kenoSelected.stakeI + '</p>';
+
+        container.innerHTML = selectionsHTML;
+    }
+
+    // Initial update
+    updateSelections();
+</script>

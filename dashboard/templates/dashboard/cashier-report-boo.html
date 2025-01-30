@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Your Betting Software</title>
+</head>
+<body>
+
+<div class="container mt-4">
+  <!-- Form Section -->
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="selectSpan">Select Span</label>
+        <select class="form-control" id="selectSpan" name="selectSpan">
+          <!-- Add options here -->
+        </select>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="fromDate">From Date</label>
+        <input type="date" class="form-control" id="fromDate" name="fromDate">
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="toDate">To Date</label>
+        <input type="date" class="form-control" id="toDate" name="toDate">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="selectSpa2n">Select Master Agents</label>
+        <select class="form-control" id="selectSpan2" name="selectSpan2">
+          <!-- Add options here -->
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="selectSpan3">Select Agents</label>
+        <select class="form-control" id="selectSpan3" name="selectSpan3">
+          <!-- Add options here -->
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="selectSpan4">Select Cashiers</label>
+        <select class="form-control" id="selectSpan4" name="selectSpan4">
+          <!-- Add options here -->
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <!-- Add Export and Submit buttons here -->
+    </div>
+  </form>
+
+  <!-- Table Section -->
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th>Cashier</th>
+        <th>Shop</th>
+        <th>Bets</th>
+        <th>Slip Count</th>
+        <th>Pay out</th>
+        <th>Unclaimed</th>
+        <th>GGR</th>
+        <th>RTP</th>
+        <th>NET/NGR</th>
+        <th>Share</th>
+        <th>Shop NET</th>
+        <th>Company NET</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Add table rows dynamically based on your data -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">Grand Total</th>
+        <!-- Add other total columns here -->
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

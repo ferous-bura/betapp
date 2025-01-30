@@ -1,0 +1,276 @@
+html {
+    font-size: 1vw;
+}
+body {
+    padding: 0;
+    margin: 0;
+    background: black;
+    z-index: 60;
+}
+#video-container {
+    position: absolute;
+    width: 100%;
+    height: 56.25vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-image: url(/static/spin/bg.png);
+    /* background: url(/images/bg.png) no-repeat; */
+    background-repeat: no-repeat;
+    background-size: contain;
+    user-select: none;
+}
+#video-parent-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#wheel {
+    width: 48.2rem;
+    position: absolute;
+    left: 7.3rem;
+    top: 3.9rem;
+}
+#pin {
+    position: absolute;
+    top: 5.7rem;
+    left: 30.5rem;
+    z-index: 4;
+    width: 1.2rem;
+    transform-origin: top center;
+}
+#center-wheel {
+    position: absolute;
+    left: 22.1rem;
+    top: 18.7rem;
+    z-index: 6;
+    width: 18rem;
+}
+#center-circle {
+    position: absolute;
+    left: 25.6rem;
+    top: 22.1rem;
+    z-index: 7;
+    width: 11rem;
+}
+#place-bet-oval {
+    position: absolute;
+    left: 25.6rem;
+    top: 23.1rem;
+    z-index: 10;
+    width: 11rem;
+}
+#info-panel {
+    font-family: heebo-regular;
+    color: #f2f2f2;
+}
+#game-number {
+    font-size: 1.9rem;
+    position: absolute;
+    top: 1.9rem;
+    left: 69.7rem;
+}
+.quartz-font {
+    font-family: quartz;
+}
+#countdown {
+    font-size: 3.3rem;
+    position: absolute;
+    top: 0.9rem;
+    left: 90rem;
+}
+.p-6-g {
+    font-size: 1.2rem;
+}
+.p-6-g-left {
+    position: absolute;
+    left: 79.7rem;
+}
+.p-6-g-right {
+    position: absolute;
+    left: 89.4rem;
+}
+.p-6-g-top {
+    position: absolute;
+    top: 7rem;
+    font-size: 1.2rem;
+}
+.p-6-g-middle {
+    position: absolute;
+    top: 9rem;
+    font-size: 1.2rem;
+}
+.p-6-g-bottom {
+    position: absolute;
+    top: 11rem;
+    font-size: 1.2rem;
+}
+.p-6-d {
+    font-size: 1.5rem;
+    text-align: center;
+}
+.p-6-d-left {
+    position: absolute;
+    left: 84.6rem;
+    width: 2.7rem;
+    height: 1.85rem;
+}
+.p-6-d-right {
+    position: absolute;
+    left: 94.1rem;
+    width: 2.7rem;
+    height: 1.85rem;
+}
+.p-6-d-top {
+    position: absolute;
+    top: 6.79rem;
+}
+.p-6-d-middle {
+    position: absolute;
+    top: 8.73rem;
+}
+.p-6-d-bottom {
+    position: absolute;
+    top: 10.7rem;
+}
+.p-6-c-d-left {
+    position: absolute;
+    left: 87.35rem;
+    width: 1.57rem;
+    height: 1.85rem;
+}
+.p-6-c-d-right {
+    position: absolute;
+    left: 96.9rem;
+    width: 1.57rem;
+    height: 1.85rem;
+}
+.p-6-c-d-top {
+    position: absolute;
+    top: 6.79rem;
+}
+.p-6-c-d-middle {
+    position: absolute;
+    top: 8.73rem;
+}
+.p-6-c-d-bottom {
+    position: absolute;
+    top: 10.7rem;
+}
+#f-l-2-d {
+    position: absolute;
+    top: 14.8rem;
+    left: 79.1rem;
+    width: 19.2rem;
+    height: 23rem;
+}
+.f-l-2-d-b {
+    font-size: 1.42rem;
+    width: 3.5rem;
+    margin-left: 2.9rem;
+    margin-top: 0.2rem;
+    height: 1.66rem;
+    text-align: center;
+    line-height: 1.7rem;
+    margin-bottom: 0.22rem;
+}
+#f-l-2-d-middle {
+    left: 6.5rem;
+    position: absolute;
+    top: 0rem;
+}
+#f-l-2-d-right {
+    left: 13rem;
+    position: absolute;
+    top: 0rem;
+}
+#c-l-2-d {
+    position: absolute;
+    top: 39.5rem;
+    left: 79.2rem;
+    width: 19.4rem;
+}
+.c-l-2-d-t-b {
+    height: 1.9rem;
+    font-size: 1.5rem;
+    width: 6.45rem;
+    display: inline-block;
+    text-align: center;
+}
+.c-l-2-d-b-b {
+    height: 1.95rem;
+    font-size: 1.5rem;
+    width: 3.2rem;
+    display: inline-block;
+    text-align: center;
+}
+#d-l-2-d {
+    position: absolute;
+    top: 45.6rem;
+    left: 82.5rem;
+    width: 19.4rem;
+}
+.d-l-2-d-b {
+    height: 1.95rem;
+    font-size: 1.5rem;
+    width: 3.2rem;
+    display: inline-block;
+    text-align: center;
+    margin-right: 3.26rem;
+}
+#h-c-l-2-d {
+    position: absolute;
+    top: 49.6rem;
+    left: 84rem;
+    width: 19.4rem;
+}
+.h-c-l-2-d-t-b,
+.h-c-l-2-d-b-b {
+    height: 1.9rem;
+    font-size: 1.5rem;
+    width: 2.9rem;
+    display: inline-block;
+    text-align: center;
+}
+#bets-closed {
+    font-size: 1.9rem;
+    position: absolute;
+    top: 1.9rem;
+    left: 85rem;
+}
+@font-face {
+    font-family: quartz;
+    src: url(/static/spin/assets/DS-DIGI-87eb14d4.TTF);
+}
+@font-face {
+    font-family: heebo-regular;
+    src: url(/static/spin/assets/Heebo-VariableFont_wght-415e2944.ttf);
+}
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0;
+    }
+    49% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.blink-animation {
+    animation: blink 1s;
+    animation-iteration-count: infinite;
+}

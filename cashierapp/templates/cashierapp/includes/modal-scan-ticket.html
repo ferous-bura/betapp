@@ -1,0 +1,84 @@
+{% load static %}
+<div id="myModalTicket" class="modal2">
+
+    <center style="padding-bottom: 20px;">
+        <div style="margin: auto;">
+            <span class="iamactive" style=" color: gray; cursor: pointer; margin: 5px; padding: 5px; height: 10px; border: 1px solid gray; border-radius: 8px;" id="scanthetick" onclick="scanthetik(this)"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi bi-upc-scan"></i>Scan </span> 
+            <span style="color: gray; cursor: pointer;margin: 5px; padding: 5px;height: 10px; border: 1px solid gray;border-radius: 8px;" id="copythetick" onclick="tickethistory()"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-printer"></i> Copy </span>
+          </div>
+    </center>
+   <ul><b> <div style="right:25%; top:13%; position: absolute; background-color: none; color: rgb(255, 255, 255); cursor: pointer;margin: 5px; padding: 5px;height: 38px;" id="copythetick" onclick="closethetik()">-| Go back</div>
+   </b></ul>
+    
+  <div class="endaleBeqa" id="endalebeqaId" style="display: none;">
+    <div class="modal-dialog modal-confirm">
+      <div class="modal-content">
+        <div class="alert alert-danger" style="display: none;" role="alert">
+          Error text    
+        </div>
+        <div class="modal-header flex-column">
+          <h4 class="modal-title w-100" id="scanedTicketStatus"></h4>
+          <button type="button" id="scanedCodeClose" class="close" style="background-color: white; border: none;">×</button>
+        </div>
+        <div class="modal-body">
+          <p>Stake : Br <span id="scanedCodeStake"></span></p>
+          <p id="scanedCodeSelection"></p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button id="scanedCodePrintLater" type="button" class="btn btn-secondary" data-dismiss="modal">
+          Re-print</button>
+          <button id="scanedCodeCancelDeem" type="button" class="btn btn-danger">
+          Cancel</button>
+        </div>
+         <input type="checkbox" id="redemption_receipt" checked="checked">Redemption receipt?
+      </div>
+    </div>
+  </div>
+  <!-- Modal content -->
+  <br><br><br>
+<div class="modal-content2 " id="pleaseScanTickeDivcopy">
+    <span id="pleaseScanBarCodeSpinnercopy" style="display:none">
+      <div class="spinner-border text-warning" role="status">
+        <span class="sr-only"> </span>
+      </div>
+    </span>
+
+    <div id="copyprinttablediv" style="margin-top: 40px; width: 718px; height: 300px; border: 1px solid rgb(70, 67, 67);overflow-y: scroll; display: none; ">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Ticket</th>
+            <th scope="col">Game</th>
+            <th scope="col">Game Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Tot. Stake</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="copyprinttable">
+          
+        </tbody>
+      </table>
+     
+    </div>
+
+   
+  </div>
+
+  <div class="modal-content2 " id="pleaseScanTickeDiv">
+    <span id="pleaseScanBarCodeSpinner" style="display:none">
+      <div class="spinner-border text-warning" role="status">
+        <span class="sr-only"> </span>
+      </div>
+    </span>
+    <span id="pleaseScanBarCode">
+      <p><i class="bi bi-upc-scan" style="font-size: 40px; padding: 10px 65px 0px 65px;"></i></p>
+      <p style="text-align: center;">please scan the barcode <br> or input manualy<br>   </p>
+        
+        <input type="text" id="kkiop12332" class="input text" autofocus><br><input type="button" style="margin: 5px; float: right;" value="submit" onclick="handleBarcodehelperv1($('#kkiop12332').val())" class="btn btn-success btn-sm button">
+      <p></p>
+    </span>
+  </div>
+</div>    
+
+<p id="test-text"></p>

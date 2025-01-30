@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Your App Name",
+  "version": "1.0",
+  "description": "Your app description",
+  "permissions": ["webview"],
+  "host_permissions": ["*"],
+  "webview": {
+    "matches": ["*://127.0.0.1:8000/*"]
+  },
+  "chrome_url_overrides": {
+    "newtab": "run.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "assets/great/icon16.png",
+      "48": "assets/great/icon48.png",
+      "128": "assets/great/icon128.png"
+    }
+  }
+}

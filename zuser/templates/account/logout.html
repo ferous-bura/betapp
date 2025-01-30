@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sign Out</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <style>
+        body {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .logout-btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            color: #4e73df;
+            border: 2px solid #4e73df;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #4e73df;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container text-center">
+
+    <h1>Sign Out</h1>
+    <p>Are you sure you want to sign out?</p>
+    <form method="post" action="/accounts/logout/">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+            <input type="hidden"
+                    name="{{ redirect_field_name }}"
+                    value="{{ redirect_field_value }}" />
+        {% endif %}
+    <button type="submit" class="logout-btn">Sign Out</button>
+    </form>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'Cashier_files/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+            

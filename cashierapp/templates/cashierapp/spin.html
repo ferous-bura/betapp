@@ -1,0 +1,607 @@
+{% load static %}
+<main class="main" id="spinPanel" style="display: none;">
+<div id="myModalTicket_spin" class="modal2" style="z-index: 5;"></div>
+<div class="modal2" id="spin_select_bet_modal" style="z-index: 3;overflow-x: hidden; background: #000000e4; ">
+
+<div class="AddToSlipDiv" id="SmartPlayKenoAddToSlipDiv_spin" style="display: block; width: 300px; position: absolute; left: 40%;">
+<div id="SmartPlayKeno_13-19-11876278_PayTable_spin">
+    <div class="PayTable">
+    <div id="kenoTicketLoader_spin_single" style="display: none; width: 100%; height:100%; opacity: 0.7; background-color: rgb(63, 63, 63); position: absolute; z-index: 4;">
+        <span id="pleaseScanBarCodeSpinner_spin_single" style="margin-top: 35%; margin-left: 45%; position: absolute;">
+        <div class="spinner-border text-warning" role="status">
+            <span class="sr-only"> </span>
+        </div>
+        </span>
+    </div>
+    <div class="accordionPanel show">
+        
+        <section class="content">
+        
+        <nav id="BetSlipTab_spin" class="Toggle" data-group="betslip">
+            
+            
+
+            <section class="tab-content current" id="tab-single-bets_spin" data-group="betslip">
+            
+            <div id="single-bets-container_spin">
+                <div class="PlacedBet pb-1 ExpandAnimation" onclick="">
+                
+                
+                <div class="BetDetails">
+                    <div onclick="" class="close_spin_selection" style="display:none;float: right; font-size: 40px;top: 0px; cursor: pointer; z-index: 2;">×</div>
+                
+                    <div class="SmartPlayKenoIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" data-svg-id="SpinAndWinSVG" class="icon" alt="SpinAndWin" src="/Content/Images/Icons/SpinAndWinIcon.svg"><g><path d="M24.5,0C11,0.3-0.3,11.4,0,25.7C0.3,39.1,11.4,50.2,25.4,50C39.2,49.7,49.9,38.6,50,25C49.9,10.9,38.4-0.2,24.5,0zM25,45.6C13.6,45.6,4.4,36.4,4.4,25C4.5,13.5,13.7,4.4,25,4.4C36.7,4.4,45.6,14,45.6,25C45.6,36.1,36.6,45.6,25,45.6z"></path><path d="M38.2,25.4c0.2-7.6-5.9-13.5-13.1-13.5c-7.3,0-13.2,5.9-13.2,13.2c0,7.3,5.8,13.1,13.1,13.2C32,38.2,38,32.6,38.2,25.4zM25,33.8c-4.9,0-8.8-3.9-8.8-8.8c0-4.9,3.9-8.8,8.8-8.9c4.8,0,8.8,4,8.8,8.7C33.8,29.9,30,33.8,25,33.8z"></path><path d="M13.8,33.8c-1.4,1.1-2.8,2.2-4.3,3.3c0.7,0.8,1.4,1.5,2.2,2.3c1.3-1.4,2.4-2.7,3.7-4C14.8,34.9,14.3,34.3,13.8,33.8z"></path><path d="M17.2,13.1c-1-1.5-2-3-3-4.5c-0.9,0.7-1.7,1.3-2.5,2c1.3,1.4,2.5,2.7,3.7,4C16,14,16.5,13.6,17.2,13.1z"></path><path d="M13.7,16.3c-1.4-1.1-2.8-2.2-4.3-3.3c-0.6,0.9-1.2,1.8-1.7,2.7c1.6,0.9,3.2,1.7,4.7,2.6C12.9,17.5,13.3,16.9,13.7,16.3z"></path><path d="M21.5,11.2C21,9.4,20.6,7.7,20.1,6c-1,0.3-2,0.7-3,1c0.7,1.7,1.5,3.3,2.2,5C20.1,11.7,20.8,11.4,21.5,11.2z"></path><path d="M11.5,29.7c-1.7,0.6-3.4,1.1-5.1,1.7c0.4,1,0.9,1.9,1.3,2.9c1.6-0.9,3.2-1.7,4.8-2.6C12.1,31.1,11.8,30.4,11.5,29.7z"></path><path d="M14.3,41.5c1,0.5,1.9,1,2.8,1.5c0.7-1.7,1.5-3.3,2.2-4.9c-0.7-0.4-1.4-0.7-2-1.1C16.3,38.4,15.3,39.9,14.3,41.5z"></path><path d="M26.2,39.2c0.1,1.8,0.3,3.5,0.4,5.4c1.1-0.2,2.1-0.4,3.1-0.5c-0.5-1.8-0.9-3.5-1.3-5.2C27.7,39,27,39.1,26.2,39.2z"></path><path d="M37.5,31.7c1.6,0.8,3.1,1.7,4.7,2.6c0.4-1,0.9-1.9,1.3-2.9c-1.7-0.6-3.4-1.2-5.1-1.7C38.1,30.4,37.9,31,37.5,31.7z"></path><path d="M34.6,14.5c1.2-1.3,2.4-2.6,3.7-4c-0.8-0.7-1.7-1.3-2.5-2c-1,1.6-2,3-3,4.5C33.4,13.6,34,14,34.6,14.5z"></path><path d="M37.5,18.2c1.6-0.9,3.1-1.7,4.7-2.6c-0.6-0.9-1.2-1.8-1.8-2.7c-1.5,1.1-2.9,2.2-4.3,3.3C36.7,16.9,37.1,17.5,37.5,18.2z"></path><path d="M34.7,35.5c1.2,1.3,2.4,2.6,3.7,4c0.7-0.8,1.4-1.6,2.2-2.3c-1.5-1.1-2.8-2.2-4.3-3.3C35.7,34.3,35.2,34.9,34.7,35.5z"></path><path d="M30.8,38c0.7,1.6,1.4,3.3,2.2,4.9c1-0.5,1.9-1,2.8-1.5c-1-1.6-2-3-3-4.5C32.1,37.3,31.4,37.7,30.8,38z"></path><path d="M32.9,7c-1-0.4-2-0.7-3-1c-0.4,1.8-0.9,3.5-1.3,5.2c0.8,0.3,1.5,0.5,2.2,0.7C31.4,10.3,32.1,8.7,32.9,7z"></path><path d="M26.1,10.8c0.1-1.8,0.3-3.5,0.4-5.3c-1.1,0-2.1,0-3.2,0c0.1,1.8,0.3,3.6,0.4,5.3C24.6,10.8,25.3,10.8,26.1,10.8z"></path><path d="M39,22.6c1.8-0.3,3.5-0.6,5.3-0.9c-0.3-1-0.5-2-0.8-3.1c-1.8,0.6-3.4,1.2-5.1,1.8C38.7,21.2,38.9,21.9,39,22.6z"></path><path d="M20.2,44c1.1,0.2,2.1,0.3,3.1,0.5c0.2-1.9,0.3-3.6,0.4-5.4c-0.8-0.1-1.5-0.2-2.3-0.4C21.1,40.5,20.7,42.2,20.2,44z"></path><path d="M11.5,20.4c-1.7-0.6-3.4-1.1-5.1-1.7c-0.3,1-0.5,2-0.8,3.1c1.8,0.3,3.6,0.6,5.3,0.9C11.1,21.9,11.3,21.2,11.5,20.4z"></path><path d="M10.7,25.1c-1.8,0-3.6,0-5.4,0c0.1,1.1,0.2,2.1,0.3,3.1c1.8-0.3,3.6-0.6,5.3-0.9C10.8,26.5,10.8,25.8,10.7,25.1z"></path><path d="M39.2,25.1c-0.1,0.8-0.1,1.5-0.2,2.2c1.7,0.3,3.5,0.6,5.3,0.9c0.1-1,0.2-2.1,0.3-3.1C42.8,25.1,41,25.1,39.2,25.1z"></path><path d="M9.7,34.3c0,0.5,0.4,0.9,0.9,0.9c0.5,0,0.9-0.4,0.9-0.9c0-0.5-0.4-0.9-0.9-0.9C10.1,33.4,9.7,33.8,9.7,34.3z"></path><path d="M29.5,25.9c-0.3,0.2-1.7-0.2-1.8-0.4c0-0.1-0.1-0.2,0-0.3c0.1-1.1-0.4-1.9-1.3-2.5c0.1-0.4,0.3-0.7,0.4-1c0.1-0.4,0.3-0.6,0.7-0.7c0.6-0.2,0.9-0.9,0.6-1.6c-0.3-0.6-1-0.9-1.6-0.6c-0.6,0.3-0.9,1-0.6,1.6c0.2,0.4,0.2,0.7,0,1.1c-0.1,0.2-0.2,0.4-0.2,0.6c-0.1,0.3-0.2,0.4-0.5,0.3c-0.8-0.1-1.5,0.2-2,0.8c-0.4,0.5-0.7,0.5-1.1,0.3c-0.1,0-0.2-0.1-0.3-0.1c-0.4-0.1-0.7-0.3-0.8-0.7c-0.2-0.6-1-0.8-1.6-0.6c-0.6,0.3-0.9,1-0.6,1.6c0.3,0.6,1,0.9,1.6,0.6c0.4-0.3,0.7-0.2,1.1,0c0.2,0.1,0.4,0.2,0.6,0.2c0.3,0.1,0.4,0.2,0.3,0.5c-0.1,0.8,0.2,1.6,0.9,2.1c0.4,0.3,0.4,0.6,0.2,1c-0.1,0.1-0.1,0.2-0.1,0.3c-0.1,0.4-0.3,0.7-0.7,0.8c-0.6,0.2-0.8,1-0.6,1.6c0.3,0.6,1,0.9,1.6,0.6c0.6-0.3,0.9-1.1,0.5-1.6c-0.3-0.4-0.2-0.7-0.1-1c0.1-0.2,0.2-0.5,0.3-0.7c0.1-0.3,0.2-0.3,0.5-0.3c0.7,0.1,1.5-0.1,1.9-0.7c0.5-0.6,0.9-0.6,1.5-0.3c0.1,0,0.1,0,0.2,0.1c0.3,0.1,0.5,0.2,0.6,0.6c0.1,0.3,0.4,0.6,0.7,0.7c0.5,0.2,1.1,0,1.4-0.5c0.3-0.5,0.2-1.1-0.2-1.5C30.6,25.6,30,25.6,29.5,25.9zM25,24.1c-0.5,0.1-0.8,0.4-0.9,0.9c0,0.3-0.2,0.5-0.5,0.4c-0.2-0.1-0.4-0.3-0.4-0.5c0-0.8,0.8-1.5,1.7-1.5c0.1,0.1,0.3,0.2,0.3,0.3C25.4,23.8,25.1,24.1,25,24.1z"></path></g></svg>
+                    
+                    </div>
+                    
+                    <h3 style="padding: 5px; font-size: 13px;">
+                    <strong><span id="ExtraDescriptionWinLen_spin"></span> </strong>
+                    </h3>
+                    <h3><span id="ExtraDescriptionSelection_spin" class="ExtraDescription"> - </span><span class="Bet nohover" id="ExtraDescriptionOdd_spin">0</span></h3>
+                </div>
+
+                <div class="Stake">
+                    <div class="DecreaseAmount" style="" onclick="onDenominationClickspin(-10);">
+                    <i class="glyphicon glyphicon-minus"></i>
+                    </div>
+                    <input id="stakeKenoIn_spin" class="Stake " type="text" value="10" min="10" max="1000" readonly="readonly">
+                    <div class="IncreaseAmount" style="" onclick="onDenominationClickspin(+5);">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    </div>
+                </div>
+                <div class="ToWinAmount"> 
+                    <span> To Win: <b><span id="kenoToWin_spin">Br 00.00</span></b></span>
+                </div>
+                <!--
+                    <div class="Remove" onclick="removeBetFromSlip(event, '17');">
+                    <i class="bi bi-backspace-fill"></i>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div>
+                <div id="Denominations_spin" class="Denominations">
+                <button type="button mtsh" value="5" onclick="onDenominationClickspin(5)">
+                5<i name="CurrencySymbol">Br</i>
+                </button>
+                <button type="button" value="10" onclick="onDenominationClickspin(10)">
+                10<i name="CurrencySymbol">Br</i>
+                </button>
+                <button type="button" value="20" onclick="onDenominationClickspin(20)">
+                20<i name="CurrencySymbol">Br</i>
+                </button>
+                <button type="button" value="50" onclick="onDenominationClickspin(50)">
+                50<i name="CurrencySymbol">Br</i>
+                </button>
+                <button type="button" value="100" onclick="onDenominationClickspin(100)">
+                100<i name="CurrencySymbol">Br</i>
+                </button>
+                </div>
+            </div>
+            
+            </section>
+            <div class="CTAcell">
+            <button style="float: right;" id="SmartPlayKeno_13-19-11876278_AddToSlipBtn_spin" class="ConfirmButton" type="button" onclick="addSingleBetToSlip_spin(event)">
+            <i class="bi bi-file-plus"></i>
+            Add Betslip 
+            </button>
+            <button onclick="close_spin_select_bet()" class="clear" style="float: left;border-radius: 3px;">
+            <i class="bi bi-clipboard2-minus" style="padding: 0px 0px; top: 0px; position: relative;"></i>
+            Clear
+            </button>
+            </div>
+            <button id="kenoSinglePlaceBet" class="strictTouch placeBet" style="width: 100%;" onclick="BET_spin('single')">
+            <i id="kenoPlaceSingleIcon" class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+            <span id="kenoPlaceSingleSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+            Place bet
+            <span class="spD"><span id="placeSingleKenoBetAmount_spin">10</span> </span>
+            </button>
+        </nav>
+        </section>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="bg-d" role="group" aria-label="Basic outlined example">
+
+    <button id="" type="button" style="visibility:hidden;margin: 0vw 0vw; color: rgb(255, 255, 255); padding:0vw 0vw 0vw 0.4vw" class="btn btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-vinyl-fill"></i> keno</button>
+    <button onclick="" type="button" style="visibility:hidden;margin: 0vw 0vw; color: rgb(218, 143, 6); padding:0vw 0.7vw 0vw 0.4vw" class="btn  btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-life-preserver"></i>spin</button>
+
+
+</div>
+
+
+<div id="tab-SpinAndWin" class="tab-content current">
+    <div class="row">
+    <div class="col m-2" id="SpinAndWin-marketselectparent"></div>
+    <div class="col" id="SpinAndWin-layoutselect">
+    </div>
+    </div>
+    <div class="nextD">
+    <div style="background-color: rgb(190, 0, 0); width: 135px">
+        <span style="margin: 0px 4px; color: aliceblue;">Next draw : <span style="color:yellow" id="spinTimer"></span></span>
+    </div>
+    
+    </div>
+    <div class="EventAccordion container-fluid px-0">
+    <div id="SpinAndWin-event-detail">
+        <div class="BettingPanel DetailsList p-0" style="top:0px">
+        <div class="row ml-0 mb-3 NextRepeatRow">
+        </div>
+
+
+        
+        <div class="pad-top-15 RouletteTable" style="width: 70% !important; ">
+            <div style="float: left;">
+            <div class="SW-Number SW-0">
+                <h3>0</h3>
+            </div>
+            </div>
+            <div style="width: 80%;float: left;">
+            <div>
+                <div class="RouletteColumn AAAB">
+
+                <div class="SW-Number SW-3">
+                    <h3>3</h3>
+                    <div class="spin_doz spin_doz2 SW-DATA-3 hov0 hov3" onclick="spin_select([3,0], 'toolpit')" data="3,0"></div>
+                    <div class="spin_doz spin_doz3 SW-DATA-3 hov1 hov2 hov3" onclick="spin_select([3,2,1], 'toolpit')" data="3,2,1"></div>
+                </div>
+
+                <div class="SW-Number SW-6">
+                    <h3>6</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-6 hov4  hov5  hov6" onclick="spin_select([6,5,4], 'toolpit')" data=""></div>
+                    <div class="spin_doz spin_doz4 SW-DATA-6 hov1 hov2 hov3 hov4 hov5 hov6" onclick="spin_select([1,2,3,4,5,6], 'toolpit')" data="1,2,3,4,5,6"></div>
+                    <div class="spin_doz spin_doz2 SW-DATA-6  hov3 hov6" onclick="spin_select([3,6], 'toolpit')" data="3,6"></div>
+                </div>
+                <div class="SW-Number SW-9">
+                    <h3>9</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-9 hov7 hov8 hov9" onclick="spin_select([7,8,9], 'toolpit')" data="7,8,9"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-9 hov4 hov5 hov6 hov7 hov8 hov9" onclick="spin_select([4,5,6,7,8,9], 'toolpit')" data="4,5,6,7,8,9"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-9 hov6 hov9" onclick="spin_select([6,9], 'toolpit')" data="6,9"></div>
+                </div>
+                <div class="SW-Number SW-12">
+                    <h3>12</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-12 hov10 hov11 hov12" onclick="spin_select([10, 11,12], 'toolpit')" data="10, 11,12"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-12 hov7 hov8 hov9 hov10 hov11 hov12" onclick="spin_select([7,8,9,10,11,12], 'toolpit')" data="7,8,9,10,11,12"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-12  hov12 hov9" onclick="spin_select([9,12], 'toolpit')" data="9,12"></div>
+                </div>
+                <div class="SW-Number SW-15">
+                    <h3>15</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-15 hov13 hov14 hov15" onclick="spin_select([13, 14,15], 'toolpit')" data="13, 14,15"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-15  hov10 hov11 hov12 hov13 hov14 hov15" onclick="spin_select([10,11,12,13,14,15], 'toolpit')" data="10,11,12,13,14,15"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-15 hov12 hov15" onclick="spin_select([12,15], 'toolpit')" data="12,15"></div>
+                </div>
+                <div class="SW-Number SW-18">
+                    <h3>18</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-18 hov16 hov17 hov18" onclick="spin_select([16,17,18], 'toolpit')" data="16,17,18"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-18 hov13 hov14 hov15 hov16 hov17 hov18" onclick="spin_select([13,14,15,16,17,18], 'toolpit')" data="13,14,15,16,17,18"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-18 hov15 hov18" onclick="spin_select([15,18], 'toolpit')" data="15,18"></div>
+                </div>
+                <div class="SW-Number SW-21">
+                    <h3>21</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-21 hov19 hov20 hov21" onclick="spin_select([19, 20,21], 'toolpit')" data="19, 20,21"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-21 hov16 hov17 hov18 hov19 hov20 hov21" onclick="spin_select([16,17,18,19,20,21], 'toolpit')" data="16,17,18,19,20,21"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-21 hov18 hov21" onclick="spin_select([18,21], 'toolpit')" data="18,21"></div>
+                </div>
+                <div class="SW-Number SW-24">
+                    <h3>24</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-24 hov22 hov23 hov24" onclick="spin_select([22, 23,24], 'toolpit')" data="22, 23,24"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-24 hov19 hov20 hov21 hov22 hov23 hov24" onclick="spin_select([19,20,21,22,23,24], 'toolpit')" data="19,20,21,22,23,24"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-24 hov21 hov24" onclick="spin_select([21,24], 'toolpit')" data="21,24"></div>
+                </div>
+                <div class="SW-Number SW-27">
+                    <h3>27</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-27 hov25 hov26 hov27" onclick="spin_select([27,26, 25], 'toolpit')" data="27,26, 25"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-27 hov22 hov23 hov24 hov25 hov26 hov27" onclick="spin_select([22,23,24,25,26,27], 'toolpit')" data="22,23,24,25,26,27"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-27 hov24 hov27" onclick="spin_select([24,27], 'toolpit')" data="24,27"></div>
+                </div>
+                <div class="SW-Number SW-30">
+                    <h3>30</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-30 hov28 hov29 hov30" onclick="spin_select([28, 29,30], 'toolpit')" data="28, 29,30"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-30 hov25 hov26 hov27 hov28 hov29 hov30" onclick="spin_select([25,26,27,28,29,30], 'toolpit')" data="25,26,27,28,29,30"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-30 hov27 hov30" onclick="spin_select([27,30], 'toolpit')" data="27,30"></div>
+                </div>
+                <div class="SW-Number SW-33">
+                    <h3>33</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-33 hov31 hov32 hov33" onclick="spin_select([31, 32,33], 'toolpit')" data="31, 32,33"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-33 hov28 hov29 hov30 hov31 hov32 hov33" onclick="spin_select([28,29,30,31,32,33], 'toolpit')" data="28,29,30,31,32,33"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-33 hov30 hov33" onclick="spin_select([30,33], 'toolpit')" data="30,33"></div>
+                </div>
+                <div class="SW-Number SW-36">
+                    <h3>36</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-36 hov34 hov35 hov36" onclick="spin_select([34, 35,36], 'toolpit')" data="34, 35,36"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-36 hov31 hov32 hov33 hov34 hov35 hov36" onclick="spin_select([31,32,33,34,35,36], 'toolpit')" data="31,32,33,34,35,36"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-36 hov33 hov36" onclick="spin_select([33,36], 'toolpit')" data="33,36"></div>
+                </div>
+                </div>
+                <div class="RouletteColumn">
+                <div class="SW-Number SW-2">
+                    <h3>2</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-2 hov3 hov2" onclick="spin_select([3,2], 'toolpit')" data="3,2"></div>
+                    <div class="spin_doz  SW-DATA-2 hov0 hov2" style="left: -7px; bottom: 35%;" onclick="spin_select([0, 2], 'toolpit')" data="0, 2"></div>
+                </div>
+                <div class="SW-Number SW-5">
+                    <h3>5</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-5  hov5 hov6" onclick="spin_select([6,5], 'toolpit')" data="6,5"></div>
+                    <div class="spin_doz spin_doz4  SW-DATA-5 hov5 hov6 hov3 hov2" onclick="spin_select([2,3,5,6], 'toolpit')" data="2,3,5,6"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-5 hov5 hov2" onclick="spin_select([5,2], 'toolpit')" data="5,2"></div>
+                </div>
+                <div id="75-24-135342_121_8_" class="SW-Number SW-8">
+                    <h3>8</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-8 hov8 hov9" onclick="spin_select([9,8], 'toolpit')" data="9,8"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-8 hov5 hov6 hov8 hov9" onclick="spin_select([5,6,8,9], 'toolpit')" data="5,6,8,9"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-8 hov5 hov8" onclick="spin_select([5,8], 'toolpit')" data="5,8"></div>
+                </div>
+                <div id="75-24-135342_121_11_" class="SW-Number SW-11">
+                    <h3>11</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-11 hov11 hov12" onclick="spin_select([11,12], 'toolpit')" data="11,12"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-11 hov8 hov9 hov11 hov12" onclick="spin_select([8,9,11,12], 'toolpit')" data="8,9,11,12"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-11 hov8 hov11" onclick="spin_select([8,11], 'toolpit')" data="8,11"></div>
+                </div>
+                <div id="75-24-135342_121_14_" class="SW-Number SW-14">
+                    <h3>14</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-14 hov14 hov15" onclick="spin_select([14, 15], 'toolpit')" data="14, 15"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-14 hov11 hov12 hov14 hov15" onclick="spin_select([14,15,11,12], 'toolpit')" data="14,15,11,12"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-14 hov11 hov14" onclick="spin_select([11,14], 'toolpit')" data="11,14"></div>
+                </div>
+                <div id="75-24-135342_121_17_" class="SW-Number SW-17">
+                    <h3>17</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-17 hov17 hov18" onclick="spin_select([17,18], 'toolpit')" data="17,18"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-17 hov14 hov15 hov17 hov18" onclick="spin_select([14,15,17,18], 'toolpit')" data="14,15,17,18"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-17 hov14 hov17" onclick="spin_select([14,17], 'toolpit')" data="14,17"></div>
+                </div>
+                <div id="75-24-135342_121_20_" class="SW-Number SW-20">
+                    <h3>20</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-20 hov20 hov21" onclick="spin_select([20,21], 'toolpit')" data="20,21"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-20 hov17 hov18 hov20 hov21" onclick="spin_select([20,21,17,18], 'toolpit')" data="20,21,17,18"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-20 hov17 hov20" onclick="spin_select([17,20], 'toolpit')" data="17,20"></div>
+                </div>
+                <div id="75-24-135342_121_23_" class="SW-Number SW-23">
+                    <h3>23</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-23 hov23 hov24" onclick="spin_select([23,24], 'toolpit')" data="23,24"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-23 hov20 hov21 hov23 hov24" onclick="spin_select([20,21,23,24], 'toolpit')" data="20,21,23,24"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-23 hov20 hov23" onclick="spin_select([20,23], 'toolpit')" data="20,23"></div>
+                </div>
+                <div id="75-24-135342_121_26_" class="SW-Number SW-26">
+                    <h3>26</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-26 hov26 hov27" onclick="spin_select([26.27], 'toolpit')" data="26.27"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-26 hov23 hov24 hov26 hov27" onclick="spin_select([23,24,26,27], 'toolpit')" data="23,24,26,27"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-26 hov23 hov26" onclick="spin_select([23,26], 'toolpit')" data="23,26"></div>
+                </div>
+                <div id="75-24-135342_121_29_" class="SW-Number SW-29">
+                    <h3>29</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-29 hov29 hov30" onclick="spin_select([29,30], 'toolpit')" data="29,30"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-29 hov26 hov27 hov29 hov30" onclick="spin_select([26,27,29,30], 'toolpit')" data="26,27,29,30"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-29 hov26 hov29" onclick="spin_select([26,29], 'toolpit')" data="26,29"></div>
+                </div>
+                <div id="75-24-135342_121_32_" class="SW-Number SW-32">
+                    <h3>32</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-32 hov32 hov33" onclick="spin_select([32,33], 'toolpit')" data="32,33"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-32 hov29 hov30 hov32 hov33" onclick="spin_select([29,30,32,33], 'toolpit')" data="29,30,32,33"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-32 hov29 hov32" onclick="spin_select([29,32], 'toolpit')" data="29,32"></div>
+                </div>
+                <div id="75-24-135342_121_35_" class="SW-Number SW-35">
+                    <h3>35</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-35 hov35 hov36" onclick="spin_select([35,36], 'toolpit')" data="35,36"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-35 hov32 hov33 hov35 hov36" onclick="spin_select([32,33,35,36], 'toolpit')" data="32,33,35,36"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-35 hov32 hov35" onclick="spin_select([32,35], 'toolpit')" data="32,35"></div>
+                </div>
+                </div>
+                <div class="RouletteColumn">
+                <div id="75-24-135342_121_1_" class="SW-Number SW-1">
+                    <h3>1</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-1 hov2 hov1" onclick="spin_select([2,1], 'toolpit')" data="2,1"></div>
+                    <div class="spin_doz spin_doz6  hov3 hov2 hov1 hov0" onclick="spin_select([3, 2,1, 0], 'toolpit')" data="3, 2,1, 0"></div>
+                    <div class="spin_doz   SW-DATA-1 hov0 hov1" style="left: -7px; bottom: 35%;" onclick="spin_select([0, 1], 'toolpit')" data="0, 1"></div>
+                    <div class="spin_doz spin_doz7 hov1 hov2 hov3" onclick="spin_select([1,2,3], 'toolpit')" data="1,2,3"></div>
+                
+                </div>
+                <div id="75-24-135342_121_4_" class="SW-Number SW-4">
+                    <h3>4</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-4 hov4 hov5" onclick="spin_select([4,5], 'toolpit')" data="4,5"></div>
+                    <div class="spin_doz spin_doz7  " onclick="spin_select([], 'toolpit')" data="4,5,6"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-4 hov1 hov2 hov4 hov5" onclick="spin_select([1,2,4,5], 'toolpit')" data="1,2,4,5"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="1,2,3,4,5,6"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-4 hov1 hov4" onclick="spin_select([1,4], 'toolpit')" data="1,4"></div>
+                
+                </div>
+                <div id="75-24-135342_121_7_" class="SW-Number SW-7">
+                    <h3>7</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-7 hov7 hov8" onclick="spin_select([7,8], 'toolpit')" data="7,8"></div>
+                    <div class="spin_doz spin_doz7  " onclick="spin_select([], 'toolpit')" data="7,8,9"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-7 hov4 hov5 hov7 hov8" onclick="spin_select([4,5,7,8], 'toolpit')" data="4,5,7,8"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="4,5,6,7,8,9"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-7 hov4 hov7" onclick="spin_select([4,7], 'toolpit')" data="4,7"></div>
+                
+                </div>
+                <div id="75-24-135342_121_10_" class="SW-Number SW-10">
+                    <h3>10</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-10  hov10 hov11" onclick="spin_select([10, 11], 'toolpit')" data="10, 11"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="10,11,12"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-10 hov7 hov8 hov10 hov11" onclick="spin_select([7,8,10,11], 'toolpit')" data="7,8,10,11"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="7,8,9,10,11,12"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-10 hov7 hov10" onclick="spin_select([7,10], 'toolpit')" data="7,10"></div>
+                
+                </div>
+                <div id="75-24-135342_121_13_" class="SW-Number SW-13">
+                    <h3>13</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-13 hov13 hov14" onclick="spin_select([13, 14], 'toolpit')" data="13, 14"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="13,14,15"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-13 hov10 hov11 hov13 hov14" onclick="spin_select([10,11,13,14], 'toolpit')" data="10,11,13,14"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="10,11,12,13,14,15"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-13 hov10 hov13" onclick="spin_select([10,13], 'toolpit')" data="10,13"></div>
+                </div>
+                <div id="75-24-135342_121_16_" class="SW-Number SW-16">
+                    <h3>16</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-16 hov16 hov17" onclick="spin_select([16,17], 'toolpit')" data="16,17"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="16,17,18"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-16 hov13 hov14 hov16 hov17" onclick="spin_select([13,14,16,17], 'toolpit')" data="13,14,16,17"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="13,14,15,16,17,18"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-16 hov13 hov16" onclick="spin_select([13,16], 'toolpit')" data="13,16"></div>
+                
+                </div>
+                <div id="75-24-135342_121_19_" class="SW-Number SW-19">
+                    <h3>19</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-19 hov19 hov20" onclick="spin_select([19,20], 'toolpit')" data="19,20"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="19,20,21"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-19 hov16 hov17 hov19 hov20 " onclick="spin_select([16,17,19,20], 'toolpit')" data="16,17,19,20"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="16,17,18,19,20,21"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-19 hov16 hov19" onclick="spin_select([16,19], 'toolpit')" data="16,19"></div>
+                
+                </div>
+                <div id="75-24-135342_121_22_" class="SW-Number SW-22">
+                    <h3>22</h3>
+                    <div class="spin_doz spin_doz3  SW-DATA-22 hov22 hov23" onclick="spin_select([22,23], 'toolpit')" data="22,23"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="22,23,24"></div>
+                    <div class="spin_doz spin_doz5  SW-DATA-22 hov19 hov20 hov22 hov23" onclick="spin_select([19,20,22,23], 'toolpit')" data="19,20,22,23"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="19,20,21,22,23,24"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-22 hov22 hov19" onclick="spin_select([22,19], 'toolpit')" data="22,19"></div>
+                
+                </div>
+                <div id="75-24-135342_121_25_" class="SW-Number SW-25">
+                    <h3>25</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-25  hov25 hov26" onclick="spin_select([25, 26], 'toolpit')" data="25, 26"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="25,26,27"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-25 hov22 hov23 hov25 hov26" onclick="spin_select([22,23,25,26], 'toolpit')" data="22,23,25,26"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="22,23,24,25,26,27"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-25 hov22 hov25" onclick="spin_select([22,25], 'toolpit')" data="22,25"></div>
+                </div>
+                <div id="75-24-135342_121_28_" class="SW-Number SW-28">
+                    <h3>28</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-28 hov28 hov29" onclick="spin_select([28,29], 'toolpit')" data="28,29"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="28,29,30"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-28 hov25 hov26 hov28 hov29" onclick="spin_select([25,26,28,29], 'toolpit')" data="25,26,28,29"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="25,26,27,28,29,30"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-28 hov25 hov28" onclick="spin_select([25,28], 'toolpit')" data="25,28"></div>
+                </div>
+                <div id="75-24-135342_121_31_" class="SW-Number SW-31">
+                    <h3>31</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-31 hov31 hov32" onclick="spin_select([31,32], 'toolpit')" data="31,32"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="31,32,33"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-31 hov28 hov29 hov31 hov32" onclick="spin_select([28,29,31,32], 'toolpit')" data="28,29,31,32"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="28,29,30,31,32,33"></div>
+                    <div class="spin_doz spin_doz1 SW-DATA-31 hov28 hov31" onclick="spin_select([28,31], 'toolpit')" data="28,31"></div>
+                
+                </div>
+                <div id="75-24-135342_121_34_" class="SW-Number SW-34">
+                    <h3>34</h3>
+                    <div class="spin_doz spin_doz3 SW-DATA-34 hov34 hov35" onclick="spin_select([34,35], 'toolpit')" data="34,35"></div>
+                    <div class="spin_doz spin_doz7 " onclick="spin_select([], 'toolpit')" data="34,35,36"></div>
+                    <div class="spin_doz spin_doz5 SW-DATA-34 hov31 hov32 hov34 hov35" onclick="spin_select([31,32,34,35], 'toolpit')" data="31,32,34,35"></div>
+                    <div class="spin_doz spin_doz6" onclick="spin_select([], 'toolpit')" data="31,32,33,34,35,36"></div>
+                    <div class="spin_doz spin_doz1  SW-DATA-34  hov31 hov34" onclick="spin_select([31,34], 'toolpit')" data="31,34"></div>
+                </div>
+                </div>
+            </div>
+            <div class="RouletteColumn pad-top-15">
+                <div class="SW-Btn " id="first12Nums" onclick="spin_select('first_12', 'dozen')">
+                <h3>1st&nbsp;12</h3>
+                </div>
+                <script>
+                $(document).ready(function(){
+                    $("#first12Nums").hover(function(){
+                        for (let index = 1; index < 13; index++) {
+                            
+                            $(".SW-"+index).addClass("hover");
+                        }
+                    }, function(){
+                    for (let index = 1; index < 13; index++) {
+                            $(".SW-"+index).removeClass("hover");
+                        }
+                    });
+                });
+                </script>
+                <div class="SW-Btn " id="second12Nums" onclick="spin_select('second_12', 'dozen')">
+                <h3>2nd&nbsp;12</h3>
+                </div>
+                
+                <div class="SW-Btn " id="third12Nums" onclick="spin_select('third_12', 'dozen')">
+                <h3>3rd&nbsp;12</h3>
+                </div>
+                
+            </div>
+            <div class="RouletteColumn pad-top-15">
+                <div class="SW-Btn " id="first18" onclick="spin_select('first_18', 'dozen')">
+                <h3>1-18</h3>
+                </div>
+                
+                <div class="SW-Btn " onclick="spin_select('even', 'dozen')" id="">
+                <h3>Even</h3>
+                </div>
+                <div class="SW-Btn Red-Btn " onclick="spin_select('red', 'dozen')">
+                <h3>Red</h3>
+                </div>
+                <div class="SW-Btn Black-Btn " onclick="spin_select('black', 'dozen')">
+                <h3>Black</h3>
+                </div>
+                <div class="SW-Btn " onclick="spin_select('odd', 'dozen')">
+                <h3>Odd</h3>
+                </div>
+                <div class="SW-Btn " id="second18" onclick="spin_select('second_18', 'dozen')">
+                <h3>19-36</h3>
+                </div>
+                
+            </div>
+            <div class="RouletteColumn Colours pad-top-15">
+                <div class="SW-Btn  ColourA" id="orange">
+                <h3>Orange</h3>
+                </div>
+                
+                <div class="SW-Btn  ColourB" id="blue">
+                <h3>Blue</h3>
+                </div>
+                
+                <div class="SW-Btn  ColourC" id="pink">
+                <h3>Pink</h3>
+                </div>
+                <div class="SW-Btn  ColourD" id="green">
+                <h3>Green</h3>
+                </div>
+                <div class="SW-Btn  ColourE" id="yellow">
+                <h3>Yellow</h3>
+                </div>
+                <div class="SW-Btn  ColourF" id="white">
+                <h3>White</h3>
+                </div>
+            </div>
+            </div>
+            <div style="float: left;">
+            <div>
+                <div id="twoToOneA" class="SW-Btn twoToOneA" onclick="spin_select('first_line', 'dozen')">
+                <h3>2&nbsp;to&nbsp;1</h3>
+                </div>
+                
+                <div id="twoToOneB" class="SW-Btn " onclick="spin_select('second_line', 'dozen')">
+                <h3>2&nbsp;to&nbsp;1</h3>
+                </div>
+                <div id="twoToOneC" class="SW-Btn " onclick="spin_select('third_line', 'dozen')">
+                <h3>2&nbsp;to&nbsp;1</h3>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <div class="ticketSpin " style="width: 30%;">
+            <div class="mainTickets" style="width: 100%;">
+            
+            <div class="tickets" style="width: 100%;">
+                <div class="theTicket" style="border-radius: 5%;">
+                <div style="overflow-y: auto; height: 90%;">
+                    <div style="margin: 0px 15px; position: sticky; top: 0px;background-color: rgb(173, 173, 173);border-radius: 5px; width: auto; margin: auto;text-align: center;">Bet slip</div>
+                    <div id="kenoTicketLoader_spin" style="display: none; width: 100%; height:95%; opacity: 0.7; background-color: rgb(63, 63, 63); position: absolute; z-index: 4;">
+                    <span id="pleaseScanBarCodeSpinner_spin" style="margin-top: 35%; margin-left: 45%; position: absolute;">
+                        <div class="spinner-border text-warning" role="status">
+                        <span class="sr-only"> </span>
+                        </div>
+                    </span>
+                    </div>
+                    <div id="helloMyBrother_spin">
+                    
+                    </div>
+
+                    <div id="printJsFormKenoDispy_spin">
+                    <div id="printJsFormKeno_spin">
+                        <div class="kenoTicket" id="printJS-form_spin">
+                        <div class="headerKeno">
+                            <div class="titlei" id="TBSkenoId_spin">
+                            #
+                            </div>
+                            <div class="title">
+                            <p id="TBSkenoDate_spin">date</p>
+                            <p id="TBSkenoCashier_spin">cashier</p>
+                            <p id="TBSkenoAgent_spin">agent</p>
+                            </div>
+                            <div class="ticketWinPar">Selection (<span id="TBSkenoWin_spin"></span>)</div>
+                        </div>
+                        <div id="TBSkenoSelection_spin">
+                            <div class="ticketWin">
+                            <div class="sel">selection</div>
+                            <div class="odd">xodd</div>
+                            </div>
+                            <div class="ticketWin">
+                            <div class="sel">selection - 2</div>
+                            <div class="odd">xodd 2</div>
+                            </div>
+                        </div>
+                        <div class="tikTot">
+                            <div class="tex ">
+                            <span class="lefty">
+                            Min Payout(incl. stake)
+                            </span>
+                            <span class="righty" id="TBSkenoToWinTotalMin_spin">
+                            Br 00.00
+                            </span>
+                            </div>
+                            <div class="amnt ">
+                            <span class="lefty ">
+                            Max Payout(incl. stake)
+                            </span>
+                            <span class="righty" id="TBSkenoToWinTotalMax_spin">
+                            Br 00.00
+                            </span>
+                            </div>
+                        </div>
+                        <div class="foot">
+                            <svg id="TBSkenoBarcode_spin" style="transform: translate(0,0)" width="152px" height="54px" x="0px" y="0px" viewBox="0 0 152 54" xmlns="http://www.w3.org/2000/svg" version="1.1"><rect x="0" y="0" width="152" height="54" style="fill:#ffffff;"></rect><g transform="translate(0, 0)" style="fill:#000000;"><rect x="0" y="0" width="3" height="40"></rect><rect x="4.5" y="0" width="1.5" height="40"></rect><rect x="9" y="0" width="4.5" height="40"></rect><rect x="16.5" y="0" width="1.5" height="40"></rect><rect x="19.5" y="0" width="3" height="40"></rect><rect x="25.5" y="0" width="4.5" height="40"></rect><rect x="33" y="0" width="1.5" height="40"></rect><rect x="39" y="0" width="1.5" height="40"></rect><rect x="42" y="0" width="3" height="40"></rect><rect x="49.5" y="0" width="4.5" height="40"></rect><rect x="58.5" y="0" width="1.5" height="40"></rect><rect x="61.5" y="0" width="3" height="40"></rect><rect x="66" y="0" width="3" height="40"></rect><rect x="75" y="0" width="1.5" height="40"></rect><rect x="78" y="0" width="1.5" height="40"></rect><rect x="82.5" y="0" width="4.5" height="40"></rect><rect x="88.5" y="0" width="1.5" height="40"></rect><rect x="91.5" y="0" width="6" height="40"></rect><rect x="99" y="0" width="4.5" height="40"></rect><rect x="106.5" y="0" width="1.5" height="40"></rect><rect x="109.5" y="0" width="3" height="40"></rect><rect x="115.5" y="0" width="1.5" height="40"></rect><rect x="120" y="0" width="6" height="40"></rect><rect x="127.5" y="0" width="1.5" height="40"></rect><rect x="132" y="0" width="3" height="40"></rect><rect x="139.5" y="0" width="4.5" height="40"></rect><rect x="145.5" y="0" width="1.5" height="40"></rect><rect x="148.5" y="0" width="3" height="40"></rect><text style="font: 13px monospace" text-anchor="middle" x="76" y="54">1 2 3 4 5 6 7 8 9</text></g></svg>
+                            <br>
+                            <span style="margin: auto; font-family:monospace;" id="TBSkenoCompany_spin"> standard shop terms &amp; condition apply.</span>
+                        </div>
+                        <br>
+                        </div>
+                    </div>
+                    </div>
+                    <script>
+                    
+                    </script>
+                </div>
+                <div class="ButtonPanel2" id="placeAndClearKeno_spin" style="display: none;">
+                    <button class="clear" onclick="clearKenoThingsMaster_spin()">
+                    <i class="bi bi-clipboard2-minus" style="padding: 0px 0px; top: -2px; position: relative;"></i>
+                    Clear
+                    </button>
+                    <button onclick="BET_spin('multiple')" class="placeBet strictTouch" id="kenoMultiplePlaceBet_spin">
+                    <i class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+                    <span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span>
+                    Place bet
+                    <span class="spD">Br <span id="kenoPlaceBetAmount_spin">0</span></span>
+                    </button>
+                </div>
+                <div class="ButtonPanel2" id="cancelAndReprintKeno_spin" style="display: none;">
+                    <button class="cancel strictTouch" id="kenoMultipleCancelBet_spin" onclick="spin_cancel()">
+                    <i class="bi bi-clipboard2-minus" style="padding: 0px 5px; top: -2px; position: relative;"></i>
+                    <span class="spinner-border spinner-border-sm" role="status" style="display: none;" aria-hidden="true"></span>
+                    Cancel
+                    </button>
+                    <button class="print" onclick=" reprint('spin')">
+                    <i class="bi bi-cast" style="padding: 0px 5px; top: -1px; position: relative;"></i>
+                    Re-print
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</main>
+
+<script>
+$(document).ready(function(){
+    $("#spinPanel").show();
+    $("#spinPanel").hide();
+
+});
+</script>

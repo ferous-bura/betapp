@@ -1,0 +1,24 @@
+{% load static %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+	<!-- Logo with Link -->
+	<a class="navbar-brand" href="{% url 'cashierapp:cashier_url' %}">
+		<img src="{% static 'img/mayabets_logo.jpg' %}" alt="Logo" style="max-height: 50px; border-radius: 50%;">
+		BET House  @{{ cashier }}
+	</a>
+
+	<!-- Sidebar Toggle (Topbar) -->
+	<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+		<i class="fa fa-bars"></i>
+	</button>
+
+	<!-- Logout Button -->
+	<div class="ml-auto">
+		<a href="{% url 'zuser:logout' %}" class="btn btn-danger">
+			<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-white"></i>
+			Logout
+		</a>
+	</div>
+</nav>
+<!-- End of Topbar -->

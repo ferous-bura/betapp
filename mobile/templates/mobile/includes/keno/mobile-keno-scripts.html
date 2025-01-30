@@ -1,0 +1,559 @@
+<style>
+  .selectedKeno{
+    border: 5px;
+    border-radius: 3px rgba(0, 0, 255, 0.363) !important;
+  }
+
+</style>
+<script>
+    
+    var disableClick = false;
+    var showClosed = false
+    var ballContainer = $("#ball-container");
+    var alltabsID = $("#alltabs");
+    var ballanimationID = $("#ballanimation");
+
+    var kenoSelected = {
+        selectionI: { 1: 'A', 2: 'B', 3: 'C' },
+        stakeI: 10,
+    };
+
+    $(document).ready(function() {
+        $('.amount-btn').on('click', function() {
+            var $input = $(this).siblings('.amount-value');
+            var currentValue = parseInt($input.val(), 10);
+            
+            if ($(this).hasClass('minus-btn')) {
+            currentValue = Math.max(currentValue - 1, 5); // Ensure minimum value is 5
+            } else {
+            currentValue++;
+            }
+            
+            $input.val(currentValue);
+        });
+    });
+    
+    // Function to update the selections display
+    function updateSelections() {
+        var container = document.getElementById('selections-container');
+        container.innerHTML = ''; // Clear previous content
+
+        // Display selectionI
+        var selectionsHTML = '<h3>Selections:</h3><ul>';
+        for (var key in kenoSelected.selectionI) {
+            selectionsHTML += '<li>' + key + ': ' + kenoSelected.selectionI[key] + '</li>';
+        }
+        selectionsHTML += '</ul>';
+
+        // Display stakeI
+        selectionsHTML += '<h3>Stake:</h3><p>' + kenoSelected.stakeI + '</p>';
+
+        container.innerHTML = selectionsHTML;
+    }
+
+    // Initial update
+    updateSelections();
+
+    function toggleElements(triggerArg) {
+
+if (triggerArg === "tabs") {
+  console.log(triggerArg);
+    ballanimationID.addClass('hidden');
+    alltabsID.removeClass('hidden');
+} else if (triggerArg === "ball_anime") {
+  console.log(triggerArg);
+    ballanimationID.removeClass('hidden');
+    alltabsID.addClass('hidden');
+} else
+{
+  console.log('triggerArg');
+  alltabsID.hide();
+  ballanimationID.hide();
+}
+}
+
+function changePage(pageId) {
+// Hide all pages
+var pages = document.querySelectorAll('.page');
+pages.forEach(function(page) {
+  page.classList.remove('active');
+});
+
+// Show selected page
+var selectedPage = document.getElementById(pageId);
+selectedPage.classList.add('active');
+
+// Update active tab
+var tabs = document.querySelectorAll('#tab');
+tabs.forEach(function(tab) {
+tab.classList.remove('active');
+});
+var selectedTab = document.querySelector('#tab[data-page="' + pageId + '"]');
+selectedTab.classList.add('active');
+}
+    // Function to create and append numbered balls
+    function createNumberedBalls(numbers) {
+        return new Promise(function(resolve, reject) {
+            $.each(numbers, function(index, number) {
+                
+                setTimeout(function() {
+                    var ball = $("<div>").addClass("ball");
+                    var numberElement = $("<div>").addClass("number").text(number);
+                    ball.append(numberElement);
+                    ballContainer.append(ball);
+
+                    setTimeout(function() {
+                        ball.remove();
+                    }, 800);
+                }, index * 1000);
+            });
+            resolve();
+        });
+    }
+
+disableEvents();
+    // Disable events for selected classes
+function disableEvents() {
+    // $('.red').off(); // Unbind all events for selected class
+    
+    // $("#ball" + b).removeClass("selectedKeno").addClass('red');
+    //     $('#loading').removeClass('yellow').addClass('red');
+    //     $('#closed').addClass('yellow').removeClass('red');
+}
+
+// Enable events for selected classes
+function enableEvents() {
+    // $('.red').on();
+    // $('.red').on('click', function() {
+        
+    //     $('#loading').addClass('yellow').removeClass('red');
+    //     $('#closed').removeClass('yellow').addClass('red');
+    //     // Event handling code here
+    // });
+}
+// Disable events before making the request
+// Disable events before making the request
+// disableEvents();
+
+// // Make the request
+// $.ajax({
+//     url: 'your-api-url',
+//     type: 'GET',
+//     success: function(response) {
+//         // Process the response
+//         // Enable events after the request is completed
+//         enableEvents();
+//     },
+//     error: function(xhr, errmsg, err) {
+//         // Handle errors
+//         // Enable events even in case of errors
+//         enableEvents();
+//     }
+// });
+
+
+function notify(type, content) {
+  $("#notify_" + type + "_text").html(content);
+  $("#notify_" + type).show();
+  setTimeout(() => {
+      $("#notify_" + type).hide();
+  }, 4000);
+}
+var addedKeno = 0;
+
+var kenoSelected = {
+    selectionI: {},
+    stakeI: 10,
+};
+
+function removeSelected() {
+    for (let index = 0; index < 37; index++) {
+        $(".ball" + index).removeClass("selectedKeno");
+    }
+    // $("#heads").removeClass("selectedKeno");
+    // $("#tails").removeClass("selectedKeno");
+    // $("#evens").removeClass("selectedKeno");
+}
+
+function kenoPlaceBet() {
+        // $("#AddToSlipDivLoader").show();
+        var formattedSelection = Object.keys(kenoSelected.selectionI).map(function(key) {
+            return parseInt(key);
+        });
+
+        console.log(formattedSelection);
+
+        var requestData = {
+            selection: formattedSelection,
+            stake: kenoSelected.stakeI,
+            action: 'place_bet',
+            time: new Date().getTime()
+        };
+
+        $.ajax({
+            url: "{% url 'mobile:index' %}",
+            method: 'POST',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function(data) {
+                if (data.status == 'success') {
+                    console.log('status ' + data.status);
+                } else {
+                    console.log('status: ' + data.status + '- message:' + data.message);
+                }
+                tricket = 1;
+                // $("#AddToSlipDivLoader").hide();
+                kenoSelected = {
+                    selectionI: {},
+                    stakeI: 10,
+                };
+                removeSelected();
+                kenoOdd();
+                notify("success", "በተሳካ ሁነታ ተወራርደዋል");
+                // kenoPrint(data);
+                lastTicketFullData = data;
+                lastTicketFullDataType = 'single';
+                // kenoTicketDisplay(lastTicketFullData, 'single');
+                if (addedKeno > 0) {
+                    $("#helloMyBrother").hide();
+                    $("#placeAndClearKeno").hide();
+                    visit("printJsFormKeno");
+                    visit("cancelAndReprintKeno");
+                    setTimeout(() => {
+                        $("#helloMyBrother").show();
+                        $("#placeAndClearKeno").show();
+                        hidit("printJsFormKeno");
+                        hidit("cancelAndReprintKeno");
+                    }, 2000);
+                } else {
+                    visit("cancelAndReprintKeno");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#AddToSlipDivLoader").hide();
+                // notify("error", "በማይታወቅ ምክኒያት መረጃውን ማግኘት አልተቻለም። እባክዎ እንደገና ይሞክሩ።");
+                notify("error", "በኔቶርክ መቆራረጥ ምክኒያት መረጃውን ማግኘት አልተቻለም።");
+            }
+        });
+  
+}
+
+function addZBall(b) {
+    if (!disableClick){
+      var index = Object.keys(kenoSelected.selectionI);
+        if (index.length == 5) {
+          notify("warning", "ከፍተኛው የውርርድ ምርጫ ላይ ደርሷል! ለመጨመር ቀድመው ከመረጧቸው ቁጥሮች መቀነስ ይኖርቦታል።");
+        } 
+        else if (kenoSelected.selectionI[b] == true) {
+          $("#ball" + b).removeClass("selectedKeno").addClass('red');
+          delete kenoSelected.selectionI[b];
+          var keys = Object.keys(kenoSelected.selectionI);
+          // kenoOdds();
+          index = Object.keys(kenoSelected.selectionI);
+          if (index.length < 5 && !$('#notify_warning_text').text().trim()) {
+            $('#notify_warning_text').empty();
+          }
+        }
+        else if (index.length < 5 && !$('#notify_warning_text').text().trim()) {
+            $("#ball" + b).removeClass('red').addClass("selectedKeno");
+            kenoSelected.selectionI[b] = true;
+            var keys = Object.keys(kenoSelected.selectionI);
+            // kenoOdd();
+            console.log(kenoSelected.selectionI);
+        }
+        else {
+            alert('ይህን ለማድረግ አስቀድሞ የመረጡትን ውርርድ ማጥፋት አልያም መመደብ ይኖርቦታል።።');
+        }
+    }
+}
+
+function turnodds(u = 'kiron'){
+    if(u == 'mohio'){
+        let odds = {
+                1: 4,
+                2: 15,
+                3: 50,
+                4: 100,
+                5: 300,
+                6: 500,
+                7: 1000,
+                8: 2000,
+                9: 4200,
+                10: 5000,
+                'heads': 2,
+                'tails': 2,
+                'evens': 4
+            };
+            return odds;
+    }
+   
+    let odds = {
+            1: 4,
+            2: 15,
+            3: 35,
+            4: 100,
+            5: 300,
+            6: 1800,
+            7: 2150,
+            8: 3000,
+            9: 4200,
+            10: 5000,
+            'heads': 2,
+            'tails': 2,
+            'evens': 4
+        };
+        return odds;
+}
+
+function kenoOdd() {
+    const odds = turnodds('kkkhhh');
+
+    var keys = Object.keys(kenoSelected.selectionI);
+
+    if (keys.length == 0) {
+        valyval = 0;
+        $("#SmartPlayKenoAddToSlipDiv").hide();
+        $("#SmartPlayKenoTutorialPanel").show();
+        $("#stakeKenoIn").val(10);
+    }
+    if (keys.length > 0) {
+        $("#SmartPlayKenoAddToSlipDiv").show();
+        $("#SmartPlayKenoTutorialPanel").hide();
+
+        $("#ExtraDescriptionSelection").text(keys.join('-'));
+
+        if (keys.length == 1) {
+            if (Object.keys(kenoSelected.selectionI)[0] == 'heads' || Object.keys(kenoSelected.selectionI)[0] == 'tails' || Object.keys(kenoSelected.selectionI)[0] == 'evens') {
+                $("#ExtraDescriptionOdd").text(odds[Object.keys(kenoSelected.selectionI)[0]]);
+                $("#kenoToWin").text("Br " + thousands_separators(odds[Object.keys(kenoSelected.selectionI)[0]] * $("#stakeKenoIn").val()));
+                $("#placeSingleKenoBetAmount").text("Br " + $("#stakeKenoIn").val());
+            } else {
+                $("#ExtraDescriptionOdd").text(odds[keys.length]);
+                $("#kenoToWin").text("Br " + thousands_separators(odds[keys.length] * $("#stakeKenoIn").val()));
+                $("#placeSingleKenoBetAmount").text("Br " + $("#stakeKenoIn").val());
+            }
+        } else {
+            $("#ExtraDescriptionOdd").text(odds[keys.length]);
+            $("#kenoToWin").text("Br " + thousands_separators(odds[keys.length] * $("#stakeKenoIn").val()));
+            $("#placeSingleKenoBetAmount").text("Br " + $("#stakeKenoIn").val());
+        }
+
+        $("#ExtraDescriptionWinLen").text(keys.length);
+
+
+    }
+
+}
+  
+  $(document).ready(function() {
+
+    function disableClickAction() {
+        disableClick = true;
+    }
+
+    function enableClickAction() {
+        disableClick = false;
+    }
+
+    function hideClosed() {
+        showClosed = false;
+    }
+
+    var count = 1;
+    for (var row = 1; row <= 6; row++) {
+      var rowHtml = "<tr>";
+      for (var col = 1; col <= 6; col++) {
+          rowHtml += "<td onclick=addZBall("+ count +") class='balls red' id='ball" + count + "'><button class='btn'>" + count + "</button></td>";
+          count++;
+      }
+      rowHtml += "</tr>";
+      $("#result-table-body").append(rowHtml);
+    }
+
+    // $(".balls").on("click", handleClick);
+
+    // function handleClick() {
+    //     if (!disableClick) {
+    //         var ballNumber = $(this).data("ball");
+    //         addZBall(ballNumber);
+    //     }
+    // }
+
+  function updateZTable() {
+
+    disableClickAction();
+            showClosed = true;
+        // $("#ball" + b).removeClass("selectedKeno").addClass('red');
+        $('#loading').removeClass('yellow').addClass('red');
+        $('#closed').addClass('yellow').removeClass('red');
+        $('.red').removeClass('selected');
+      $.ajax({
+            url: '{% url "mobile:get_latest_result" %}',
+            type: 'GET',
+      success: function(response) {
+          // $('#latest_keno').text(response);
+          var resultsString = response.latest_result;
+          var results = JSON.parse(resultsString);
+          var updateCount = 0;
+
+            responseLogs(response);
+
+          updateCells();
+
+          function updateCells() {
+            var $cell = $("#ball" + results[updateCount]);
+            if ($cell.hasClass("red")) {
+                $cell.removeClass("red").addClass("yellow");
+            }
+            updateCount++;
+            if (updateCount < 9) {
+                setTimeout(updateCells, 900);
+            } else {
+                setTimeout(function() {
+                    updateCount = 0;
+                    $(".yellow").removeClass("yellow").addClass("red");
+                }, results.length * 1000);
+            }
+          }
+
+            toggleElements('ball_anime');
+                // Run both functions concurrently after the delay
+                Promise.all([createNumberedBalls(results), showResult(results)]).then(function() {
+                    console.log("Both functions completed");
+                    setTimeout(function() {
+                        toggleElements('tabs');
+                        enableClickAction();
+
+                    }, 15000);
+                }).catch(function(error) {
+                    console.error("Error:", error);
+                });
+          function showResult() {
+            return new Promise(function(resolve, reject) {
+                var rowHtml = "<li class='list-group-item active'>" + "game: ";
+                // $('.remove_me_next').remove();
+                var lastrowHtml = "<span class='remove_me_next active'>Result: ";
+                for (var r = 0; r < results.length ; r++) {
+                    rowHtml += "<span class='ball" + r + "'>" + results[r] + "</span> | ";
+                    lastrowHtml += "<span class='result-item'> " + results[r] + "</span>"; // Wrap each number with custom class
+                }
+                rowHtml += "</li>";
+                lastrowHtml += "</span>"
+
+                $('.list-group-item').removeClass('active');
+                var $result_list = $('.show-result-on-modal');
+                var $last_result = $('#last_result');
+                
+                $result_list.append(rowHtml);
+                $last_result.html(lastrowHtml);
+
+                resolve();
+            });
+        }
+          var creationTime = new Date(response.creation_time); // Assuming response.creation_time is in UTC format
+          var currentTime = new Date();
+          var timeDifference = currentTime.getTime() - creationTime.getTime();
+          
+          var remainingTimeUntilNextMinute = 60000 - (timeDifference % 60000);
+          setTimeout(updateZTable, remainingTimeUntilNextMinute);
+          enableClickAction();
+
+        },
+        error: function(xhr, errmsg, err) {
+            console.log(xhr.status + ": " + xhr.responseText);
+            setTimeout(updateZTable, 5000);
+        }
+      });
+
+      localStorage.setItem('lastExecutedTime', new Date().getTime());
+
+    }
+
+
+    // var lastExecutedTime = localStorage.getItem('lastExecutedTime');
+    // var currentTime = new Date().getTime();
+    // var executionThreshold = 10 * 1000; // 30 seconds in milliseconds
+
+    // // Convert lastExecutedTime to a number
+    // lastExecutedTime = lastExecutedTime ? parseInt(lastExecutedTime, 10) : null;
+
+    // if (!lastExecutedTime || (currentTime - lastExecutedTime > executionThreshold)) {
+    //     // Execute the function only if it hasn't been executed recently
+    //     updateZTable();
+
+    //     // Update lastExecutedTime in localStorage
+    //     localStorage.setItem('lastExecutedTime', currentTime.toString());
+    // }
+
+        updateZTable();
+
+        function responseLogs(response) {
+
+            // Log the entire response object to the console
+            console.log("Response Data:");
+            console.log(response);
+
+            // Log the latest result to the console
+            console.log("Latest Result:");
+            console.log(response.latest_result);
+
+            // Iterate over each ticket in selection_matches_list
+            var selectionMatchesList = response.selection_matches_list;
+            console.log("Selection Matches List:");
+            for (var ticketId in selectionMatchesList) {
+                if (selectionMatchesList.hasOwnProperty(ticketId)) {
+                    var ticketData = selectionMatchesList[ticketId];
+                    console.log("Ticket ID:", ticketId);
+                    console.log("Matches:", ticketData.matches);
+                    console.log("Price:", ticketData.price);
+                }
+            }
+
+            // Log the total won amount to the console
+            var totalWon = response.total_won;
+            console.log("Total Won:");
+            console.log(totalWon);
+        }
+
+  
+  });
+
+  function kenoTicketDisplay(input, lastTicketFullDataType) {
+
+if (true) {
+    $("#TBSkenoId").html("# " + input.id);
+    $("#TBSkenoDate").html(input.on);
+    $("#TBSkenoCashier").html(input.by);
+    $("#TBSkenoAgent").html(input.agent);
+    var asfMain = "";
+    for (let index = 0; index < input.user.length; index++) {
+        const element = input.user[index];
+        var asf = ' <div class="ticketWin"><div class="sel">' + element.selection.join(',') + ' x' + element.odd + '</div><div class="odd">Br ' + element.stake + '</div></div>';
+        asfMain += asf;
+    }
+
+    $("#TBSkenoSelection").html(asfMain + '<br><div class="ticketWin"><div class="sel">Total Stake</div><div class="odd"><b>Br ' + input.TotalStake + '</b></div></div>');
+    $("#TBSkenoToWinTotalMin").html("Br " + thousands_separators(input.toWinMin));
+    $("#TBSkenoToWinTotalMax").html("Br " + thousands_separators(input.toWinMax));
+
+    var codycode = '*' + input.code + '*';
+    JsBarcode("#TBSkenoBarcode", input.code, {
+        width: 1.2,
+        height: 40,
+        fontSize: 9,
+        textMargin: 0,
+        margin: 0,
+        text: codycode.split('').join('')
+    });
+
+    $("#TBSkenoCompany").html(input.company + " standard shop terms & condition apply.");
+}
+}
+function visit(id) {
+    // document.getElementById(id).style.display = "block";
+    console.log('congra');
+}
+</script>

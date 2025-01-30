@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <title>Maya Bets</title>
+  <!-- Bootstrap CSS -->
+  <link rel="icon" type="image/x-icon" href="{% static 'img/mayabets_logo.ico' %}">
+
+  <link rel="stylesheet" href="{% static 'mobile/live_chats.css' %}">
+  <link rel="stylesheet" href="{% static 'mobile/bootstrap.min.css' %}">
+  <!-- Font Awesome CSS -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
+  <script src="{% static 'mobile/jquery.min.js' %}"></script>
+  <!-- Bootstrap JS -->
+  <script src="{% static 'mobile/popper.min.js' %}"></script>
+  <script src="{% static 'mobile/bootstrap.min.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://kit.fontawesome.com/f7b6734354.js" crossorigin="anonymous"></script>
+  <style>
+/* Sticky header */
+::-moz-selection { /* Code for Firefox */
+background-color: transparent;
+}
+
+::selection {
+  background-color: transparent;
+}
+    body {
+      background-color: #00203FFF;
+      font-family: Arial, sans-serif;
+    }
+
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #00203FFF;
+      color: #fff;
+      padding: 0;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);
+      /* Add elevation */
+    }
+
+    /* Sticky footer */
+    .sticky-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #00203FFF;
+      color: #fff;
+      padding: 1px 0;
+      margin: 0;
+      text-align: center;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+      /* Add elevation */
+    }
+
+    .main-content {
+      padding-bottom: 60px;
+      max-height: calc(100vh - 90px) !important;
+      background-color: #00203FFF;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+    }
+
+    #notification-container {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 1050;
+    /* Adjust as needed */
+  }
+
+  #notification {
+    display: none;
+    animation: slideIn 0.2s ease-in-out forwards;
+  }
+
+  /* Center the timer text */
+  .navbar-nav {
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    /* start profile styles */
+    .card {
+      width: 350px;
+      background-color: #efefef;
+      border: none;
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+
+    .image img {
+      transition: all 0.5s
+    }
+
+    .card:hover .image img {
+      transform: scale(1.5)
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: bold
+    }
+
+    .idd {
+      font-size: 14px;
+      font-weight: 600
+    }
+
+    .idd1 {
+      font-size: 12px
+    }
+
+    .number {
+      font-size: 22px;
+      font-weight: bold
+    }
+
+    .follow {
+      font-size: 12px;
+      font-weight: 500;
+      color: #444444
+    }
+
+    .btn1 {
+      height: 40px;
+      width: 150px;
+      border: none;
+      background-color: #000;
+      color: #aeaeae;
+      font-size: 15px
+    }
+
+    .icons i {
+      font-size: 19px
+    }
+
+    hr .new1 {
+      border: 1px solid
+    }
+
+    .join {
+      font-size: 14px;
+      color: #a0a0a0;
+      font-weight: bold
+    }
+
+    .date {
+      background-color: #ccc
+    }
+
+/* end */
+  </style>
+  {% block style %}
+  {% endblock %}
+</head>
+
+<body>
+
+{% include 'mobile/nav.html' with active_tab=game_type %}
+
+{% include 'mobile/timer-game-num.html' %}
+<main class="container-fluid main-content">
+{% block content %}
+{% endblock %}
+</main>
+
+{% block footer %}
+{% endblock %}
+
+{% include 'mobile/info-modal.html' %}
+
+{% block script %}
+{% endblock %}
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', function () {
+      // Function to add a new chat message to the top of the chat view
+      function addNewChatMessage(chatItem) {
+        const chatView = document.getElementById('chatView');
+        chatView.insertBefore(chatItem, chatView.firstChild);
+        // Scroll to the top of the chat view after adding the new message
+        chatView.scrollTop = 0;
+      }
+
+      // Function to create a new chat message element
+      function createChatItem(senderName, message, time) {
+        const chatItem = document.createElement('div');
+        chatItem.classList.add('chat-item');
+
+        const innerHtml = `
+            <div class="d-flex">
+                <img class"img" src="{% static 'mobile/img/player-gamer.avif' %}" alt="PI">
+                <div class="p-1">
+                    <div class="d-flex align-items-end">
+                        <div class="small sender-name"><a href="#">${senderName}</a></div>
+                        <div class="small chat-time">${time}</div>
+                    </div>
+                    <div class="small chat-text">
+                        ${message}
+                    </div>
+                </div>
+            </div>
+        `;
+        chatItem.innerHTML = innerHtml;
+
+        return chatItem;
+      }
+
+      function getLiveBets() {
+        $.ajax({
+          url: "{% url 'mobile:get_live_bets' %}",
+          type: 'GET',
+          success: function (response) {
+            response.forEach((message, index) => {
+              setTimeout(() => {
+                const chatItem = createChatItem(message.senderName, message.message, message.time);
+                addNewChatMessage(chatItem);
+              }, index * 250);
+            });
+          },
+          error: function (xhr, status, error) {
+            // Handle errors
+            console.error(error);
+          }
+        });
+      }
+
+      // Call getLiveBets initially and then at intervals
+      getLiveBets(); // Call initially
+      // setInterval(getLiveBets, 10000); // Call every minute (adjust as needed)
+    });
+
+    $(document).ready(function () {
+      var intervalTimer; // Variable to hold the interval timer
+
+      function updateTimer() {
+        var now = new Date();
+        var minutes = Math.floor((now.getTime() / 1000) / 60); // Calculate minutes
+        var seconds = 59 - now.getSeconds(); // Calculate remaining seconds
+        var timerText = '00' + ':' + pad(seconds);
+        $('#timer').text(timerText);
+
+        // If timer reaches 00:00, trigger closed state
+        if (seconds === 0 || seconds >= 55) {
+          handleClosedState();
+        }
+      }
+
+      function pad(num) {
+        return (num < 10 ? '0' : '') + num;
+      }
+
+      // Initial update and start the interval timer
+      updateTimer();
+      intervalTimer = setInterval(updateTimer, 1000);
+
+      // Change timer text to "Closed" for 5 seconds when it reaches 00:00
+      function handleClosedState() {
+        $('#timer').text('Closed');
+        clearInterval(intervalTimer); // Stop the interval timer
+        setTimeout(function () {
+          updateTimer(); // Update the timer after 5 seconds
+          intervalTimer = setInterval(updateTimer, 1000); // Restart the interval timer
+        }, 5000);
+      }
+    });
+
+</script>
+</body>
+
+</html>

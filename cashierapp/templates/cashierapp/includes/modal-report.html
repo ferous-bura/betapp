@@ -1,0 +1,67 @@
+{% load static %}
+<div class="w3-container" style="z-index: 10; width: 30% !important;">
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+            <header class="w3-container w3-orange">
+                <br>
+                <span style="float: right;" onclick="$('#id01').hide();" class="w3-button w3-orange w3-xlarge w3-display-topright">×</span>
+                <div class="w3-bar w3-border-bottom">
+                    <button class="tablink w3-bar-item w3-button" style="margin-left: 0px; font-family: sans-serif; border-radius: 10px; background-color: white;" id="cashierOpt1" onclick="openCity('today')">Today</button>
+                    <button class="tablink w3-bar-item w3-button" style="font-family: sans-serif; border-radius: 10px;" id="cashierOpt2" onclick="openCity('yesterday')">Yesterday</button>
+                </div>
+            </header>
+            <div id="today" class="w3-container city" style="display: block;">
+                <br>
+                <div style="width: 400px;">
+                    <div style="float: left;">
+                        <p>Total Bet : </p>
+                        <p>Redeemed : </p>
+                        <p>Canceled : </p>
+                        <p>Deposited : </p>
+                    </div>
+                    <div style="float: right;text-align: right; ">
+                        <p id="report1001">Loading ...</p>
+                        <p id="report1002">Loading ...</p>
+                        <p id="report1003">Loading ...</p>
+                        <p id="report1004">Loading ...</p>
+                        <p id="report1005">Loading ...</p>
+                    </div>
+                </div>
+            </div>
+            <div id="yesterday" class="w3-container city" style="display: none;">
+                <br>
+                <div style="width: 400px;">
+                    <div style="float: left; ">
+                        <p>Total Bet : </p>
+                        <p>Redeemed : </p>
+                        <p>Canceled : </p>
+                        <p>Deposited : </p>
+                    </div>
+                    <div style="float: right; text-align: right;">
+                        <p id="report2001">Loading ...</p>
+                        <p id="report2002">Loading ...</p>
+                        <p id="report2003">Loading ...</p>
+                        <p id="report2004">Loading ...</p>
+                        <p id="report2005">Loading ...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container mt-3">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <input type="date" id="select_date" class="col-2 form-control">
+                    </div>
+                    <div class="col">
+                        <button class="get_report form-control btn btn-success">get report:</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="w3-container w3-light-grey w3-padding">
+                <button onclick="print_balance()" type="button" style=" margin: 5px 2px; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-printer"></i>Print</button>
+                <button onclick="cashier_deposite()" type="button" style=" margin: 0vw 2px; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-cash-coin"></i>Deposit</button>
+                <button onclick="cashier_deposite()" type="button" style=" margin: 0vw 2px; border: none; background-color: #8730adc0; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button"><i style="font-size: 16px; padding: 0px;" class="bi p-1 bi-wallet2"></i>Withdraw</button>
+                <button type="button" style=" float: right; margin-top: 4px; border: none; color: rgb(255, 255, 255); padding:0.2vw 0.9vw 0.2vw 0.4vw" class="btn btn-success btn-sm button" onclick="refreshBalance()" id="refreshBalance"><i style="font-size: 16px; padding: 0px;" class="strictTouch bi p-1 bi-arrow-clockwise"></i>Refresh</button>
+            </div>
+        </div>
+    </div>
+</div>
