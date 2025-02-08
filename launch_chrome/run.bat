@@ -5,8 +5,8 @@ setlocal enabledelayedexpansion
 set "USERNAME="
 set "SCREEN_POS=1900"
 set "USER_DATA_DIR=%USERPROFILE%\Documents\ChromeUserData"
-@REM set "URL=https://mayabet2.pythonanywhere.com/api/"
-set "URL=127.0.0.1:8000/api/"
+set "URL=https://mayabet2.pythonanywhere.com/api/"
+@REM set "URL=127.0.0.1:8000/api/"
 set "CHROME_PATH=C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 :: Read config file if it exists

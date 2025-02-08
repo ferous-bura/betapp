@@ -100,7 +100,7 @@ class CashierView(LoginRequiredMixin, View):
 
         if time_difference > 230:
             return JsonResponse({'status': 'error', 'message': 'Betting time is over. Game expired.'}, status=403)
-        
+
         return None  # Meaning the user can bet
 
     def place_bet(self, json_data, cashier):
