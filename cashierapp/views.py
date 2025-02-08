@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db.models import Sum
 from django.views.decorators.http import require_GET
 from datetime import datetime, timedelta
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from cashierapp.cashier_fetch import get_ticket_data, get_ticket_print_data, get_spinticket_data, get_spinticket_print_data
 from dashboard.analyzer import get_initial_data, get_spininitial_data
 from keno.models import Game, GameResult, Ticket
@@ -30,8 +30,10 @@ from game_utils.time_file import (
 
 logger = logging.getLogger(__name__)
 
-@method_decorator(user_type_redirect, name='dispatch')
-class CashierView(View):
+# @method_decorator(user_type_redirect, name='dispatch')
+# @login_required(login_url='/zuser/login/')
+class CashierView(LoginRequiredMixin, View):
+    login_url = '/zuser/login/'  # Redirects unauthorized users
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -86,6 +88,21 @@ class CashierView(View):
             result = {'status': 'error', 'message': 'Unsupported content type'}
             return JsonResponse(result, status=400)
 
+    def can_bet_on_game(self, latest_game):
+        current_time = timezone.localtime(timezone.now())  # Get current time
+        latest_game_created_at = timezone.localtime(latest_game.created_at)  # Convert to local time
+        
+        # Calculate time difference in seconds
+        time_difference = (current_time - latest_game_created_at).total_seconds()
+        
+        if time_difference < 10:
+            return JsonResponse({'status': 'error', 'message': 'Betting not allowed yet. Wait at least 5 seconds.'}, status=403)
+
+        if time_difference > 230:
+            return JsonResponse({'status': 'error', 'message': 'Betting time is over. Game expired.'}, status=403)
+        
+        return None  # Meaning the user can bet
+
     def place_bet(self, json_data, cashier):
         latest_game = Game.objects.latest_keno_open()
         print('am placing bet')
@@ -94,16 +111,11 @@ class CashierView(View):
             return JsonResponse({'status': 'error', 'message': 'please wait a moment, game is not created'})
         else:
             print('--found latest game')
-            current_time = get_local_time_now()
-            latest_game_created_at = timezone.localtime(latest_game.created_at)
-            time_difference = current_time - latest_game_created_at
-           # print(f'time_difference {time_difference}')
-           # print(f'latest_game_created_at {latest_game_created_at}')
-
-            if not time_difference.total_seconds() < 225:
-                time.sleep(5)
-                print('-- time is up')
-                return JsonResponse({'status': 'error', 'message': 'time is up'})
+            
+            response = self.can_bet_on_game(latest_game)
+            if response:
+                return response  # Stop execution if the time restriction is violated
+            
             else:
                 print('-- can bet')
                 input_type = json_data.get('input_type')

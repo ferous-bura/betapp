@@ -38,7 +38,7 @@ def is_cashier_admin(user):
 
 def user_type_redirect(view_func):
     @wraps(view_func)
-    @login_required(login_url='/users/login/')
+    @login_required(login_url='/zuser/login/')
     def _wrapped_view(request, *args, **kwargs):
         user = request.user
         path_without_slash = request.path.rstrip('/')

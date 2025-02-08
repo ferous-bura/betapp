@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('cashierapp.urls')),
     path('api/', include('keno.api.urls')),
     path('spin/', include('spin.api.urls')),
-    path('users/', include('django.contrib.auth.urls')),
+    # path('users/', include('django.contrib.auth.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('zuser/', include('zuser.urls')),
     path('mobile/', include('mobile.urls')),

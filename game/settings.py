@@ -133,3 +133,7 @@ CLOUD_APP_LOGIN_URL_LOCAL = 'http://127.0.0.1:8000/receive-localhost/'
 CLOUD_APP_LOGIN_URL = 'https://mayabet2.pythonanywhere.com/receive-localhost/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 24 * 3600  # Expires after 1 hour (3600 seconds)
+
+# settings.py
+LOGIN_URL = '/zuser/login/'
+LOGOUT_URL = '/zuser/login/'

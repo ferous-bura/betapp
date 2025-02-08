@@ -25,7 +25,7 @@ def create_superuser_view(request):
 def logout_view(request):
     logout(request)
     # Redirect to some page after logout
-    return redirect('/users/login/')  # Replace 'index' with the name of your desired page
+    return redirect('/zuser/login/')  # Replace 'index' with the name of your desired page
 
 def signup_view(request):
     success_url_name = '/mobile/'
@@ -68,8 +68,7 @@ def forgot_password_view(request):
     return render(request, template_name, {'form': form})
 
 def login_view(request):
-    success_url_name = '/'
-    template_name = 'registration/login.html'
+    template_name = 'registration/new_login.html'
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -77,6 +76,8 @@ def login_view(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
+                if user.is_staff:
+                    return redirect('/admin')
                 login(request, user)
                 #messages.success(request, f"Success: Login Successful!")
                 return redirect(reverse("cashierapp:cashier_url"))
