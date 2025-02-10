@@ -1039,7 +1039,6 @@ class TicketManager(models.Manager):
         last_40_tickets = self.order_by('-created_at').filter(
             cashier_by=cashier, 
             cancelled=False,
-            redeemed=False,
             created_at__date=get_local_time_date()
         )
         total_stakes = {}

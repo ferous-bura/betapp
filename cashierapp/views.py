@@ -95,10 +95,10 @@ class CashierView(LoginRequiredMixin, View):
         # Calculate time difference in seconds
         time_difference = (current_time - latest_game_created_at).total_seconds()
         
-        if time_difference < 10:
+        if time_difference < 5:
             return JsonResponse({'status': 'error', 'message': 'Betting not allowed yet. Wait at least 5 seconds.'}, status=403)
 
-        if time_difference > 230:
+        if time_difference > 238:
             return JsonResponse({'status': 'error', 'message': 'Betting time is over. Game expired.'}, status=403)
 
         return None  # Meaning the user can bet

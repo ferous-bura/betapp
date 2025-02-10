@@ -1,9 +1,7 @@
 from django.utils import timezone
 import random
 from django.db import transaction
-import re
 from collections import Counter
-from itertools import chain
 from django.core.exceptions import ObjectDoesNotExist
 from zuser.models import Agent
 from game_utils.time_file import get_local_time_date, get_local_time_now
