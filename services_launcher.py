@@ -4,15 +4,17 @@ import subprocess
 import threading
 import psutil
 
-def start_celery_worker():
+def start_scheduler():
     # Ensure the Python path includes the current directory
     sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-    return subprocess.Popen([sys.executable, "-m", "celery", "--app=game", "worker", "-l", "INFO", "--pool=solo"])
+    scheduler_thread = threading.Thread(target=run_scheduler)
+    scheduler_thread.daemon = True
+    scheduler_thread.start()
+    return scheduler_thread
 
-def start_celery_beat():
-    # Ensure the Python path includes the current directory
-    sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-    return subprocess.Popen([sys.executable, "-m", "celery", "-A", "game", "beat", "--loglevel=info"])
+def run_scheduler():
+    from scheduler import start_scheduler
+    start_scheduler()
 
 def start_django_server():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'game.settings')
@@ -25,16 +27,12 @@ def start_django_server():
             "forget to activate a virtual environment?"
         ) from exc
     
-    sys.argv = ["manage.py", "runserver", "127.0.0.1:9000", "--noreload"]
+    sys.argv = ["manage.py", "runserver", "127.0.0.1:8000", "--noreload"]
     django_process = threading.Thread(target=execute_from_command_line, args=(sys.argv,))
     django_process.start()
     return django_process
 
 def quit_app():
-    for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
-        if "celery" in proc.info['name']:
-            proc.terminate()
-
     # Terminate the Django server process
     for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
         if "python" in proc.info['name'] and "manage.py" in " ".join(proc.info['cmdline']):
@@ -47,8 +45,7 @@ def quit_app():
 
 def main():
     start_django_server()
-    start_celery_worker()
-    start_celery_beat()
+    start_scheduler()
 
     try:
         while True:
