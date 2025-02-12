@@ -57,6 +57,15 @@ class GameResultSerializer(serializers.ModelSerializer):
         agent = self.context.get('agent')
         return str(obj.id)
 
+# class GameResultSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = GameResult
+#         fields = ['id', 'gameId', 'order', 'value']
+
+#     def to_representation(self, instance):
+#         # Directly return the 'results' JSON list
+#         return instance.results
+
 class GameSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
     createdAt = serializers.DateTimeField(source='created_at')
@@ -114,6 +123,15 @@ class GameNumberSerializer(serializers.Serializer):
             return GameResultSerializer(latest_result, many=True).data
         else:
             return []
+
+    # def get_result(self, obj):
+    #     latest_closed_game = Game.objects.filter(status='CLOSED').order_by('-created_at').first()
+    #     if latest_closed_game:
+    #         # Fetch the GameResult object for the latest closed game and the current agent
+    #         game_result = GameResult.objects.filter(gameId=latest_closed_game, agent=self.agent).first()
+    #         if game_result:
+    #             return GameResultSerializer(game_result).data
+    #     return []
 
     def get_recent(self, obj):
         closed_games_with_results = Game.objects.filter(status='CLOSED').order_by('-created_at')[:10]  # .exclude(id=latest_closed_game.pk)
@@ -175,3 +193,13 @@ class GameOpenSerializer(serializers.Serializer):
             return GameResultSerializer(obj, many=True).data
         else:
             return []
+
+    # def get_result(self, obj):
+    #     latest_closed_game = Game.objects.filter(status='CLOSED').order_by('-created_at').first()
+    #     if latest_closed_game:
+    #         # Fetch the GameResult object for the latest closed game and the current agent
+    #         game_result = GameResult.objects.filter(gameId=latest_closed_game, agent=self.agent).first()
+    #         if game_result:
+    #             # Return the 'results' JSON list directly
+    #             return game_result.results
+    #     return []

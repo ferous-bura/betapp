@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 # from django.contrib.auth.models import User
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField, Max, Count
-
+from django.db.models import JSONField
 from zuser.models import Agent, Cashier, Player
 from game_utils.time_file import get_local_time_date, get_local_time_now, get_local_time_yesterday, single_date
 from .utils.raw_result import lucky_odd_price, turn_odd_type_to_price
@@ -714,6 +714,7 @@ class GameResultManager(models.Manager):
 
 class GameResult(models.Model):
     agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, related_name="gameresult")
+    results = JSONField(default=list)  # Store results as a JSON list
     value = models.IntegerField(null=True)
     order = models.IntegerField(null=True)
     gameId = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='gameresult_set')

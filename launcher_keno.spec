@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['launcher_keno.py'],
+    ['services_launcher.py'],
     pathex=[],
     binaries=[],
     datas=[('static/img/icon.ico', 'static/img'), ('static/img/logo.jpg', 'static/img')],

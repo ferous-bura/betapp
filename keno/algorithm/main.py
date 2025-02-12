@@ -533,8 +533,28 @@ class KenoManager:
         return all80_balls, safe_balls, picked_balls_list
 
     def _update_game_results(self, result):
+        # print(f'result: {result}')
         for i, r in enumerate(result):
+            # print(f'{i + 1} - {r}')
             GameResult.objects.create(value=r, order=i + 1, gameId=self.game, resultId=0, agent=self.agent)
+
+    # def _update_game_results(self, result):
+    #     # Prepare the results as a list of dictionaries
+    #     results_data = [
+    #         {
+    #             "id": f"{i}{self.game.id}",
+    #             "gameId": str(self.game.id),
+    #             "order": i + 1,
+    #             "value": value
+    #         }
+    #         for i, value in enumerate(result)
+    #     ]
+
+    #     GameResult.objects.create(
+    #         result=results_data,
+    #         resultId=0, 
+    #         agent=self.agent
+    #     )
 
     def _finish_and_save(self, result):
         def _calculate_winners(result):

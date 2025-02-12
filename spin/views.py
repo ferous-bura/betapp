@@ -6,6 +6,7 @@ from datetime import datetime
 
 def keno_update_view(request):
     keno_update_tasks()  # Call your keno update task
+    print(f"Keno update executed at: {datetime.now()}")
     return HttpResponse(f"Keno update executed at: {datetime.now()}")
 
 def spin_update_view(request):

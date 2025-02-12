@@ -23,6 +23,15 @@
     }
     var the_game_type;
     $(document).ready(function () {
+        
+
+// Add this function to handle modal closing when clicking outside
+window.onclick = function(event) {
+    let modal = document.getElementById("myModalTicket");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
         $("#switchToSpin").click(function () {
             the_game_type = 'spin';
             $("#kenoPanel").hide();

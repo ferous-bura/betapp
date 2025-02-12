@@ -3,4 +3,12 @@
 /services_launcher.py
 /tasksss.py
 /venv
+/build
+/dist
+/keno.spec
+/launcher_keno.spec
+/bet_task.py
+/bet_task_local.py
+/keno/scheduler.py
+
 
